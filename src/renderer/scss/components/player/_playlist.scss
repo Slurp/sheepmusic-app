@@ -38,6 +38,11 @@
   @include transition-sharp(transform);
   color: $playlist-txt-color;
   height: calc(100vh - #{$footer-fixed-height} - 57px);
+  &:hover {
+    .playlist-actions a {
+      opacity: 1;
+    }
+  }
   .playlist-wrapper {
     position: absolute;
     left: 5px;
@@ -46,7 +51,7 @@
   .playlist-header {
     padding-top: 17px;
     margin-bottom: 5px;
-    border-bottom:1px solid rgba(0, 0, 0, 0.1);
+    border-bottom:1px solid theme-color('secondary');
   }
 
   ul {
@@ -91,14 +96,15 @@
     position: relative;
     &:after {
       position: absolute;
-      top: 2px;
-      left: 2px;
+      top: 5px;
+      left: 5px;
       z-index: 2;
       content: "";
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       display: block;
       background: url('#{$general}/now-playing.gif') rgba($player-txt-color, 0.5);
+      background-position: center;
     }
     .play {
       display: none;
@@ -155,6 +161,10 @@
   }
   &:hover {
     background: $playlist-item-hover-bg-color;
+    color: theme-color();
+    h6 {
+      color: theme-color();
+    }
     .playlist-item-actions {
       opacity: 1;
     }
@@ -185,11 +195,12 @@
     font-size: 12px;
     margin: 0;
     margin-top:5px;
-    color: lighten($playlist-txt-color, 30%);
+    color: $playlist-txt-color;
   }
 }
 
 .playlist-actions {
+
   border-top:1px solid rgba(0, 0, 0, 0.1);
   padding: 5px 0 5px;
   //padding-right: 3.75rem;
@@ -205,7 +216,7 @@
   .btn-group-fluid {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
   .duration {
     font-size: 0.8rem;
@@ -222,6 +233,7 @@
     @extend .btn-secondary;
     min-width: 0;
     padding: 0.4rem;
+    opacity: 0;
 
     &:hover {
       color: $white;
@@ -234,11 +246,6 @@
     }
     &.NO_REPEAT {
       @extend .btn-light;
-    }
-    &.REPEAT_ALL {
-    }
-    &:nth-child(2) {
-      margin-right: auto;
     }
   }
 }

@@ -2,7 +2,7 @@
   z-index: 4;
   display: flex;
 
-  background-color: rgba($player-bg-color,0.5);
+  background-color: $player-bg-color;
 
 
   height: $footer-fixed-height;
@@ -48,7 +48,7 @@
   &.player__forward,
   &.player__rewind {
     display: none;
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       display: initial;
     }
   }

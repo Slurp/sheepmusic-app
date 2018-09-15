@@ -37,7 +37,7 @@ $paragraph-margin-bottom : 1rem;
 $table-cell-padding:            .75rem !default;
 $table-cell-padding-sm:         .3rem !default;
 
-$text-color: theme-color();
+$text-color: theme-color-light('light');
 $hr-color: $gray-200;
 
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
@@ -53,4 +53,10 @@ $navbar-light-toggler-border-color: rgba($white,.1) !default;
 $navdrawer-width: 3.12rem;
 // Cards
 $card-border-color:        rgba(theme-color(),.25);
+$nav-tab-color: $text-color;
+$nav-tab-bg-hover: theme-color('secondary');
+$nav-tab-border-color: theme-color('secondary');
+$nav-tab-color-active: theme-color-light('light');
+$nav-tab-border-width: 2px;
+$nav-pills-color: $text-color;
 

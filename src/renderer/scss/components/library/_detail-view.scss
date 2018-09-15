@@ -7,7 +7,7 @@
     top: 50%;
   }
   .backdrop {
-    background: theme-color('light');
+    background: theme-color();
     height: 100%;
     position: absolute;
     top: 0;
@@ -32,9 +32,9 @@
       background-position: top;
       background-size: 100%;
       background-repeat: no-repeat;
-      box-shadow: inset 0px -27vw 20vw -10vw theme-color('light');
-      @include media-breakpoint-up(sm) {
-        box-shadow: inset 0px -27vw 20vw -2vh theme-color('light');
+      box-shadow: inset 0px -27vw 20vw -10vw theme-color();
+      @include media-breakpoint-up(md) {
+        box-shadow: inset 0px -27vw 20vw -2vh theme-color();
       }
     }
   }
@@ -44,27 +44,29 @@
     margin-left: -20px;
     margin-bottom: 15px;
     flex: 1 1 100%;
-    color: theme-color('primary');
-    text-shadow: 0 2px $white;
+    color: theme-color-dark('light');
+    font-weight: bold;
   }
   section {
-    padding: 20px 36px;
-    @include media-breakpoint-down(xs) {
-      margin: 100px 0px 20px 0px;
-      padding: 10px 8px;
+    margin: 100px 0px 20px 0px;
+    padding: 10px 8px;
+
+    @include media-breakpoint-up(md) {
+      padding: 20px 36px;
+      margin: 0;
     }
     .detail-info-wrapper {
       display: flex;
       padding: 20px;
       flex-direction: column;
-      background: linear-gradient(to bottom, rgba(theme-color('light'), 0.0), rgba(theme-color('light'), 0.5));
-      @include media-breakpoint-up(sm) {
+      background: linear-gradient(to bottom, rgba(theme-color(), 0.0), rgba(theme-color(), 0.5));
+      @include media-breakpoint-up(md) {
         flex-direction: row;
       }
     }
     &.list,
     .song-list {
-      background: rgba(theme-color('light'), 0.5);
+      background: rgba(theme-color(), 0.5);
       box-shadow: none;
       margin-left: 0;
       margin-right: 0;
@@ -79,7 +81,7 @@
     display: flex;
     flex: 1 1 100%;
     justify-content: center;
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       justify-content: flex-end;
     }
     .btn-float {
@@ -105,7 +107,7 @@
     padding: 10px 0;
     flex-direction: column;
     flex-wrap: wrap;
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       flex-direction: row;
       align-items: center;
     }
@@ -113,8 +115,11 @@
       background: theme-color('light');
       color: theme-color('dark');
       margin-bottom: 0.5rem;
+      justify-content: left;
       &:not(:last-child) {
-        margin-right: 0.5rem;
+        @include media-breakpoint-up(md) {
+          margin-right: 0.5rem;
+        }
       }
       i {
         color: theme-color('light');
@@ -129,7 +134,7 @@
   width: 220px;
   margin-right: 20px;
   margin-bottom: 20px;
-  @include media-breakpoint-down(xs) {
+  @include media-breakpoint-down(sm) {
     width: 100%;
     flex: 1 0 100%;
     img {
@@ -171,7 +176,7 @@
 
 .detail-info {
   flex: 1 1 calc(100% - 220px);
-  @include media-breakpoint-down(xs) {
+  @include media-breakpoint-down(sm) {
     float: left;
     max-width: 100%;
   }
@@ -180,6 +185,7 @@
     display: flex;
     align-items: center;
     font-weight: 700;
+    color: theme-color-light('light');
     text-shadow: 1px 1px theme-color();
     @include media-breakpoint-down(xs) {
       text-align: center;
@@ -195,10 +201,10 @@
   }
   h1 {
     font-size: 4rem;
-    color: theme-color();
-    text-shadow: 1px 1px theme-color('light');
+    color: theme-color('light');
+    text-shadow: 1px 1px theme-color-dark('light');
     text-transform: capitalize;
-    @include media-breakpoint-down(xs) {
+    @include media-breakpoint-down(sm) {
       text-align: center;
     }
     img {

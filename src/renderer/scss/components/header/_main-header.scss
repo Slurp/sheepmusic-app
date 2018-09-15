@@ -7,6 +7,7 @@
   }
 }
 .navbar {
+  background-color: theme-color-dark();
   .navbar-collapse {
     @extend .justify-content-end;
   }
@@ -34,7 +35,7 @@
   z-index: $zindex-sticky;
   &.navbar {
     transition: all 0.3s linear;
-    background-color: theme-color();
+    background-color: theme-color-dark();
     width: 100% !important;
     // Sticky target is now sticky
     position: fixed;
@@ -51,7 +52,6 @@
   }
   &.is-sticky {
     &.navbar {
-      background-color: theme-color();;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
       .navbar-collapse {
         margin-top: 0;

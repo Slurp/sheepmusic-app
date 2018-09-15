@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  background-color: $white;
+  background-color: theme-color('primary');
   min-height: 100%;
   .main-background {
     background: url("#{$backgrounds}/1920x1080.jpg");

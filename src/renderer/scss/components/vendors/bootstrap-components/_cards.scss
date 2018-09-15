@@ -2,7 +2,8 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   text-decoration: none;
-  color: theme-color('primary');
+  color: theme-color-light('light');
+  background: transparent;
   box-shadow: 0 0 2px 0 rgba(theme-color(), 0.14), 0 1px 2px 0 rgba(theme-color(), 0.12), 0 1px 1px 0 rgba(theme-color(), 0.2);
   &[href],
   &[tabindex] {
@@ -61,7 +62,7 @@
   }
   .card-title {
     font-size: 1rem;
-    color: theme-color-dark('primary');
+    color: theme-color-light('light');
     margin-bottom: 0.1rem;
   }
   .card-subtitle {
@@ -79,7 +80,7 @@
     display: flex;
     .card-block {
       width: 100%;
-      background: rgba(theme-color('light'),0.5);
+      background: transparent; // rgba(theme-color('light'),0.5);
       padding: 0;
       display: flex;
       flex-direction: column;

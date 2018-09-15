@@ -1,6 +1,6 @@
 .nav-drawer-nav {
   width: $navdrawer-width;
-  background-color: $navdrawer-content-bg;
+  background-color: theme-color-dark('primary');
   box-shadow: map-get($shadows, 2);
   padding: 0;
   position: fixed;
@@ -40,7 +40,7 @@
         align-items: center;
         @include transition-standard(background-color, color);
 
-        color: $navdrawer-nav-link-color;
+        color: theme-color('secondary');
         font-size: $navdrawer-nav-link-font-size;
         font-weight: $navdrawer-nav-link-font-weight;
         line-height: 1;
@@ -53,13 +53,12 @@
         white-space: nowrap;
         &:active,
         &.active {
-          color: theme-color-dark('secondary');;
+          color: theme-color-dark('secondary');
         }
         span {
           display: none;
-          padding-right: 15px;
+          padding: 2px 8px 0;
           font-weight: bold;
-          padding-top: 2px;
         }
         i {
           width: 50px;
@@ -78,9 +77,11 @@
           white-space: nowrap;
           a {
             background: theme-color('secondary');
-            color: $white;
+            color: theme-color();
             span {
+              color: $white;
               display: inline-block;
+              border-left: 1px solid theme-color();
             }
           }
         }
