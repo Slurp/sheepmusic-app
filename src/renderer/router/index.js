@@ -30,9 +30,9 @@ import Login from 'components/pages/login'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  hashbang: false,
+  hashbang: true,
   linkActiveClass: 'active',
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',
