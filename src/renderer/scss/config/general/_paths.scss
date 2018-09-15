@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Paths
+
+   This file is exclusively intended for setting up variables
+   Never add styles directly to this file
+   ========================================================================== */
+
+
+/* General
+   ========================================================================== */
+$root:                  "./assets";
+
+
+/* Image folders
+   ========================================================================== */
+$backgrounds:           "#{$root}/media/backgrounds";
+$buttons:               "#{$root}/media/buttons";
+$dummy:                 "#{$root}/media/dummy";
+$general:               "#{$root}/media/general";
+$icons:                 "#{$root}/media/icons";
+$components:            "#{$root}/media/components";
+
+
+/* Font folders
+   ========================================================================== */
+$iconfont-path:         "#{$root}/fonts/iconfont/fonts";
+$webfont-path:          "#{$root}/fonts";

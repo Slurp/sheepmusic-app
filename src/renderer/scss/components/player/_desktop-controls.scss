@@ -1,0 +1,12 @@
+
+.player-desktop-controls {
+
+  @include make-col-ready();
+  display: none;
+  @include media-breakpoint-up(md) {
+    @include make-col(4);
+    padding-top: 10px;
+    flex-direction: row-reverse;
+    display: flex;
+  }
+}

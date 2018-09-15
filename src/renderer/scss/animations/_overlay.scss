@@ -1,0 +1,55 @@
+.playlist-show {
+  #loading-overlay {
+    right: 25%;
+  }
+}
+.loading-overlay {
+  position: fixed;
+  top:0;
+  right:0;
+  left:0;
+  bottom: 0;
+  height:100%;
+  background: url("#{$backgrounds}/1920x1080.jpg");
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: block;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+#loading-overlay {
+  transition:all 0.1s ease;
+  position: fixed;
+  top:57px;
+  left: 0;
+  bottom: $footer-fixed-height;
+  right: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &.show{
+    display: flex;
+  }
+  .display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      margin-right: 6px;
+    }
+  }
+  button {
+    margin: 0;
+  }
+}

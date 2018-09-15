@@ -1,0 +1,23 @@
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url("#{$backgrounds}/1920x1080.jpg");
+  background-position: center;
+  background-size: cover;
+  &.footer-player {
+    height: $footer-fixed-height;
+    padding-top: 0;
+    padding-bottom: 10px;
+    z-index: $zindex-popover + 1;
+    position: fixed;
+    max-width: 100vw;
+  }
+  .btn-playlist {
+    position: absolute;
+    top: -1.25rem;
+    right: 1.25rem;
+  }
+}

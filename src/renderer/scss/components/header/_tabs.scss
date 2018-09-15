@@ -1,0 +1,26 @@
+.nav-tabs.router-tabs {
+  position: relative;
+  .nav-link {
+    transition: background-color 0.3s ease-in-out;
+    &.active {
+      color: $nav-tab-color;
+      opacity: $nav-tab-link-opacity;
+      &:before {
+        background-color: $nav-tab-indicator-bg;
+        opacity: 0;
+      }
+    }
+    &.active.router-link-exact-active,
+    &.router-link-exact-active:active {
+      opacity: 1;
+    }
+
+    &.active.router-link-exact-active {
+      color: $nav-tab-color-active;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}

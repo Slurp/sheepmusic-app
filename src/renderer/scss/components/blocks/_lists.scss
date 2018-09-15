@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+/* Reset
+   ========================================================================== */
+dl.info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+dt {
+    padding: 2px 0;
+}
+
+dl.info dt {
+    flex: 0 0 35%;
+    overflow: hidden; /* Prevents long words in labels from causing layout to break */
+}
+
+/* Use padding rather than margin in bottom to avoid extra spacing overflowing to the top of the next column */
+dd {
+    padding: 2px 0 5px 0;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+dl.info dd {
+    flex: 65% 0 0;
+    margin-left: auto;
+    max-width: 65%; /* Fix for IE issue in which box-sizing is not taken into account when using flex */
+}
+
+dl.info dd + dd {
+    margin-left: 35%;
+}
+
+@include media-breakpoint-up(sm) {
+    dl.info dt {
+        flex: 1 1 15%;
+    }
+    dl.info dd {
+        flex: 80% 1 1;
+        max-width: 80%;
+    }
+    dl.info dd + dd {
+        margin-left: 20%;
+    }
+}
+
+
+
+
+/*doc
+---
+title: Lists
+name: 05_lists
+category: Blocks
+---
+
+<strong>Unorderd list</strong>
+
+```html_example
+<ul>
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+</ul>
+```
+
+<strong>Orderd list</strong>
+
+```html_example
+<ol>
+    <li>Orderd list</li>
+    <li>Orderd list</li>
+    <li>Orderd list</li>
+    <li>Orderd list</li>
+</ol>
+```
+
+<strong>Reset</strong>
+
+```html_example
+<ul class="list--reset">
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+    <li>Unorderd list</li>
+</ul>
+```
+*/

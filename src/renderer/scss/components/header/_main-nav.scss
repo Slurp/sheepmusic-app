@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Header - Main navigation
+   ========================================================================== */
+
+/* Default
+   ========================================================================== */
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  .navbar-toggler-icon
+  {
+    background-image: $navbar-light-toggler-icon-bg;
+  }
+  i {
+    color:theme-color('secondary');
+  }
+  .navbar-nav {
+    margin: 0;
+    .nav-item {
+      transition: all .4s;
+      > .nav-link {
+        color:theme-color('secondary');
+        position: relative;
+        font-family: $font-family-base;
+        font-weight: 600;
+        text-decoration: none;
+        &:hover {
+          text-decoration: none;
+        }
+        &:before {
+          background-color: theme-color('secondary');
+          content: "";
+          height: 3px;
+          left: 0;
+          bottom: 0;
+          position: absolute;
+          transition: width ease .4s;
+          width: 0;
+        }
+      }
+      &.active,
+      &:hover {
+        .nav-link {
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .dropdown-menu-right {
+    right: 0;
+    left: auto;
+  }
+}

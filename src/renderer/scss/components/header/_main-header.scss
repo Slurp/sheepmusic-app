@@ -1,0 +1,72 @@
+/* ==========================================================================
+   Header - Main header
+   ========================================================================== */
+@include media-breakpoint-down(xs) {
+  .navbar-expand-sm > .container {
+    padding: 0 $grid-gutter-width / 2;
+  }
+}
+.navbar {
+  .navbar-collapse {
+    @extend .justify-content-end;
+  }
+  .brand-logo {
+    transition: all 0.3s linear;
+    display: block;
+    background: url('#{$general}/logo.svg') no-repeat;
+    background-size: 32px 32px;
+    background-position: center;
+    background-color: theme-color('secondary');
+    margin-left: -1rem;
+    padding:1rem;
+    width: $navdrawer-width;
+    height: 56px;
+    border: 1px solid theme-color('secondary');
+  }
+}
+
+/* ==================================================
+  Sticky
+  ================================================== */
+.sticky {
+  // Element is a sticky target but not yet sticky
+  transition: all 0.3s linear;
+  z-index: $zindex-sticky;
+  &.navbar {
+    transition: all 0.3s linear;
+    background-color: theme-color();
+    width: 100% !important;
+    // Sticky target is now sticky
+    position: fixed;
+    @supports (position: sticky) {
+      position: sticky;
+      z-index: $zindex-sticky;
+    }
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 0;
+  }
+  &.is-sticky {
+    &.navbar {
+      background-color: theme-color();;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+      .navbar-collapse {
+        margin-top: 0;
+        .nav-item {
+          .nav-link {
+            padding-top: $nav-link-padding-y;
+            color: $link-color;
+            &:before {
+              background-color: theme-color('secondary');
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

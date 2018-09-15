@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Header - Search form
+   ========================================================================== */
+
+/* General
+   ========================================================================== */
+form.form-search {
+  .form-control {
+    background: theme-color('light');
+    border-bottom: 2px solid theme-color-dark('light');
+    opacity: 1;
+    min-height: auto;
+    margin-right: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    &:focus {
+      text-decoration: none;
+      border-bottom: 2px solid theme-color('secondary');
+    }
+  }
+  .btn {
+    color: theme-color('secondary');
+    border: 2px solid theme-color('secondary');
+    border-left:0;
+  }
+}
+

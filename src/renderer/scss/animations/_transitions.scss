@@ -1,0 +1,44 @@
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+  .loading-overlay {
+    display: block;
+  }
+}
+.col {
+  &.list-enter-active, &.list-leave-active {
+    transition: all 0.5s ease-out;
+    transform: translateY(0);
+  }
+  &.list-enter-active {
+    transition-delay: 0.3s;
+
+  }
+
+  &.list-enter, &.list-leave-to {
+    opacity: 0;
+  }
+  &.list-enter {
+    transform: translateY(1vh);
+  }
+  &.list-leave-to {
+    transform: translateY(-1vh);
+  }
+}
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 200%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInUp {
+  animation-name: slideInUp;
+}

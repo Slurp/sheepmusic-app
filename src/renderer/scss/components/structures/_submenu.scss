@@ -1,0 +1,92 @@
+.nav-drawer-nav {
+  width: $navdrawer-width;
+  background-color: $navdrawer-content-bg;
+  box-shadow: map-get($shadows, 2);
+  padding: 0;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: auto;
+  bottom: $footer-fixed-height;
+  transition: all 0.3s linear;
+  z-index: $zindex-fixed;
+  // Visibility.
+  display: block;
+  z-index: (map-get($navdrawer-elevation-shadow, elevation) - 1);
+  + .container-fluid {
+    .left-column {
+      padding-left: $navdrawer-width + 0.5rem;
+      @include media-breakpoint-up(md) {
+        padding-left: $navdrawer-width + 1rem;
+      }
+    }
+    .backdrop {
+      left: $navdrawer-width;
+      .image-backdrop {
+        left: 15px;
+      }
+      margin: 0;
+    }
+  }
+  // Items.
+  nav {
+    padding: 15px 0;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      a {
+        display: flex;
+        align-items: center;
+        @include transition-standard(background-color, color);
+
+        color: $navdrawer-nav-link-color;
+        font-size: $navdrawer-nav-link-font-size;
+        font-weight: $navdrawer-nav-link-font-weight;
+        line-height: 1;
+        padding: (($navdrawer-nav-link-height - $navdrawer-nav-link-font-size) / 2) 0;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        white-space: nowrap;
+        &:active,
+        &.active {
+          color: theme-color-dark('secondary');;
+        }
+        span {
+          display: none;
+          padding-right: 15px;
+          font-weight: bold;
+          padding-top: 2px;
+        }
+        i {
+          width: 50px;
+          text-align: center;
+          &:before {
+            position: absolute;
+            top: 10px;
+            left: 16px;
+          }
+        }
+      }
+      li {
+        position: relative;
+        height: 38px;
+        &:hover {
+          white-space: nowrap;
+          a {
+            background: theme-color('secondary');
+            color: $white;
+            span {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+

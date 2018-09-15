@@ -1,0 +1,12 @@
+$pagination-bg: $body-bg;
+$pagination-active-color: theme-color();;
+// Pagination
+
+$pagination-bg:             $material-color-grey-100 !default;
+$pagination-border-radius:  $border-radius !default;
+$pagination-color:          theme-color();;
+$pagination-color-disabled: $black-hint !default;
+$pagination-inner-spacer-x: 1px !default;
+$pagination-padding-x:      .5rem !default;
+$pagination-padding-y:      .625rem !default;
+

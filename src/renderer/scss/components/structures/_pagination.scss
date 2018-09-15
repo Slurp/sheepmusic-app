@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Structures - Pagination
+   ========================================================================== */
+.pagination {
+    display: flex;
+    @include list-unstyled();
+    @include border-radius();
+    border-top:1px solid $divider-color;
+    .page-item {
+        flex: 1 0;
+        height: 100%;
+    }
+    .next-chunk,
+    .next-page,
+    .prev-chunk,
+    .prev-page
+    {
+        .page-link {
+            padding-left: $pagination-inner-spacer-x / 2;
+            padding-right: $pagination-inner-spacer-x / 2;
+        }
+    }
+    .page-link {
+        line-height: initial;
+        display: block;
+        @include active-focus-hover {
+            color: $white;
+            text-decoration: none;
+        }
+
+        @include focus-hover {
+            background-image: linear-gradient(to bottom, theme-color('secondary'), theme-color('secondary'));
+        }
+
+        &:active,
+        &.active {
+            background-color: theme-color('secondary');
+            background-image: none;
+        }
+    }
+    .count {
+        color: $divider-color;
+    }
+}
+
+.alphabet-pagination {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+

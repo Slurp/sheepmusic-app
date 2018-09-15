@@ -1,0 +1,63 @@
+// Floating button
+.btn-float {
+
+  &.btn-secondary i {
+    color: $button-floating-color;
+  }
+}
+
+// button fix
+button.btn-floating {
+  border: $button-border;
+}
+
+// Fixed Action Button
+.fixed-action-btn {
+  > .btn-float {
+    height: 2rem;
+    line-height: 1.75rem;
+    width: 2rem;
+  }
+  &.active {
+    ul {
+      opacity: 1;
+      bottom: 64px;
+      transform: translateY(-50%);
+      a.btn-float {
+        height: 2rem;
+        line-height: 1.75rem;
+        width: 2rem;
+      }
+    }
+    a.btn-float {
+      opacity: 1;
+      z-index: 2;
+    }
+  }
+
+  position: fixed;
+  right: 23px;
+  bottom: 23px;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 998;
+
+  ul {
+    left: 0;
+    right: 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateY(-100%) li {
+      margin-bottom: 15px;
+    }
+
+    .btn-float {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  }
+}

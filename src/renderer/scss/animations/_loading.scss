@@ -1,0 +1,50 @@
+// Some fancy bars for an eye-candy effect.
+// Credits: http://codepen.io/johnheiner/pen/JdRybK and http://codepen.io/jackrugile/pres/CkAbG
+@keyframes sound {
+  0% {
+    opacity: .35;
+    height: 2px;
+  }
+  100% {
+    opacity: 1;
+    height: 60px;
+  }
+}
+
+#bars,
+.loading-bars {
+  width: 200px;
+  height: 80px;
+  position: relative;
+  display: inline-block;
+
+  .bar {
+    background: #666;
+    bottom: 1px;
+    position: absolute;
+    min-width: 10px;
+    animation: sound 0ms -800ms linear infinite alternate;
+     height: 80px;
+  }
+
+  .bar:nth-child(1)  { left: 1px; background: $blue; animation-duration: 474ms; }
+  .bar:nth-child(2)  { left: 15px; background: $indigo; animation-duration: 433ms; }
+  .bar:nth-child(3)  { left: 29px; background: $purple; animation-duration: 407ms; }
+  .bar:nth-child(4)  { left: 43px; background: $amethyst; animation-duration: 458ms; }
+  .bar:nth-child(5)  { left: 57px; background: $pink; animation-duration: 391ms; }
+  .bar:nth-child(6)  { left: 71px; background: $fuschia; animation-duration: 458ms; }
+  .bar:nth-child(7)  { left: 85px; background: $red; animation-duration: 407ms; }
+  .bar:nth-child(8)  { left: 99px; background: $orange; animation-duration: 439ms; }
+  .bar:nth-child(9)  { left: 113px; background: $gold; animation-duration: 397ms; }
+  .bar:nth-child(10)  { left: 127px; background: $yellow; animation-duration: 487ms; }
+  .bar:nth-child(11)  { left: 141px; background: $breaking-bad; animation-duration: 417ms; }
+  .bar:nth-child(12)  { left: 155px; background: $green; animation-duration: 380ms; }
+  .bar:nth-child(13)  { left: 169px; background: $teal; animation-duration: 437ms; }
+  .bar:nth-child(14)  { left: 183px; background: $cyan; animation-duration: 377ms; }
+
+}
+
+.loading-bars {
+  width: 60px;
+  height: 30px;
+}

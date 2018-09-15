@@ -1,0 +1,40 @@
+.album-backdrop,
+.artist-backdrop {
+  background-size: cover;
+  background-position: 50% 50%;
+  display: flex;
+  @include make-row();
+  &.no-image {
+    .info-bar {
+      color: theme-color('primary');
+      text-shadow: 0 2px $white;
+      &:before {
+        border-bottom: 4px solid theme-color('secondary');
+        background: theme-color-light('light');
+      }
+    }
+  }
+  .info-bar {
+    position: relative;
+    &:before {
+      content: " ";
+      display: block;
+      width: 100%;
+      background-color: $backdrop-overlay-color;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+
+    }
+    z-index: 3;
+    transition: all 0.9s ease;
+  }
+
+  ~ * {
+    margin-top: 15px;
+  }
+}
+

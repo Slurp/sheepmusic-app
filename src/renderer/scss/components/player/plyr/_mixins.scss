@@ -1,0 +1,32 @@
+// ==========================================================================
+// Plyr mixins
+// https://github.com/selz/plyr
+// ==========================================================================
+
+// <input type="range"> styling
+@mixin plyr-range-track() {
+  height: $plyr-range-track-height;
+  background: transparent;
+  border-radius:0;
+  user-select: none;
+}
+@mixin plyr-range-thumb() {
+  position: relative;
+  top: $plyr-range-track-height /2;
+  height: $plyr-range-track-height;
+  width: $plyr-range-track-height;
+  background: $plyr-range-thumb-bg;
+  border: $plyr-range-thumb-border;
+  transition: background .2s ease, border .2s ease, transform .2s ease;
+  box-sizing: border-box;
+}
+@mixin plyr-range-thumb-active() {
+  top: auto;
+  height: $plyr-range-thumb-height;
+  width: $plyr-range-thumb-width;
+  background: $plyr-range-thumb-active-bg;
+  border-color: $plyr-range-thumb-active-border-color;
+  transform: scale($plyr-range-thumb-active-scale);
+  box-shadow: $plyr-range-thumb-shadow;
+  border-radius: 100%;
+}

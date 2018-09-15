@@ -1,0 +1,36 @@
+.user-profile {
+  .card {
+    margin: 2rem 0;
+    box-shadow: 0 0 2px 0 rgba(theme-color(), 0.14), 0 1px 2px 0 rgba(theme-color(), 0.12), 0 1px 1px 0 rgba(theme-color(), 0.2);
+    &[href],
+    &[tabindex] {
+      @include active-focus-hover {
+        box-shadow:  0 2px 4px 0 rgba(theme-color(), 0.14), 0 4px 5px 0  rgba(theme-color(), 0.12), 0 1px 10px 0 rgba(theme-color(), 0.2);
+        text-decoration: none;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+    .card-header {
+      padding: 0.25rem 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid $divider-color;
+      .card-actions {
+        margin-left: auto;
+        align-self: flex-end;
+      }
+    }
+    .card-actions__header {
+    }
+    .card-actions {
+      margin-left: auto;
+      align-self: flex-end;
+    }
+  }
+}

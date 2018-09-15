@@ -1,0 +1,180 @@
+/* ==========================================================================
+   Colors
+
+   This file is exclusively intended for setting up variables
+   Never add styles directly to this file
+   ========================================================================== */
+@import '~daemonite-material/assets/scss/colors';
+//
+// Color system
+//
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+$grays: ();
+$grays: map-merge((
+        100: $gray-100,
+        200: $gray-200,
+        300: $gray-300,
+        400: $gray-400,
+        500: $gray-500,
+        600: $gray-600,
+        700: $gray-700,
+        800: $gray-800,
+        900: $gray-900
+), $grays);
+
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+
+$turquoise: #80CBC4;
+$acid-lime: #c6ff00;
+$amethyst: #ab47bc;
+$aquamarine: #64ffda;
+$breaking-bad: #388e3c;
+$brick: #e57373;
+$coffee: #80CBC4;
+$cyan: #00bcd4;
+$daisy: #FFEB3B;
+$dodger-blue: #2979ff;
+$fuschia: #E91E63;
+$gold: #FFD700;
+$graphite: #616161;
+$indigo: #3F51B5;
+$lime: #7CB342;
+$orange: #ff7042;
+$pomegrenate: #f44336;
+$sky: #84ffff;
+$slate: #607D8B;
+$strawberry: #ff4081;
+$teal: #009688;
+$tomato: #F44336;
+
+/* Colors
+   ========================================================================== */
+$primary-color-dark:   #455A64;
+$primary-color:        #607D8B;
+$primary-color-light:  #CFD8DC;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FF4081;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+//$primary: #343a40;
+$primary: #131e2b;
+$primary-light: #5e646b;
+$primary-dark: #0e141a;
+$secondary-light: #ff4081;
+$secondary: #f50057;
+$secondary-dark: #bb002f;
+
+//$theme-colors: (
+//        primary: $primary,
+//        secondary: #F50057,
+//        success: $green,
+//        info: $teal,
+//        warning: $yellow,
+//        danger: $secondary-dark,
+//        light: $gray-100,
+//        dark: $primary-dark
+//);
+
+// Theme palette
+// Change these values to customise colour palettes
+
+$theme-colors: (
+        primary: (
+                color:   $primary,
+                dark:  $primary-dark,
+                light: $primary-light
+        ),
+        secondary: (
+                color:   $secondary,
+                dark:  $secondary-dark,
+                light: $secondary-light
+        ),
+        danger: (
+                color:   $material-color-red-600,
+                dark:  $material-color-red-900,
+                light: $material-color-red-300
+        ),
+        info: (
+                color:   $material-color-blue-500,
+                dark:  $material-color-blue-700,
+                light: $material-color-blue-100
+        ),
+        success: (
+                color:   $material-color-green-500,
+                dark:  $material-color-green-700,
+                light: $material-color-green-100
+        ),
+        warning: (
+                color:   $material-color-orange-500,
+                dark:  $material-color-orange-700,
+                light: $material-color-orange-100
+        ),
+        dark: (
+                color:   $material-color-grey-800,
+                dark:  $material-color-grey-900,
+                light: $material-color-grey-600
+        ),
+        light: (
+                color:   $material-color-grey-100,
+                dark:  $material-color-grey-300,
+                light: $material-color-grey-050
+        )
+);
+
+
+//material
+// Black and white
+// Based on https://material.google.com/style/color.html#color-text-background-colors
+
+$black:                   #000000 !default;
+
+$black-primary-opacity:   .87 !default;
+$black-secondary-opacity: .54 !default;
+$black-hint-opacity:      .38 !default;
+$black-divider-opacity:   .12 !default;
+
+$black-primary-solid:     #212121 !default;
+$black-secondary-solid:   #757575 !default;
+$black-hint-solid:        #9e9e9e !default;
+$black-divider-solid:     #e1e1e1 !default;
+
+$black-primary:           rgba(red($black), green($black), blue($black), $black-primary-opacity) !default;
+$black-secondary:         rgba(red($black), green($black), blue($black), $black-secondary-opacity) !default;
+$black-hint:              rgba(red($black), green($black), blue($black), $black-hint-opacity) !default;
+$black-divider:           rgba(red($black), green($black), blue($black), $black-divider-opacity) !default;
+
+$white:                   #ffffff !default;
+
+$white-primary-opacity:   1 !default;
+$white-secondary-opacity: .7 !default;
+$white-hint-opacity:      .5 !default;
+$white-divider-opacity:   .12 !default;
+
+$white-primary:           rgba(red($white), green($white), blue($white), $white-primary-opacity) !default;
+$white-secondary:         rgba(red($white), green($white), blue($white), $white-secondary-opacity) !default;
+$white-hint:              rgba(red($white), green($white), blue($white), $white-hint-opacity) !default;
+$white-divider:           rgba(red($white), green($white), blue($white), $white-divider-opacity) !default;
+

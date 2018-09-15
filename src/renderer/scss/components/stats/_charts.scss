@@ -1,0 +1,8 @@
+.stats__charts {
+  @include make-row();
+  margin-bottom: 2rem;
+  > div {
+    @include make-col-ready();
+    @include make-col(6);
+  }
+}

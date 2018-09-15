@@ -1,0 +1,11 @@
+.floating-label {
+  &.has-value label,
+  &.is-focused label {
+    top: -0.5rem;
+  }
+  .form-control {
+    padding-left: 0;
+    border:solid rgba(theme-color('primary'),.42);
+    border-width: 0 0 1px;
+  }
+}

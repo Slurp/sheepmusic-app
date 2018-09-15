@@ -1,0 +1,36 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  .card {
+    flex: 1;
+    max-width: 50%;
+    .card-header {
+      color: $white;
+      background-color: theme-color('secondary');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        flex: 1;
+        align-self: center;
+      }
+    }
+    .card-body {
+      padding: 1rem;
+    }
+  }
+  .brand-logo {
+    border-radius: 100%;
+    transition: all 0.3s linear;
+    padding: 10px;
+    display: block;
+    height: 44px;
+    width: 44px;
+    background: theme-color-dark('dark') url('#{$general}/logo.svg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 20px;
+  }
+}

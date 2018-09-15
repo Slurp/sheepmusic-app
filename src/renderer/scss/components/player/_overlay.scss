@@ -1,0 +1,278 @@
+.playing-overlay {
+
+  position: fixed;
+  top: 56px;
+  left: 0; //$navdrawer-width;
+  bottom: $footer-fixed-height;
+  width: 100%; //calc(100% - #{$navdrawer-width});
+  display: block;
+  z-index: $zindex-popover;
+  background-color: rgba(theme-color('dark'), 1);
+
+  .btn-close {
+    position: absolute;
+    top: $grid-gutter-width-base;
+    right: $grid-gutter-width-base;
+    height: 1.4rem;
+    line-height: 1.2rem;
+    width: 1.4rem;
+  }
+  #bars {
+    position: absolute;
+    bottom: 0;
+    .bar {
+      &:nth-child(1n) {
+        background: theme-color('primary');
+      }
+      &:nth-child(2n) {
+        background: theme-color('secondary');
+      }
+      &:nth-child(3n) {
+        background: theme-color('dark');
+      }
+    }
+  }
+  .background-image {
+    animation-name: slideInUp;
+    animation-duration: 0.5s;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    content: '';
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    box-shadow: inset 0 -37vw 30vw -10vw rgba(theme-color-dark('primary'), 0.9);
+  }
+  &__content {
+    animation-name: slideInUp;
+    animation-duration: 0.5s;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(theme-color('dark'), 0.5);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: theme-color('light');
+    padding: $grid-gutter-width-base;
+    h3 {
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      img {
+        margin-right: 10px;
+        width: 50%;
+      }
+      + h1 {
+        font-weight: 300;
+        word-wrap: break-word;
+      }
+    }
+    h1 {
+      font-size: 4rem;
+      text-transform: capitalize;
+      flex: 1 1 100%;
+    }
+    .info {
+      flex: 0 75%;
+      text-align: left;
+      padding: 0 $grid-gutter-width-base * 2;
+      padding-left: 12%;
+    }
+    img {
+      max-width: 100%;
+    }
+    .album-cover {
+      flex: 1 25%;
+
+      img {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+    }
+
+  }
+}
+
+.playlist-show {
+  .playing-overlay {
+    max-width: 75%; //calc(75% - #{$navdrawer-width});
+    @include media-breakpoint-up(sm) {
+      @include make-col(7.5);
+    }
+    @include media-breakpoint-up(md) {
+      @include make-col(8.5);
+    }
+    @include media-breakpoint-up(lg) {
+      @include make-col(9.5);
+    }
+  }
+}
+
+.case {
+  position: relative;
+  display: block;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  z-index: 2;
+  box-shadow: 0 0 2px 0 rgba($black, 0.2);
+  margin: 0 auto;
+  &:after {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 265px;
+    height: 10px;
+    left: -40px;
+    bottom: -8px;
+    z-index: 1;
+    background: radial-gradient(rgba($black, 0.45) 0%, rgba($black, 0) 50%, rgba(225, 225, 225, 0) 51%, rgba(246, 246, 246, 0) 100%);
+  }
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    border-radius: 3px;
+    box-shadow: 2px 0 2px 0 rgba($black, 0.6);
+  }
+  .overlay {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 1px 1px 4px 0 rgba($white,0.45), inset 1px 1px 2px 0 rgba($white,0.5), inset -1px -1px 2px 0 rgba($white,0.5);
+    border-radius: 3px;
+    border: 1px solid rgba(theme-color('primary'), 0.35);
+    &:before {
+      position: absolute;
+      display: block;
+      content: "";
+      top: 0;
+      left: 0;
+      z-index: 4;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-55deg, rgba($white, 0.1) 0%, rgba(244, 244, 244, 0.35) 50%, rgba(225, 225, 225, 0) 51%, rgba(246, 246, 246, 0) 100%);
+      border-radius: 3px;
+
+    }
+  }
+  .vinyl {
+    animation: spin 600ms linear infinite;
+    left: calc(50% - 30px);
+  }
+  .slot {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: -10px;
+    height: 100%;
+    width: 10px;
+    overflow: hidden;
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      top: -50%;
+      left: -63px;
+      height: 200%;
+      width: 85px;
+      background: radial-gradient(ellipse at center,rgba($white, 1) 0%, rgba($white, 1) 50%, rgba(76, 76, 76, 1) 51%, rgba(76, 76, 76, 0) 52%, rgba($black, 0.1) 53%, rgba($black, 0) 58%);
+    }
+  }
+}
+
+.vinyl {
+  position: absolute;
+  z-index: 1;
+  bottom: 2%;
+  left: 1%;
+  display: block;
+  width: 96%;
+  height: 96%;
+  border-radius: 100%;
+  background: linear-gradient(to bottom, rgba(45, 45, 45, 1) 0%, rgba($black, 1) 100%);
+  box-shadow: inset 0 1px 0 0 rgba($white, 0.35), inset 0 -1px 1px 0 rgba($white, 0.25), 0 0 8px 0 rgba($black, 0.4);
+  border: 1px solid theme-color('dark');
+  transition: all 500ms ease-in-out;
+  &:before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background: radial-gradient(rgba(38,38,38,0.4) 0%,rgba(89,89,89,0.4) 1%,rgba(35,35,35,0.4) 2%,rgba(86,86,86,0.4) 3%,rgba(35,35,35,0.4) 4%,rgba(86,86,86,0.4) 5%,rgba(35,35,35,0.4) 6%,rgba(86,86,86,0.4) 7%,rgba(35,35,35,0.4) 8%,rgba(86,86,86,0.4) 9%,rgba(35,35,35,0.4) 10%,rgba(86,86,86,0.4) 11%,rgba(35,35,35,0.4) 12%,rgba(86,86,86,0.4) 13%,rgba(35,35,35,0.4) 14%,rgba(86,86,86,0.4) 15%,rgba(35,35,35,0.4) 16%,rgba(86,86,86,0.4) 17%,rgba(35,35,35,0.4) 18%,rgba(86,86,86,0.4) 19%,rgba(35,35,35,0.4) 20%,rgba(86,86,86,0.4) 21%,rgba(35,35,35,0.4) 22%,rgba(86,86,86,0.4) 23%,rgba(35,35,35,0.4) 24%,rgba(86,86,86,0.4) 25%,rgba(35,35,35,0.4) 26%,rgba(86,86,86,0.4) 27%,rgba(35,35,35,0.4) 28%,rgba(86,86,86,0.4) 29%,rgba(35,35,35,0.4) 30%,rgba(86,86,86,0.4) 31%,rgba(35,35,35,0.4) 32%,rgba(86,86,86,0.4) 33%,rgba(35,35,35,0.4) 34%,rgba(86,86,86,0.4) 35%,rgba(35,35,35,0.4) 36%,rgba(86,86,86,0.4) 37%,rgba(35,35,35,0.4) 38%,rgba(86,86,86,0.4) 39%,rgba(35,35,35,0.4) 40%,rgba(86,86,86,0.4) 41%,rgba(35,35,35,0.4) 42%,rgba(86,86,86,0.4) 43%,rgba(35,35,35,0.4) 44%,rgba(86,86,86,0.4) 45%,rgba(35,35,35,0.4) 46%,rgba(86,86,86,0.4) 47%,rgba(35,35,35,0.4) 48%,rgba(86,86,86,0.4) 49%,rgba(35,35,35,0.4) 50%,rgba(86,86,86,0.4) 51%,rgba(35,35,35,0.4) 52%,rgba(86,86,86,0.4) 53%,rgba(35,35,35,0.4) 54%,rgba(86,86,86,0.4) 55%,rgba(35,35,35,0.4) 56%,rgba(86,86,86,0.4) 57%,rgba(35,35,35,0.4) 58%,rgba(86,86,86,0.4) 59%,rgba(35,35,35,0.4) 60%,rgba(86,86,86,0.4) 61%,rgba(35,35,35,0.4) 62%,rgba(86,86,86,0.4) 63%,rgba(35,35,35,0.4) 64%,rgba(86,86,86,0.4) 65%,rgba(35,35,35,0.4) 66%,rgba(86,86,86,0.4) 67%,rgba(35,35,35,0.4) 68%,rgba(86,86,86,0.4) 69%,rgba(35,35,35,0.4) 70%,rgba(86,86,86,0.4) 71%,rgba(35,35,35,0.4) 72%,rgba(86,86,86,0.4) 73%,rgba(35,35,35,0.4) 74%,rgba(86,86,86,0.4) 75%,rgba(35,35,35,0.4) 76%,rgba(86,86,86,0.4) 77%,rgba(35,35,35,0.4) 78%,rgba(86,86,86,0.4) 79%,rgba(35,35,35,0.4) 80%,rgba(86,86,86,0.4) 81%,rgba(35,35,35,0.4) 82%,rgba(86,86,86,0.4) 83%,rgba(35,35,35,0.4) 84%,rgba(86,86,86,0.4) 85%,rgba(35,35,35,0.4) 86%,rgba(86,86,86,0.4) 87%,rgba(35,35,35,0.4) 88%,rgba(86,86,86,0.4) 89%,rgba(35,35,35,0.4) 90%,rgba(86,86,86,0.4) 91%,rgba(35,35,35,0.4) 92%,rgba(86,86,86,0.4) 93%,rgba(35,35,35,0.4) 94%,rgba(86,86,86,0.4) 95%,rgba(35,35,35,0.4) 96%,rgba(86,86,86,0.4) 97%,rgba(86,86,86,0.4) 97%,rgba(35,35,35,0.4) 98%);
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  i {
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    content: "\002022";
+    width: 30%;
+    height: 30%;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    margin-top: -15%;
+    margin-left: -15%;
+    color: #000;
+    background: linear-gradient(-45deg, rgba(gray(100), 1) 0%, rgba(gray(100), 1) 100%);
+    border: 1px solid #000;
+    font-size: 40px;
+    line-height: 46px;
+    text-shadow: 0 0 3px rgba($black, 0.8);
+    &:after {
+      position: absolute;
+      content: "";
+      width: 50%;
+      height: 50%;
+      border-radius: 100%;
+      top: 50%;
+      left: 50%;
+      background: theme-color-dark('dark');
+      margin-left: -25%;
+      margin-top: -25%;
+      border: 1.6px solid theme-color-light('dark');
+    }
+  }
+}
+
+
+
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,12 @@
+.user-profile__tabs {
+  @include make-row();
+  .col{
+    @include make-col-ready();
+    &__left {
+      @include make-col(2);
+    }
+    &__right {
+      @include make-col(10);
+    }
+  }
+}
