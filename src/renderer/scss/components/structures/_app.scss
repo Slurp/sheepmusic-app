@@ -1,8 +1,22 @@
 .appBar {
+  .title-bar {
+    position: fixed;
+    top:0;
+  }
+  .navbar.sticky {
+    top: 39px;
+  }
   .playlist {
     top:97px;
+    height: calc(100vh - #{$footer-fixed-height} - 97px);
+    ul {
+      height: calc(100vh - #{$footer-fixed-height} - 189px);
+    }
   }
   .nav-drawer-nav {
     top:95px;
+  }
+  .router-view {
+    margin-top: 39px;
   }
 }

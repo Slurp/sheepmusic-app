@@ -1,9 +1,11 @@
 .title-bar {
   height: 39px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
   padding: 8px;
   background: rgba(theme-color-dark(),0.9);
   border-bottom: 1px solid theme-color();
+  z-index: $zindex-sticky;
 }
