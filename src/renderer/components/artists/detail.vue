@@ -12,9 +12,9 @@
                             <img
                                     v-lazyload
                                     :alt="artist.name"
-                                    :src=config.defaultCover
+                                    :src=defaultCover
                                     :data-src=cover
-                                    :data-err=config.defaultCover
+                                    :data-err=defaultCover
                             />
                         </div>
                     </div>
@@ -65,12 +65,12 @@ import songList from 'components/songs/list'
 import breadcrumbs from 'components/misc/breadcrumbs'
 import album from 'components/albums/album'
 import artistCard from 'components/artists/artist'
+import config from 'config/index'
+import loadingCircle from 'components/misc/loading-circle'
 import truncate from './bio'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 import editBtn from './edit-btn'
-import config from 'config/index'
-import loadingCircle from 'components/misc/loading-circle'
 
 export default {
   name: 'artist_detail',
@@ -84,6 +84,11 @@ export default {
     queueBtn,
     editBtn,
     loadingCircle
+  },
+  data() {
+    return {
+      defaultCover: config.defaultCover
+    }
   },
   props: ['id'],
   created() {

@@ -19,7 +19,10 @@ function createWindow() {
    */
   mainWindow = new BrowserWindow({
     useContentSize: true,
-    titleBarStyle: 'default'
+    titleBarStyle: 'default',
+    minWidth: 320,
+    minHeight: 640,
+    backgroundColor: '#2e2c29'
   })
 
   mainWindow.loadURL(winURL)
