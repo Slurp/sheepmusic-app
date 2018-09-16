@@ -1,5 +1,6 @@
 <template>
     <div v-bind:class="loginScreen" id="app">
+        <title-bar></title-bar>
         <navbar v-if="$auth.check()"></navbar>
         <sidebar v-if="$auth.check() && loaded && !loading"></sidebar>
         <div class="container-fluid" v-if="loaded && !loading">
@@ -26,10 +27,12 @@ import overlay from 'components/misc/overlay'
 import sidebar from 'components/sidebar/index'
 import modalScreens from 'components/modals/screens'
 import Toaster from 'services/toast'
+import TitleBar from './components/misc/title-bar'
 
 export default {
   name: 'sheepmusic-app',
   components: {
+    TitleBar,
     navbar, player, playlist, overlay, sidebar, modalScreens, playerOverlay
   },
   data() {
@@ -37,17 +40,19 @@ export default {
       loaded: false,
       toast: new Toaster(),
       showNowPlaying: false,
-      playing: null
+      playing: null,
+      isApp: false,
+      appBar: false
     }
   },
   computed: {
     loginScreen() {
       return {
         'playlist-show': this.loaded && this.$auth.check() && this.showPlaylist,
-        'main-background': !this.$auth.check()
+        'main-background': !this.$auth.check(),
+        appBar: !process.env.IS_WEB
       }
     },
-
     loading() {
       return this.$store.getters.loading
     },

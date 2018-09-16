@@ -9,7 +9,8 @@ export default class Notification {
     const promise = Push.create(`♫ ${song.title}`, {
       body: `${song.album.name} – ${song.artist.name}`,
       icon: url,
-      timeout: 300
+      timeout: 300,
+      silent: true
     })
 
     promise.then(notification => {
