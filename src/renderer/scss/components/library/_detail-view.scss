@@ -60,7 +60,7 @@
       padding: 20px;
       flex-direction: column;
       background: linear-gradient(to bottom, rgba(theme-color(), 0.0), rgba(theme-color(), 0.5));
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(lg) {
         flex-direction: row;
       }
     }
@@ -134,7 +134,7 @@
   width: 220px;
   margin-right: 20px;
   margin-bottom: 20px;
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     width: 100%;
     flex: 1 0 100%;
     img {
@@ -175,10 +175,10 @@
 }
 
 .detail-info {
-  flex: 1 1 calc(100% - 220px);
-  @include media-breakpoint-down(sm) {
-    float: left;
-    max-width: 100%;
+  float: left;
+  max-width: 100%;
+  @include media-breakpoint-up(md) {
+    flex: 1 1 calc(100% - 220px);
   }
   h3 {
     font-size: 3rem;
@@ -187,7 +187,7 @@
     font-weight: 700;
     color: theme-color-light('light');
     text-shadow: 1px 1px theme-color();
-    @include media-breakpoint-down(xs) {
+    @include media-breakpoint-down(md) {
       text-align: center;
     }
     img {
@@ -204,7 +204,7 @@
     color: theme-color('light');
     text-shadow: 1px 1px theme-color-dark('light');
     text-transform: capitalize;
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       text-align: center;
     }
     img {

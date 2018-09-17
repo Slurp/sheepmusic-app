@@ -23,12 +23,7 @@
 
 /* Forms
    ========================================================================== */
-@import "forms/form",
-"forms/form-group",
-"forms/form-control",
-"forms/form-control-label",
-"forms/form-widget",
-"forms/radio-checkbox";
+@import "forms/form";
 
 @import "blocks/blocks";
 @import "parts/parts";

@@ -17,17 +17,12 @@
                         <input v-model="data.body.password" type="password" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label class="custom-control custom-checkbox">
-                            <input v-model="data.rememberMe" type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Remember Me</span>
-                        </label>
-
+                        <div class="custom-control custom-checkbox">
+                            <input v-model="data.rememberMe" id="rememberMe" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">
-
-                        </label>
                         <button type="submit" class="btn btn-secondary float-md-right">Login</button>
                     </div>
                     <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
@@ -64,22 +59,20 @@ export default {
   methods: {
     login() {
       this.$store.dispatch('toggleLoading')
-      const redirect = this.$auth.redirect()
       this.$auth.login({
         data: this.data.body, // Axios
         rememberMe: this.data.rememberMe,
-        redirect: { name: redirect ? redirect.from.name : 'recent-albums' },
+        redirect: { name: 'recent-albums' },
         fetchUser: this.data.fetchUser,
-        success(res) {
+        success() {
           this.$store.dispatch('loggedIn').then(() => {
             this.$store.dispatch('toggleLoading')
           }).catch(() => {
             this.toast.toast('@#@#*(&@#*&@#(*!@^!@&@!')
           })
         },
-        error(res) {
+        error() {
           this.$store.dispatch('toggleLoading')
-          this.error = res.data
         }
       })
     }

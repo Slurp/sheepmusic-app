@@ -2,6 +2,8 @@
   .title-bar {
     position: fixed;
     top:0;
+    justify-content: left;
+    padding-left: 75px;
   }
   .navbar.sticky {
     top: 39px;
@@ -18,5 +20,11 @@
   }
   .router-view {
     margin-top: 39px;
+  }
+  .breadcrumb-fixed {
+    left: 170px;
+    height: 39px;
+    padding: 7px;
+    min-height: auto;
   }
 }

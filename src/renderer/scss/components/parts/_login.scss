@@ -19,6 +19,7 @@
     }
     .card-body {
       padding: 1rem;
+      color: theme-color-light();
     }
   }
   .brand-logo {
@@ -29,7 +30,7 @@
     height: 44px;
     width: 44px;
     background: theme-color-dark('dark') url('#{$general}/logo.svg') no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     margin-right: 20px;
   }
