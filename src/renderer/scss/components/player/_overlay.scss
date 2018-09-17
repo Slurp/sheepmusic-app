@@ -96,7 +96,7 @@
     }
     .album-cover {
       flex: 1 25%;
-
+      max-width: 50%;
       img {
         width: 100%;
         height: auto;
@@ -109,7 +109,7 @@
 
 .playlist-show {
   .playing-overlay {
-    max-width: 75%; //calc(75% - #{$navdrawer-width});
+    @include make-col(7);
     @include media-breakpoint-up(sm) {
       @include make-col(7.5);
     }

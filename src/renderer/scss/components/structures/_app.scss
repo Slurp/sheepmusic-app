@@ -4,9 +4,14 @@
     top:0;
     justify-content: left;
     padding-left: 75px;
+    -webkit-user-select: none;
+    -webkit-app-region: drag
   }
   .navbar.sticky {
     top: 39px;
+  }
+  .playing-overlay {
+    top:95px;
   }
   .playlist {
     top:97px;

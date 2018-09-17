@@ -96,9 +96,6 @@
 }
 
 .router-view {
-  margin-bottom: $footer-fixed-height;
-}
-.router-view {
   @include make-row();
   margin-bottom: $footer-fixed-height;
 }

@@ -10,7 +10,7 @@
                          v-lazyload
                          :alt="album.name"
                          :src=defaultCover
-                         :data-src=album.cover
+                         :data-src=cover
                          :data-err=defaultCover
                     />
                     <div class="slot">
@@ -66,6 +66,12 @@ export default {
     song() {
       return this.$store.getters['playlist/getCurrentSong']
     },
+    cover() {
+      if (this.album) {
+        return this.album.cover
+      }
+      return null
+    },
     album() {
       if (this.song) {
         return this.$store.getters['albums/getAlbumById'](this.song.album.id)
@@ -97,7 +103,7 @@ export default {
       return null
     },
     show() {
-      return (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)
+      return true // (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)
     }
   }
 }
