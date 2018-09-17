@@ -9,7 +9,7 @@
                     <img class="cover"
                          v-lazyload
                          :alt="album.name"
-                         :src=defaultCover
+                         :src=cover
                          :data-src=cover
                          :data-err=defaultCover
                     />
@@ -67,13 +67,14 @@ export default {
       return this.$store.getters['playlist/getCurrentSong']
     },
     cover() {
-      if (this.album) {
-        return this.album.cover
+      if (this.song && this.song.album.cover) {
+        return new URL(this.song.album.cover, config.baseUrl)
       }
-      return null
+      return config.defaultCover
     },
     album() {
       if (this.song) {
+        this.$store.dispatch('albums/loadAlbum', this.song.album.id)
         return this.$store.getters['albums/getAlbumById'](this.song.album.id)
       }
       return null
