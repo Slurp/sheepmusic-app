@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "sheepmusic-app",
+    "productName": "sheepmusic",
     "appId": "com.zwartschaap.music",
     "directories": {
       "output": "build"
