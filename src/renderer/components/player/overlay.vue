@@ -104,7 +104,7 @@ export default {
       return null
     },
     show() {
-      return true // (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)
+      return (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)
     }
   }
 }
