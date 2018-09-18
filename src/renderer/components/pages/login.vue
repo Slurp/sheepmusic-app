@@ -40,8 +40,8 @@ export default {
 
       data: {
         body: {
-          username: 'slurp',
-          password: 'test'
+          username: '',
+          password: ''
         },
         rememberMe: true,
         fetchUser: false
