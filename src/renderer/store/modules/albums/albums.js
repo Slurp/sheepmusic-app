@@ -43,7 +43,7 @@ const actions = {
     })
   },
   async loadAlbum({ commit, state }, albumId) {
-    if (state.albums[albumId] === null || state.albums[albumId].songs === null) {
+    if (!state.albums[albumId] || !state.albums[albumId].songs) {
       Vue.axios.get(`/api/album/${albumId}`).then(response => {
         commit('ADD_ALBUM', { album: response.data, index: albumId })
       }, err => {
@@ -82,7 +82,9 @@ const getters = {
     return state.albums.slice
   },
   search: state => albums => albums.map(album => state.albums[album.id]),
-  getAlbumById: state => albumId => state.albums[albumId],
+  getAlbumById: state => albumId => {
+    return state.albums[albumId]
+  },
   detailLink: state => album => ({
     name: 'detail_album',
     params: { artist: album.artist.name, album: album.name, id: album.id }

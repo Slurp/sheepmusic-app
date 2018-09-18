@@ -22,10 +22,17 @@
         left: 150px;
     }
     .breadcrumb-item {
+        padding: 0.725rem 0;
         &:before {
             color: theme-color('secondary');
         }
-        text-transform: capitalize;
+        text-transform: lowercase;
         color: theme-color('light');
+        + .breadcrumb-item {
+            margin-left: 0.1rem;
+            &:before {
+                margin-right: 0.1rem;
+            }
+        }
     }
 }

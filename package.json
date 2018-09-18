@@ -143,6 +143,7 @@
     "url-loader": "^1.0.1",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^15.2.4",
+    "vue-router-back-button": "^1.1.1",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.15.1",

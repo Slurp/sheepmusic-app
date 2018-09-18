@@ -71,6 +71,8 @@ import truncate from './bio'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 import editBtn from './edit-btn'
+import { getBackground, getCover, getLogo } from '../../store/modules/artists/model'
+import { maybe } from '../../services/functional-tools'
 
 export default {
   name: 'artist_detail',
@@ -96,7 +98,7 @@ export default {
   },
   methods: {
     loadArtistDetail() {
-      if (this.artist === null || typeof this.artist.albums === 'undefined') {
+      if (!this.artist || !this.artist.fullyLoaded) {
         this.$store.dispatch('artists/loadArtist', this.id)
       }
       this.$store.dispatch('artists/viewArtist', this.id)
@@ -113,28 +115,13 @@ export default {
       return this.artist.genres
     },
     logo() {
-      return this.$store.getters['artists/getLogoForArtist'](this.id)
+      return maybe(this.artist, artist => getLogo(artist))
     },
     cover() {
-      if (this.$store.getters['artists/getThumbForArtist'](this.id)) {
-        return this.$store.getters['artists/getThumbForArtist'](this.id)
-      }
-      if (this.artist.image && this.artist.image !== '') {
-        return new URL(this.artist.image, config.baseUrl)
-      }
-      if (this.artist.albumArt && this.artist.albumArt !== '') {
-        return new URL(this.artist.albumArt, config.baseUrl)
-      }
-      return config.defaultCover
+      return maybe(this.artist, artist => getCover(artist))
     },
     background() {
-      if (this.$store.getters['artists/getBackgroundForArtist'](this.id)) {
-        return this.$store.getters['artists/getBackgroundForArtist'](this.id)
-      }
-      if (this.$store.getters['artists/getBannerForArtist'](this.id)) {
-        return this.$store.getters['artists/getBannerForArtist'](this.id)
-      }
-      return this.artist.albumArt
+      return maybe(this.artist, artist => getBackground(artist))
     },
     artist() {
       return this.$store.getters['artists/getArtistById'](this.id)

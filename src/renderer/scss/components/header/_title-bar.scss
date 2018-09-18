@@ -8,4 +8,8 @@
   background: rgba(theme-color-dark(),0.9);
   border-bottom: 1px solid theme-color();
   z-index: $zindex-sticky;
+  .btn-sm {
+    margin-right: 8px;
+    padding: 0;
+  }
 }

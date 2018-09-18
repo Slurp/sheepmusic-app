@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import config from 'config/index'
 import { sortedState, sortedMutations, sortedActions } from 'store/helpers/sortedPage'
-
 import { addItemsAndSortedList } from 'root/store/helpers/mutations'
+import { getBackground, getCover } from './model'
 
 const state = {
   artists: [],
@@ -93,27 +94,24 @@ const getters = {
       return state.artists[artistId]
     }
   },
+  getCover: state => artistId => {
+    if (state.artists && state.artists[artistId]) {
+      return getCover(state.artists[artistId])
+    }
+    return config.defaultCover
+  },
   getLogoForArtist: state => artistId => {
-    if (state.artists && state.artists[artistId] && typeof state.artists[artistId].logo !== 'undefined' && state.artists[artistId].logo.length > 0) {
+    if (state.artists &&
+        state.artists[artistId] &&
+        typeof state.artists[artistId].logo !== 'undefined' &&
+        state.artists[artistId].logo.length > 0) {
       return state.artists[artistId].logo[Math.max(Math.floor(Math.random() * state.artists[artistId].logo.length), state.artists[artistId].logo.length - 1)]
     }
     return null
   },
   getBackgroundForArtist: state => artistId => {
-    if (state.artists && state.artists[artistId] && typeof state.artists[artistId].background !== 'undefined' && state.artists[artistId].background.length > 0) {
-      return state.artists[artistId].background[Math.max(Math.floor(Math.random() * state.artists[artistId].background.length), state.artists[artistId].background.length - 1)]
-    }
-    return null
-  },
-  getBannerForArtist: state => artistId => {
-    if (state.artists && state.artists[artistId] && typeof state.artists[artistId].banner !== 'undefined' && state.artists[artistId].banner.length > 0) {
-      return state.artists[artistId].banner[Math.max(Math.floor(Math.random() * state.artists[artistId].banner.length), state.artists[artistId].banner.length - 1)]
-    }
-    return null
-  },
-  getThumbForArtist: state => artistId => {
-    if (state.artists && state.artists[artistId] && typeof state.artists[artistId].thumbs !== 'undefined' && state.artists[artistId].thumbs.length > 0) {
-      return state.artists[artistId].thumbs[Math.max(Math.floor(Math.random() * state.artists[artistId].thumbs.length), state.artists[artistId].thumbs.length - 1)]
+    if (state.artists && state.artists[artistId]) {
+      return getBackground(state.artists[artistId])
     }
     return null
   },

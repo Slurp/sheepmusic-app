@@ -1,6 +1,11 @@
 <template>
     <nav class="title-bar">
-        {{ appTitle }}
+        <router-link class="btn-sm btn-secondary"
+                     :to="{ path: $routerHistory.previous().path }">
+            <i class="material-icons">
+                chevron_left
+            </i>
+        </router-link>
     </nav>
 </template>
 

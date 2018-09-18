@@ -58,6 +58,8 @@ import { secondsToHis } from 'services/time'
 import config from 'config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
+import { getLogo } from '../../store/modules/artists/model'
+import { maybe } from '../../services/functional-tools'
 
 export default {
   name: 'album_details',
@@ -89,10 +91,7 @@ export default {
       }
     },
     logo() {
-      if (this.artist !== null && this.artist.logo !== 'undefined') {
-        return this.$store.getters['artists/getLogoForArtist'](this.artist.id)
-      }
-      return null
+      return maybe(this.artist, artist => getLogo(artist))
     },
     album() {
       return this.$store.getters['albums/getAlbumById'](this.id)

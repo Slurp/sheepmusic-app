@@ -38,6 +38,8 @@ import Toaster from 'services/toast'
 import config from 'config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
+import { maybe } from '../../services/functional-tools'
+import { getCover } from '../../store/modules/artists/model'
 
 export default {
    name: 'artistList',
@@ -77,19 +79,8 @@ export default {
      }
    },
    computed: {
-     hasCover() {
-       return (this.loadedArtist && (this.artist.image || this.artist.albumArt))
-     },
      cover() {
-       if (this.hasCover) {
-         if (this.artist.image && this.artist.image !== '') {
-           return new URL(this.artist.image, config.baseUrl)
-         }
-         if (this.artist.albumArt && this.artist.albumArt !== '') {
-           return new URL(this.artist.albumArt, config.baseUrl)
-         }
-       }
-       return config.defaultCover
+       return maybe(this.artist, artist => getCover(artist))
      },
      loadedArtist() {
        return (this.loaded && (this.artist && this.artist.fullyLoaded))

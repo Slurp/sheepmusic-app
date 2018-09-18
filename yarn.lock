@@ -9737,6 +9737,17 @@ vue-loader@^15.2.4:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-router-back-button@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/vue-router-back-button/-/vue-router-back-button-1.1.1.tgz#d7aa42a69b6728364f340cdf2618f2b8e691688f"
+  dependencies:
+    vue "^2.3.3"
+    vue-router "^2.6.0"
+
+vue-router@^2.6.0:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.8.1.tgz#9833c9ee57ac83beb0269056fefee71713f20695"
+
 vue-router@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
@@ -9765,7 +9776,7 @@ vue-tiny-lazyload-img@^0.0.3:
   dependencies:
     vue "^2.5.16"
 
-vue@^2.5.16:
+vue@^2.3.3, vue@^2.5.16:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 

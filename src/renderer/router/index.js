@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { routerHistory, writeHistory } from 'vue-router-back-button'
 import AlbumOverview from 'components/albums/overview'
 import ArtistOverview from 'components/artists/overview'
 import PlaylistOverview from 'components/playlists/overview'
@@ -28,8 +29,9 @@ import Login from 'components/pages/login'
 // const Charts = () => import('components/charts/charts')
 
 Vue.use(VueRouter)
+Vue.use(routerHistory)
 
-export default new VueRouter({
+const router = new VueRouter({
   hashbang: true,
   linkActiveClass: 'active',
   mode: 'hash',
@@ -186,3 +188,5 @@ export default new VueRouter({
     return { x: 0, y: 0 }
   }
 })
+router.afterEach(writeHistory)
+export default router

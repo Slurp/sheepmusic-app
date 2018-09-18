@@ -34,6 +34,8 @@
 <script>
 import IdleJs from 'idle-js'
 import config from 'config/index'
+import { maybe } from '../../services/functional-tools'
+import { getBackground, getLogo } from '../../store/modules/artists/model'
 
 export default {
   name: 'player-overlay',
@@ -87,21 +89,10 @@ export default {
       return null
     },
     background() {
-      if (this.artist) {
-        if (this.$store.getters['artists/getBackgroundForArtist'](this.artist.id)) {
-          return this.$store.getters['artists/getBackgroundForArtist'](this.artist.id)
-        }
-        if (this.artist.albumArt) {
-          return this.artist.albumArt
-        }
-      }
-      return 'none'
+      return maybe(this.artist, artist => getBackground(artist))
     },
     logo() {
-      if (this.artist) {
-        return this.$store.getters['artists/getLogoForArtist'](this.artist.id)
-      }
-      return null
+      return maybe(this.artist, artist => getLogo(artist))
     },
     show() {
       return (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)

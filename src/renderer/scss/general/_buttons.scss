@@ -1,6 +1,10 @@
 // Floating button
 .btn-float {
-
+  &.btn-sm {
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+  }
   &.btn-secondary i {
     color: $button-floating-color;
   }

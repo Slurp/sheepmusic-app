@@ -61,16 +61,17 @@ export default {
   },
   methods: {
     getAlbumDetails() {
-      if (this.album === null || this.album.fullyLoaded === false) {
-        this.loaded = false
+      if (!this.album || this.album.fullyLoaded === false) {
+        console.log(this.albumId)
         this.$store.dispatch('albums/loadAlbum', this.albumId).then(() => {
           this.loaded = true
         }).catch(() => {
           this.toast.toast(`Stop! ${this.album.name} got hammered and is not getting of the server`)
           this.loaded = false
         })
+      } else {
+        this.loaded = true
       }
-      this.loaded = true
     },
     toggleSheet() {
       this.openSheet = !this.openSheet

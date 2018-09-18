@@ -39,10 +39,7 @@
     width: 100% !important;
     // Sticky target is now sticky
     position: fixed;
-    @supports (position: sticky) {
-      position: sticky;
-      z-index: $zindex-sticky;
-    }
+    z-index: $zindex-sticky;
     left: 0;
     right: 0;
     top: 0;
