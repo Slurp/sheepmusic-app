@@ -2,7 +2,8 @@ import Vue from 'vue'
 import config from 'config/index'
 import { sortedState, sortedMutations, sortedActions } from 'store/helpers/sortedPage'
 import { addItemsAndSortedList } from 'root/store/helpers/mutations'
-import { getBackground, getCover } from './model'
+import { getBackground, getCover, getLogo } from './model'
+import { getImportedByMonth, getUpdatedByMonth } from '../../helpers/stats'
 
 const state = {
   artists: [],
@@ -101,11 +102,8 @@ const getters = {
     return config.defaultCover
   },
   getLogoForArtist: state => artistId => {
-    if (state.artists &&
-        state.artists[artistId] &&
-        typeof state.artists[artistId].logo !== 'undefined' &&
-        state.artists[artistId].logo.length > 0) {
-      return state.artists[artistId].logo[Math.max(Math.floor(Math.random() * state.artists[artistId].logo.length), state.artists[artistId].logo.length - 1)]
+    if (state.artists && state.artists[artistId]) {
+      return getLogo(state.artists[artistId])
     }
     return null
   },
@@ -121,42 +119,10 @@ const getters = {
     params: { artist: artist.name, id: artist.id }
   }),
   getImportedByMonth: state => {
-    if (state.artists && state.artists.length > 0) {
-      const year = (new Date()).getFullYear()
-      const groups = state.artists.reduce((r, o) => {
-        const date = new Date(o.createdAt.date)
-        const m = date.getMonth()
-        if (year === date.getFullYear()) {
-          // eslint-disable-next-line no-unused-expressions
-          (r[m]) ? r[m]++ : r[m] = 1
-        }
-        return r
-      }, Array(12).fill(0))
-      for (let i = 1; i < 12; i++) {
-        groups[i] += groups[i - 1]
-      }
-      return groups
-    }
-    return Array(12).fill(0)
+    return getImportedByMonth(state.artists)
   },
   getUpdatedByMonth: state => {
-    if (state.artists && state.artists.length > 0) {
-      const year = (new Date()).getFullYear()
-      const groups = state.artists.reduce((r, o) => {
-        const date = new Date(o.updatedAt.date)
-        const m = date.getMonth()
-        if (year === date.getFullYear()) {
-          if (r[m] === null) {
-            r[m] = 1
-          } else {
-            r[m]++
-          }
-        }
-        return r
-      }, Array(12).fill(0))
-      return groups
-    }
-    return Array(12).fill(0)
+    return getUpdatedByMonth(state.artists)
   }
 }
 

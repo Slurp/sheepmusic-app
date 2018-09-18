@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { sortedState, sortedMutations, sortedActions } from 'store/helpers/sortedPage'
 import { addItemsAndSortedList } from 'store/helpers/mutations'
+import { getImportedByMonth } from '../../helpers/stats'
 
 const state = {
   albums: [],
@@ -90,23 +91,7 @@ const getters = {
     params: { artist: album.artist.name, album: album.name, id: album.id }
   }),
   getImportedByMonth: state => {
-    if (state.albums.length > 0) {
-      const year = (new Date()).getFullYear()
-      const groups = state.albums.reduce((r, o) => {
-        const date = new Date(o.createdAt.date)
-        const m = date.getMonth()
-        if (year === date.getFullYear()) {
-          // eslint-disable-next-line no-unused-expressions
-          (r[m]) ? r[m]++ : r[m] = 1
-        }
-        return r
-      }, Array(12).fill(0))
-      for (let i = 1; i < 12; i++) {
-        groups[i] += groups[i - 1]
-      }
-      return groups
-    }
-    return Array(12).fill(0)
+    return getImportedByMonth(state.albums)
   },
   getLosslessCollection: state => {
     if (state.albums.length > 0) {
