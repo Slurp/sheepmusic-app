@@ -5,7 +5,7 @@ const state = {
 }
 
 const actions = {
-  announceSong({ dispatch, commit, state }, song) {
+  async announceSong({ dispatch, commit, state }, song) {
     Vue.axios.get(song.events.now_playing).then(() => {
       dispatch('albums/loadAlbum', song.album.id, { root: true })
       dispatch('artists/loadArtist', song.artist.id, { root: true })
@@ -13,7 +13,7 @@ const actions = {
       console.log(err)
     })
   },
-  playedSong({ dispatch, commit, state }, song) {
+  async playedSong({ dispatch, commit, state }, song) {
     Vue.axios.get(song.events.played).then(() => {
       dispatch('albums/loadAlbum', song.album.id, { root: true })
       dispatch('artists/loadArtist', song.artist.id, { root: true })
