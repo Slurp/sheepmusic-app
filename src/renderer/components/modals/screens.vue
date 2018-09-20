@@ -5,7 +5,7 @@
     </section>
 </template>
 <script>
-  import playlistForm from 'components/playlist/edit'
+  import playlistForm from '@/components/playlist/edit'
 import external from './external'
 
 export default {

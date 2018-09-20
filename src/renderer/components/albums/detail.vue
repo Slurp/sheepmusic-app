@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import songList from 'components/songs/list'
-import breadcrumbs from 'components/misc/breadcrumbs'
-import loadingCirlce from 'components/misc/loading-circle'
-import { secondsToHis } from 'services/time'
-import config from 'config/index'
+import songList from '@/components/songs/list'
+import breadcrumbs from '@/components/misc/breadcrumbs'
+import loadingCirlce from '@/components/misc/loading-circle'
+import { secondsToHis } from '@/services/time'
+import config from '@/config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 import { getLogo } from '../../store/modules/artists/model'

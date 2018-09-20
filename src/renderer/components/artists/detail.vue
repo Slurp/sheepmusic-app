@@ -61,12 +61,12 @@
 </template>
 
 <script>
-import songList from 'components/songs/list'
-import breadcrumbs from 'components/misc/breadcrumbs'
-import album from 'components/albums/album'
-import artistCard from 'components/artists/artist'
-import config from 'config/index'
-import loadingCircle from 'components/misc/loading-circle'
+import songList from '@/components/songs/list'
+import breadcrumbs from '@/components/misc/breadcrumbs'
+import album from '@/components/albums/album'
+import artistCard from '@/components/artists/artist'
+import config from '@/config/index'
+import loadingCircle from '@/components/misc/loading-circle'
 import truncate from './bio'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'

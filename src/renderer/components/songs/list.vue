@@ -39,8 +39,8 @@
     </div>
 </template>
 <script>
-  import { secondsToHis } from 'services/time'
-  import Toaster from 'services/toast'
+  import { secondsToHis } from '@/services/time'
+  import Toaster from '@/services/toast'
 
   export default {
     props: {

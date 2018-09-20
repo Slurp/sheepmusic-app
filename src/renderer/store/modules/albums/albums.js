@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { sortedState, sortedMutations, sortedActions } from 'store/helpers/sortedPage'
-import { addItemsAndSortedList } from 'store/helpers/mutations'
+import { sortedState, sortedMutations, sortedActions } from '@/store/helpers/sortedPage'
+import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import { getImportedByMonth } from '../../helpers/stats'
 
 const state = {

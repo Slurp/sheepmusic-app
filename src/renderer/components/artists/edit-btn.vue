@@ -4,7 +4,7 @@
     </a>
 </template>
 <script>
-import Toaster from 'services/toast'
+import Toaster from '@/services/toast'
 export default {
   name: 'edit-artist-btn',
   props: ['artist'],

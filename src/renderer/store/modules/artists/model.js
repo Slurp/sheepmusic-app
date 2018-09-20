@@ -1,5 +1,5 @@
-import config from 'config/index'
-import { randomItem } from 'services/array-helper'
+import config from '@/config/index'
+import { randomItem } from '@/services/array-helper'
 
 export function getBackground(artist) {
   if (typeof artist.background !== 'undefined' && artist.background.length > 0) {

@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import config from 'config/index'
-import album from 'components/albums/album'
-import artist from 'components/artists/artist'
+import config from '@/config/index'
+import album from '@/components/albums/album'
+import artist from '@/components/artists/artist'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 

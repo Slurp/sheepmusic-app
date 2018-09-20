@@ -1,4 +1,4 @@
-import { set } from 'store/helpers/mutations'
+import { set } from '@/store/helpers/mutations'
 const sortingType = {
   all: (a, b) => a.id - b.id,
   recent: (a, b) => b.date - a.date,

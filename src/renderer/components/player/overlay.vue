@@ -33,7 +33,7 @@
 
 <script>
 import IdleJs from 'idle-js'
-import config from 'config/index'
+import config from '@/config/index'
 import { maybe } from '../../services/functional-tools'
 import { getBackground, getLogo } from '../../store/modules/artists/model'
 

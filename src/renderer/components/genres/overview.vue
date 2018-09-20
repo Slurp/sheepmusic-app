@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import Toaster from 'services/toast'
-import arrayFunctions from 'services/array-helper'
+import Toaster from '@/services/toast'
+import arrayFunctions from '@/services/array-helper'
 
 export default {
   name: 'genre-overview',

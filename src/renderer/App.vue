@@ -19,14 +19,14 @@
 </template>
 
 <script>
-import navbar from 'components/header/index'
-import player from 'components/player/index'
-import playerOverlay from 'components/player/overlay'
-import playlist from 'components/playlist/playlist'
-import overlay from 'components/misc/overlay'
-import sidebar from 'components/sidebar/index'
-import modalScreens from 'components/modals/screens'
-import Toaster from 'services/toast'
+import navbar from '@/components/header/index'
+import player from '@/components/player/index'
+import playerOverlay from '@/components/player/overlay'
+import playlist from '@/components/playlist/playlist'
+import overlay from '@/components/misc/overlay'
+import sidebar from '@/components/sidebar/index'
+import modalScreens from '@/components/modals/screens'
+import Toaster from '@/services/toast'
 import TitleBar from './components/misc/title-bar'
 
 export default {

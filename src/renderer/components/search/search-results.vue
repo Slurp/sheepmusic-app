@@ -74,9 +74,9 @@
 </template>
 
 <script>
-import album from 'components/albums/album'
-import artist from 'components/artists/artist'
-import songList from 'components/songs/list'
+import album from '@/components/albums/album'
+import artist from '@/components/artists/artist'
+import songList from '@/components/songs/list'
 
 export default {
   name: 'search-results',

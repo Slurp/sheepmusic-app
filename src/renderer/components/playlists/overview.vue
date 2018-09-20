@@ -24,7 +24,7 @@
 
 <script>
 import playlist from './playlists'
-import Toaster from 'services/toast'
+import Toaster from '@/services/toast'
 
 export default {
   name: 'playlist-overview',

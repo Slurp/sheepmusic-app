@@ -33,7 +33,7 @@
 
 <script>
 import artist from './artist'
-import loadingCircle from 'components/misc/loading-circle'
+import loadingCircle from '@/components/misc/loading-circle'
 
 export default {
   props: ['type'],

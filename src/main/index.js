@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
+import { app, protocol, BrowserWindow } from 'electron' // eslint-disable-line
+import path from 'path'
 
 /**
  * Set `__static` path to static files in production
@@ -14,6 +15,12 @@ const winURL = process.env.NODE_ENV === 'development' ?
   `file://${__dirname}/index.html`
 
 function createWindow() {
+  protocol.registerFileProtocol('file', (request, callback) => {
+    const url = request.url.substr(7)
+    callback({ path: path.normalize(`http://${__dirname}/${url}`) })
+  }, error => {
+    if (error) console.error('Failed to register protocol')
+  })
   /**
    * Initial window options
    */

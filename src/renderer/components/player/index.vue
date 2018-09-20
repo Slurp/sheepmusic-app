@@ -53,10 +53,10 @@
     </footer>
 </template>
 <script>
-import BlackSheepPlayer from 'components/BSAudioSuite/player'
-import Notifications from 'services/notifications'
-import Toaster from 'services/toast'
-import { secondsToHis } from 'services/time'
+import BlackSheepPlayer from '@/components/BSAudioSuite/player'
+import Notifications from '@/services/notifications'
+import Toaster from '@/services/toast'
+import { secondsToHis } from '@/services/time'
 import playerInfo from './player-info'
 import playerVolume from './player-volume'
 import playerControls from './player-controls'

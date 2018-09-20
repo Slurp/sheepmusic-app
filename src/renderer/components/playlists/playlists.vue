@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import config from 'config/index'
+import config from '@/config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
-import { secondsToHis } from 'services/time'
+import { secondsToHis } from '@/services/time'
 
 export default {
   name: 'playlistList',

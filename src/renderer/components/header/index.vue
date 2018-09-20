@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import searchBox from 'components/search/search-box'
+import searchBox from '@/components/search/search-box'
 import userBadge from './user-badge'
 
 export default {

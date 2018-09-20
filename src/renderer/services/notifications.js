@@ -1,6 +1,6 @@
 
 import * as Push from 'push.js'
-import config from 'config/index'
+import config from '@/config/index'
 
 export default class Notification {
   static notifySong(song) {

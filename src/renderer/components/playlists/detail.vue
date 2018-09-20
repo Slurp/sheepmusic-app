@@ -36,12 +36,12 @@
 </template>
 
 <script>
-import config from 'config/index'
-import songList from 'components/songs/list'
-import breadcrumbs from 'components/misc/breadcrumbs'
+import config from '@/config/index'
+import songList from '@/components/songs/list'
+import breadcrumbs from '@/components/misc/breadcrumbs'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
-import { secondsToHis } from 'services/time'
+import { secondsToHis } from '@/services/time'
 
 export default {
   name: 'playlist-detail',

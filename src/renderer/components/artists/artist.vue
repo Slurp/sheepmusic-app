@@ -34,8 +34,8 @@
 
 <script>
  
-import Toaster from 'services/toast'
-import config from 'config/index'
+import Toaster from '@/services/toast'
+import config from '@/config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 import { maybe } from '../../services/functional-tools'

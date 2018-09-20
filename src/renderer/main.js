@@ -5,8 +5,8 @@ import { sync } from 'vuex-router-sync'
 import App from 'App'
 import router from 'router'
 import store from 'store'
-import pagination from 'services/pagination/pagination'
-import { Auth, Bearer, HttpDriver, RouterDriver } from 'services/auth'
+import pagination from '@/services/pagination/pagination'
+import { Auth, Bearer, HttpDriver, RouterDriver } from '@/services/auth'
 import VueTinyLazyloadImg from 'vue-tiny-lazyload-img'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

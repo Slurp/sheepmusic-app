@@ -29,8 +29,8 @@
 
 <script>
 import album from './album'
-import Toaster from 'services/toast'
-import loadingCircle from 'components/misc/loading-circle'
+import Toaster from '@/services/toast'
+import loadingCircle from '@/components/misc/loading-circle'
 
 export default {
   props: {

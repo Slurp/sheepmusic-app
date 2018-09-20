@@ -65,7 +65,7 @@
 </template>
 <script>
 import songItem from './song'
-import { secondsToHis } from 'services/time'
+import { secondsToHis } from '@/services/time'
 import draggable from 'vuedraggable'
 
 export default {
