@@ -114,6 +114,10 @@ export default class BlackSheepPlayer {
     })
 
     this.player.on('play', () => {
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.log('song play')
+      }
       if (preloadedSong) {
         this.duration = this.player.duration()
         this.dispatchEvent('loaded', this.duration)
