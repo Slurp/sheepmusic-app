@@ -3,7 +3,7 @@ import config from '@/config/index'
 import { sortedState, sortedMutations, sortedActions } from '@/store/helpers/sortedPage'
 import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import { getBackground, getCover, getLogo } from './model'
-import { getImportedByMonth, getUpdatedByMonth } from '../../helpers/stats'
+import { getImportedByMonth, getUpdatedByMonth } from '@/store/helpers/stats'
 
 const state = {
   artists: [],
