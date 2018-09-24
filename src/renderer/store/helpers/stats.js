@@ -2,7 +2,7 @@ function getByMonth(collection, key) {
   if (collection.length > 0) {
     const year = (new Date()).getFullYear()
     const groups = collection.reduce((r, o) => {
-      const date = new Date(o[key].date)
+      const date = new Date(o[key])
       const m = date.getMonth()
       if (year === date.getFullYear()) {
         // eslint-disable-next-line no-unused-expressions

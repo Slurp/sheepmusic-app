@@ -104,7 +104,7 @@ export const addItemsAndSortedList = (state, key, data, subKey) => {
     id: item.id,
     name: item.name,
     playCount: item.playCount,
-    date: new Date(item.createdAt.date)
+    date: new Date(item.createdAt)
   }))
   // remove first value is null
   state.sortedList.splice(0, 1)
