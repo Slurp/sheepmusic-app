@@ -11,18 +11,42 @@
   .navbar-collapse {
     @extend .justify-content-end;
   }
+  .navbar-brand {
+    overflow: hidden;
+    background-color: theme-color('secondary');
+    width: $navdrawer-width;
+    height: 56px;
+    margin-left: -1rem;
+    display: flex;
+    flex-direction: column;
+    &:hover {
+      .brand-back,
+      .brand-logo {
+        transform: translate3d(0,-56px,0);
+      }
+    }
+  }
+  .brand-logo,
+  .brand-back {
+    transform: translate3d(0,0,0);
+    display: block;
+    width: $navdrawer-width;
+    min-height: 56px;
+    color: theme-color-light('light');
+    transition: all 0.3s linear;
+    text-align: center;
+    font-size: 3.2rem;
+    background-color: theme-color('secondary');
+    border: 1px solid theme-color('secondary');
+  }
   .brand-logo {
     transition: all 0.3s linear;
     display: block;
     background: url('#{$general}/logo.svg') no-repeat;
     background-size: 32px 32px;
     background-position: center;
-    background-color: theme-color('secondary');
-    margin-left: -1rem;
-    padding:1rem;
     width: $navdrawer-width;
-    height: 56px;
-    border: 1px solid theme-color('secondary');
+    min-height: 56px;
   }
 }
 

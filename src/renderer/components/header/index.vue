@@ -1,8 +1,11 @@
 <template>
     <nav class="navbar navbar-expand-sm sticky" role="navigation">
-        <a href="#" aria-controls="doc_navdrawer" aria-expanded="false" aria-label="Toggle Navdrawer"
-           class="navbar-brand" data-target="#doc_navdrawer" data-toggle="navdrawer" data-type="permanent">
-            <span class="brand-logo"></span>
+        <a  class="navbar-brand" href="#" @click.stop.prevent="$router.back()">
+            <span class="brand-logo">
+            </span>
+            <i class="material-icons brand-back">
+                chevron_left
+            </i>
         </a>
         <search-box></search-box>
         <user-badge></user-badge>

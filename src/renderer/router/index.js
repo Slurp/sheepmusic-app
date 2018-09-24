@@ -32,9 +32,7 @@ Vue.use(VueRouter)
 Vue.use(routerHistory)
 
 const router = new VueRouter({
-  hashbang: true,
   linkActiveClass: 'active',
-  mode: 'hash',
   routes: [
     {
       path: '/',
