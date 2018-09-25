@@ -80,7 +80,7 @@ const getters = {
       const start = (state.itemsPerPage * (state.page - 1))
       return state.sortedList.slice(start, start + state.itemsPerPage).map(album => state.albums[album.id])
     }
-    return state.albums.slice
+    return state.sortedList.map(album => state.albums[album.id])
   },
   search: state => albums => albums.map(album => state.albums[album.id]),
   getAlbumById: state => albumId => {
