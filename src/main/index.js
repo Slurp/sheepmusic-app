@@ -1,5 +1,9 @@
 import { app, protocol, BrowserWindow } from 'electron' // eslint-disable-line
+import windowStateKeeper from 'electron-window-state'
 import path from 'path'
+
+const MIN_WINDOW_WIDTH = 320
+const MIN_WINDOW_HEIGHT = 640
 
 /**
  * Set `__static` path to static files in production
@@ -15,22 +19,40 @@ const winURL = process.env.NODE_ENV === 'development' ?
   `file://${__dirname}/index.html`
 
 function createWindow() {
-  protocol.registerFileProtocol('file', (request, callback) => {
-    const url = request.url.substr(7)
-    callback({ path: path.normalize(`http://${__dirname}/${url}`) })
-  }, error => {
-    if (error) console.error('Failed to register protocol')
+  /**
+   * Window State
+   * @type {{x: *, y: *, width: *, height: *, isMaximized: *, isFullScreen: *, saveState, unmanage, manage}}
+   */
+  const mainWindowState = windowStateKeeper({
+    defaultWith: MIN_WINDOW_WIDTH,
+    defaultHeight: MIN_WINDOW_HEIGHT
   })
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width < MIN_WINDOW_WIDTH ? MIN_WINDOW_WIDTH : mainWindowState.width,
+    height: mainWindowState.height < MIN_WINDOW_HEIGHT ? MIN_WINDOW_HEIGHT : mainWindowState.height,
     useContentSize: true,
+    fullscreenable: false,
     titleBarStyle: 'hiddenInset',
-    minWidth: 320,
-    minHeight: 640,
+    minHeight: MIN_WINDOW_HEIGHT,
+    minWidth: MIN_WINDOW_WIDTH,
+    autoHideMenuBar: true,
+    darkTheme: true,
+    show: false,
     backgroundColor: '#2e2c29'
   })
+
+  mainWindow.once('ready-to-show', () => mainWindow.show())
+
+  if (mainWindowState.isMaximized) {
+    mainWindow.maximize()
+  }
+
+  mainWindowState.manage(mainWindow)
 
   mainWindow.loadURL(winURL)
 

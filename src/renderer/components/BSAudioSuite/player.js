@@ -1,7 +1,7 @@
 import { Howl } from 'howler'
 
 export default class BlackSheepPlayer {
-  constructor() {
+  constructor(vue) {
     this.player = null
     this.nextSong = null
     this.currentSong = null
@@ -9,6 +9,7 @@ export default class BlackSheepPlayer {
     this.events = []
     this.seek = 0
     this.duration = 0
+    this.token = vue.$auth.token()
   }
 
   on(eventName, handler) {
@@ -36,7 +37,13 @@ export default class BlackSheepPlayer {
       src: [src],
       format: ['mp3'],
       html5: true,
-      preload: true
+      preload: true,
+      headers: [
+        {
+          name: 'Authorization',
+          value: 'Bearer ' + this.token
+        }
+      ]
     })
   }
 

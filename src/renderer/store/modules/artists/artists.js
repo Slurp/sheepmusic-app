@@ -88,7 +88,7 @@ const getters = {
       const start = (state.itemsPerPage * (state.page - 1))
       return state.sortedList.slice(start, start + state.itemsPerPage).map(artist => state.artists[artist.id])
     }
-    return state.sortedList.map(album => state.artist[album.id])
+    return state.sortedList.map(object => state.artist[object.id])
   },
   getArtistById: state => artistId => {
     if (state.artists) {
