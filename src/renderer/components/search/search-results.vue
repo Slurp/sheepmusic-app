@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <ul class="nav nav-tabs active" id="searchTabs" role="tablist">
+        <ul class="nav nav-tabs active" v-if="results" id="searchTabs" role="tablist">
             <li class="nav-item" v-if="artists">
                 <a class="nav-link active"
                    id="artists-tab"
@@ -34,7 +34,6 @@
                     Albums
                 </a>
             </li>
-
             <li class="nav-item" v-if="songs">
                 <a class="nav-link"
                    id="songs-tab"
@@ -47,29 +46,32 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content" id="searchTabsContent">
+        <div class="tab-content"  v-if="results" id="searchTabsContent">
             <div class="tab-pane fade show active"
                  id="artists"
-                 v-if="artists"
                  role="tabpanel"
-                 aria-labelledby="artists-tab">
-                <transition-group name="list" tag="section" class="list">
+                 aria-labelledby="artists-tab"
+                 v-if="artists">
+                <transition-group  v-if="loadedArtists" name="list" tag="section" class="list">
                     <div class="col" v-for="artist in artists" :key="artist.id" :name="artist.id">
                         <artist :artist-id=artist.id :artist=artist></artist>
                     </div>
                 </transition-group>
+                <loading-circle v-else></loading-circle>
             </div>
             <div class="tab-pane fade " id="albums" role="tabpanel" v-if="albums" aria-labelledby="albums-tab">
-                <transition-group name="list" tag="section" class="list">
+                <transition-group v-if="loadedAlbums" name="list" tag="section" class="list">
                     <div class="col" v-for="album in albums" :key="album.id" :name="album.id">
                         <album :album-id=album.id :album="album"></album>
                     </div>
                 </transition-group>
+                <loading-circle v-else></loading-circle>
             </div>
             <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab" v-if="songs">
                 <song-list :songs="songs" :show-artist=true></song-list>
             </div>
         </div>
+        <loadingCircle v-else></loadingCircle>
     </article>
 </template>
 
@@ -77,6 +79,7 @@
 import album from '@/components/albums/album'
 import artist from '@/components/artists/artist'
 import songList from '@/components/songs/list'
+import loadingCircle from '@/components/misc/loading-circle'
 
 export default {
   name: 'search-results',
@@ -84,11 +87,14 @@ export default {
   components: {
     album,
     artist,
-    songList
+    songList,
+    loadingCircle
   },
   data() {
     return {
-      results: null
+      results: null,
+      loadedAlbums: false,
+      loadedArtists: false
     }
   },
   created() {
@@ -101,6 +107,9 @@ export default {
   watch: {
     query(newQuery, oldQuery) {
       if (newQuery !== oldQuery) {
+        this.results = null
+        this.loadedArtists = false
+        this.loadedAlbums = false
         this.search()
       }
     }
@@ -115,20 +124,39 @@ export default {
   },
   computed: {
     searchResults() {
-      if (this.results) {
-        return this.results
-      }
-      return null
+      return this.results
     },
     albums() {
       if (this.searchResults) {
-        return this.$store.getters['albums/search'](this.searchResults.albums)
+        const results = this.$store.getters['albums/search'](this.searchResults.albums)
+        if (this.loadedAlbums) {
+          return results
+        }
+        this.$store.dispatch('albums/loadAlbumCollection', results).then(() => {
+          this.loadedAlbums = true
+          return results
+        }).catch(() => {
+          this.loadedAlbums = true
+          return results
+        })
       }
-      return false
+      return null
     },
     artists() {
       if (this.searchResults) {
-        return this.$store.getters['artists/search'](this.searchResults.artists)
+        const results = this.$store.getters['artists/search'](this.searchResults.artists)
+        if (this.loadedArtists) {
+          console.log('return artists')
+          return results
+        }
+        this.$store.dispatch('artists/loadArtistCollection', results).then(() => {
+          console.log('loaded artist')
+          this.loadedArtists = true
+          return results
+        }).catch(() => {
+          this.loadedArtists = true
+          return results
+        })
       }
       return false
     },
