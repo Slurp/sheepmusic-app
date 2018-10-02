@@ -52,20 +52,18 @@
                  role="tabpanel"
                  aria-labelledby="artists-tab"
                  v-if="artists">
-                <transition-group  v-if="loadedArtists" name="list" tag="section" class="list">
+                <transition-group  name="list" tag="section" class="list">
                     <div class="col" v-for="artist in artists" :key="artist.id" :name="artist.id">
                         <artist :artist-id=artist.id :artist=artist></artist>
                     </div>
                 </transition-group>
-                <loading-circle v-else></loading-circle>
             </div>
             <div class="tab-pane fade " id="albums" role="tabpanel" v-if="albums" aria-labelledby="albums-tab">
-                <transition-group v-if="loadedAlbums" name="list" tag="section" class="list">
+                <transition-group  name="list" tag="section" class="list">
                     <div class="col" v-for="album in albums" :key="album.id" :name="album.id">
                         <album :album-id=album.id :album="album"></album>
                     </div>
                 </transition-group>
-                <loading-circle v-else></loading-circle>
             </div>
             <div class="tab-pane fade" id="songs" role="tabpanel" aria-labelledby="songs-tab" v-if="songs">
                 <song-list :songs="songs" :show-artist=true></song-list>
@@ -108,18 +106,29 @@ export default {
     query(newQuery, oldQuery) {
       if (newQuery !== oldQuery) {
         this.results = null
-        this.loadedArtists = false
-        this.loadedAlbums = false
         this.search()
       }
     }
   },
   methods: {
     search() {
+      this.loadedArtists = false
+      this.loadedAlbums = false
       this.axios.get(`/api/search/${this.query}`).then(response => {
         this.results = response.data
-      }, () => {
-      })
+        const albumResults = this.$store.getters['albums/search'](this.results.albums)
+        this.$store.dispatch('albums/loadAlbumCollection', albumResults).then(() => {
+          this.loadedAlbums = albumResults
+        }).catch(() => {
+          this.loadedAlbums = null
+        })
+        const artistResults = this.$store.getters['artists/search'](this.searchResults.artists)
+        this.$store.dispatch('artists/loadArtistCollection', artistResults).then(() => {
+          this.loadedArtists = artistResults
+        }).catch(() => {
+          this.loadedArtists = null
+        })
+      }, () => {})
     }
   },
   computed: {
@@ -127,36 +136,14 @@ export default {
       return this.results
     },
     albums() {
-      if (this.searchResults) {
-        const results = this.$store.getters['albums/search'](this.searchResults.albums)
-        if (this.loadedAlbums) {
-          return results
-        }
-        this.$store.dispatch('albums/loadAlbumCollection', results).then(() => {
-          this.loadedAlbums = true
-          return results
-        }).catch(() => {
-          this.loadedAlbums = true
-          return results
-        })
+      if (this.searchResults && this.loadedAlbums) {
+        return this.loadedAlbums
       }
       return null
     },
     artists() {
-      if (this.searchResults) {
-        const results = this.$store.getters['artists/search'](this.searchResults.artists)
-        if (this.loadedArtists) {
-          console.log('return artists')
-          return results
-        }
-        this.$store.dispatch('artists/loadArtistCollection', results).then(() => {
-          console.log('loaded artist')
-          this.loadedArtists = true
-          return results
-        }).catch(() => {
-          this.loadedArtists = true
-          return results
-        })
+      if (this.searchResults && this.loadedArtists) {
+        return this.loadedArtists
       }
       return false
     },

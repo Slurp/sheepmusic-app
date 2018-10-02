@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: center;
   padding: 8px;
-  background: rgba(theme-color-dark(),0.9);
+  background: theme-color-dark();
   border-bottom: 1px solid theme-color();
   z-index: $zindex-sticky;
   .btn-sm {
