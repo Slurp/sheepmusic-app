@@ -35,6 +35,7 @@ const actions = {
   async playSong({ dispatch, commit }, song) {
     await dispatch('clearPlaylist')
     commit('ADD_SONG', { song })
+    commit('NEXT')
   },
   async selectSong({ commit }, index) {
     commit('SELECT_SONG', { index })

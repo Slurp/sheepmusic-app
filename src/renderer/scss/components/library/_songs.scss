@@ -23,12 +23,11 @@
     border-bottom: 1px solid $divider-color;
     transition: background-color 0.3s ease;
     &.playing {
-      background-color: rgba($player-txt-color, 1);
-      .track-number {
-        opacity: 0;
-      }
+      background-color: rgba(theme-color-light('light'), 1);
+      color: theme-color('dark');
       .col-track {
         position: relative;
+        color: theme-color('secondary');
         &:after {
           position: absolute;
           top: 0px;

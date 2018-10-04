@@ -61,8 +61,7 @@ export default {
   },
   methods: {
     getAlbumDetails() {
-      if (!this.album || this.album.fullyLoaded === false) {
-        console.log(this.albumId)
+      if (!this.album || !this.album.fullyLoaded) {
         this.$store.dispatch('albums/loadAlbum', this.albumId).then(() => {
           this.loaded = true
         }).catch(() => {

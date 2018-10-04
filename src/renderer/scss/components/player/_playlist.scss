@@ -11,7 +11,7 @@
   overflow: hidden;
   opacity: 0;
   color: $playlist-txt-color;
-  transition: all 1s ease 0.1s;
+  @include transition-standard(background-color, opacity, width);
 }
 
 .playlist {
@@ -35,7 +35,7 @@
   z-index: 998;
   margin-right: 0;
   margin-bottom: 0;
-  @include transition-sharp(transform);
+  @include transition-standard-complex(transform, width);
   color: $playlist-txt-color;
   height: calc(100vh - #{$footer-fixed-height} - 57px);
   &:hover {

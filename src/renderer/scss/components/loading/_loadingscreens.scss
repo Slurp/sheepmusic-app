@@ -1,0 +1,13 @@
+
+.loading-screen {
+  display: flex;
+  min-width: 100%;
+  min-height: 20vh;
+  position: relative;
+  align-items: center;
+  justify-items: center;
+  .loading-screen-surface {
+    flex:1 100%;
+  }
+  @import "bars";
+}

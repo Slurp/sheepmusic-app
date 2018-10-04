@@ -3,7 +3,8 @@
         <div v-if="artist && artist.fullyLoaded">
             <breadcrumbs :artist="artist"></breadcrumbs>
             <div class="backdrop">
-                <div class="image-backdrop artist-backdrop" v-bind:style="{ 'background-image': 'url(' + background + ')' }"></div>
+                <div class="image-backdrop artist-backdrop"
+                     v-bind:style="{ 'background-image': 'url(' + background + ')' }"></div>
             </div>
             <section>
                 <div class="detail-info-wrapper">
@@ -19,13 +20,17 @@
                         </div>
                     </div>
                     <div class="detail-info">
-                        <div class="actions">
-                            <playBtn :artist=artist></playBtn>
-                            <queueBtn :artist=artist></queueBtn>
-                            <editBtn :artist=artist></editBtn>
+                        <div class="detail-header">
+                            <h1 class="artist-name" v-if="logo == null">{{ artist.name }}</h1>
+                            <h1 class="artist-name" v-if="logo != null">
+                                <img :src="logo">
+                            </h1>
+                            <div class="actions">
+                                <playBtn :artist=artist></playBtn>
+                                <queueBtn :artist=artist></queueBtn>
+                                <editBtn :artist=artist></editBtn>
+                            </div>
                         </div>
-                        <h1 class="artist-name" v-if="logo == null">{{ artist.name }}</h1>
-                        <h1 class="artist-name" v-if="logo != null"><img :src="logo"></h1>
                         <div class="meta">
                             <span class="chip"><span class="chip-icon"><i class="material-icons">album</i></span>{{ artist.albums.length }}</span>
                             <span class="chip" v-if="genres" v-for="genre in genres">
@@ -41,15 +46,21 @@
                 </div>
                 <section class="list">
                     <h2 class="section-header">Albums</h2>
-                    <div class="col" v-for="album in albums" :key="album.id">
-                        <album :album-id=album.id :album=storedAlbum(album.id) :key="album.id"></album>
+                    <div class="row">
+                        <div class="col" v-for="album in albums" :key="album.id">
+                            <album :album-id=album.id :album=storedAlbum(album.id) :key="album.id"></album>
+                        </div>
                     </div>
                 </section>
 
                 <section class="list" v-if="artist.similar.length > 0">
                     <h2 class="section-header">Similar Artists</h2>
-                    <div class="col" v-for="similarArtist in artist.similar" :key="similarArtist">
-                        <artist-card :artist-id=similarArtist :artist=storedArtist(similarArtist) :key="similarArtist"></artist-card>
+                    <div class="row">
+                        <div class="col" v-for="similarArtist in artist.similar" :key="similarArtist">
+                            <artist-card :artist-id=similarArtist
+                                         :artist=storedArtist(similarArtist)
+                                         :key="similarArtist"></artist-card>
+                        </div>
                     </div>
                 </section>
 
@@ -61,78 +72,78 @@
 </template>
 
 <script>
-import songList from '@/components/songs/list'
-import breadcrumbs from '@/components/misc/breadcrumbs'
-import album from '@/components/albums/album'
-import artistCard from '@/components/artists/artist'
-import config from '@/config/index'
-import loadingCircle from '@/components/misc/loading-circle'
-import truncate from './bio'
-import playBtn from './play-btn'
-import queueBtn from './queue-btn'
-import editBtn from './edit-btn'
-import { getBackground, getCover, getLogo } from '../../store/modules/artists/model'
-import { maybe } from '../../services/functional-tools'
+  import songList from '@/components/songs/list'
+  import breadcrumbs from '@/components/misc/breadcrumbs'
+  import album from '@/components/albums/album'
+  import artistCard from '@/components/artists/artist'
+  import config from '@/config/index'
+  import loadingCircle from '@/components/misc/loading-circle'
+  import truncate from './bio'
+  import playBtn from './play-btn'
+  import queueBtn from './queue-btn'
+  import editBtn from './edit-btn'
+  import { getBackground, getCover, getLogo } from '../../store/modules/artists/model'
+  import { maybe } from '../../services/functional-tools'
 
-export default {
-  name: 'artist_detail',
-  components: {
-    songList,
-    breadcrumbs,
-    album,
-    artistCard,
-    truncate,
-    playBtn,
-    queueBtn,
-    editBtn,
-    loadingCircle
-  },
-  data() {
-    return {
-      defaultCover: config.defaultCover
-    }
-  },
-  props: ['id'],
-  created() {
-    this.loadArtistDetail()
-  },
-  methods: {
-    loadArtistDetail() {
-      if (!this.artist || !this.artist.fullyLoaded) {
-        this.$store.dispatch('artists/loadArtist', this.id)
+  export default {
+    name: 'artist_detail',
+    components: {
+      songList,
+      breadcrumbs,
+      album,
+      artistCard,
+      truncate,
+      playBtn,
+      queueBtn,
+      editBtn,
+      loadingCircle
+    },
+    data() {
+      return {
+        defaultCover: config.defaultCover
       }
-      this.$store.dispatch('artists/viewArtist', this.id)
     },
-    storedAlbum(albumId) {
-      return this.$store.getters['albums/getAlbumById'](albumId)
+    props: ['id'],
+    created() {
+      this.loadArtistDetail()
     },
-    storedArtist(artistId) {
-      return this.$store.getters['artists/getArtistById'](artistId)
-    }
-  },
-  computed: {
-    genres() {
-      return this.artist.genres
+    methods: {
+      loadArtistDetail() {
+        if (!this.artist || !this.artist.fullyLoaded) {
+          this.$store.dispatch('artists/loadArtist', this.id)
+        }
+        this.$store.dispatch('artists/viewArtist', this.id)
+      },
+      storedAlbum(albumId) {
+        return this.$store.getters['albums/getAlbumById'](albumId)
+      },
+      storedArtist(artistId) {
+        return this.$store.getters['artists/getArtistById'](artistId)
+      }
     },
-    logo() {
-      return maybe(this.artist, artist => getLogo(artist))
-    },
-    cover() {
-      return maybe(this.artist, artist => getCover(artist))
-    },
-    background() {
-      return maybe(this.artist, artist => getBackground(artist))
-    },
-    artist() {
-      return this.$store.getters['artists/getArtistById'](this.id)
-    },
-    albums() {
-      if (this.artist.albums !== 'undefined') {
-        return this.artist.albums.sort((a, b) => b.year - a.year)
+    computed: {
+      genres() {
+        return this.artist.genres
+      },
+      logo() {
+        return maybe(this.artist, artist => getLogo(artist))
+      },
+      cover() {
+        return maybe(this.artist, artist => getCover(artist))
+      },
+      background() {
+        return maybe(this.artist, artist => getBackground(artist))
+      },
+      artist() {
+        return this.$store.getters['artists/getArtistById'](this.id)
+      },
+      albums() {
+        if (this.artist.albums !== 'undefined') {
+          return this.artist.albums.sort((a, b) => b.year - a.year)
+        }
       }
     }
   }
-}
 </script>
 <style>
 

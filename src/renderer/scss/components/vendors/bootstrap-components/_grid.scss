@@ -102,7 +102,7 @@
 .left-column {
   @include make-col-ready();
   @include make-col(12);
-  @include transition-standard-complex(all);
+  @include transition-standard-complex(width);
 }
 .playlist-show {
   .left-column {

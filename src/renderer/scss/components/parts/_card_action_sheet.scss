@@ -7,18 +7,20 @@
       top: 0;
       bottom: 0;
       left: 0;
-      right:0;
+      right: 0;
       display: block;
       content: "";
-      transition: background-color 1ms ease-in-out;
+      opacity: 0;
+      @include transition-standard(background, opacity, width);
     }
   }
   &:hover {
-    box-shadow: inset 1px 1px 4px 0 rgba($white,0.45), inset 1px 1px 2px 0 rgba($white,0.5), inset -1px -1px 2px 0 rgba($white,0.5);
+    box-shadow: inset 1px 1px 4px 0 rgba(theme-color-light('light'), 0.45), inset 1px 1px 2px 0 rgba(theme-color-light('light'), 0.5), inset -1px -1px 2px 0 rgba(theme-color-light('light'), 0.5);
     .card-img {
       &:after {
-        background: rgba(theme-color('primary'),0.2);
-        background: linear-gradient(-55deg, rgba($white, 0.1) 0%, rgba(244, 244, 244, 0.35) 49%, rgba(225, 225, 225, 0.34) 51%, rgba(246, 246, 246, 0) 100%);
+        opacity: 1;
+        background: rgba(theme-color('primary'), 0.4);
+        background: linear-gradient(-55deg, rgba(theme-color-light('primary'), 0.3) 0%, rgba(theme-color-light('light'), 0.35) 49%, rgba(theme-color-light('light'), 0.34) 51%, rgba(theme-color-light('primary'), 0) 100%);
       }
     }
     .action-sheet {

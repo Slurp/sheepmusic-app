@@ -69,7 +69,7 @@
                 <song-list :songs="songs" :show-artist=true></song-list>
             </div>
         </div>
-        <loadingCircle v-else></loadingCircle>
+        <loadingScreen v-else></loadingScreen>
     </article>
 </template>
 
@@ -77,7 +77,7 @@
 import album from '@/components/albums/album'
 import artist from '@/components/artists/artist'
 import songList from '@/components/songs/list'
-import loadingCircle from '@/components/misc/loading-circle'
+import loadingScreen from '@/components/misc/loading-bars'
 
 export default {
   name: 'search-results',
@@ -86,7 +86,7 @@ export default {
     album,
     artist,
     songList,
-    loadingCircle
+    loadingScreen
   },
   data() {
     return {
@@ -136,16 +136,10 @@ export default {
       return this.results
     },
     albums() {
-      if (this.searchResults && this.loadedAlbums) {
-        return this.loadedAlbums
-      }
-      return null
+      return this.loadedAlbums
     },
     artists() {
-      if (this.searchResults && this.loadedArtists) {
-        return this.loadedArtists
-      }
-      return false
+      return this.loadedArtists
     },
     songs() {
       if (this.searchResults) {
