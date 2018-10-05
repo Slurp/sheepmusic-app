@@ -20,17 +20,19 @@
                         </div>
                     </div>
                     <div class="detail-info">
-                        <div class="actions">
-                            <playBtn :album=album></playBtn>
-                            <queueBtn :album=album></queueBtn>
+                        <div class="detail-header">
+                            <h3 class="artist-name">
+                                <router-link
+                                        :to="{ name: 'detail_artist', params: { artist: this.album.artist.name, id: this.album.artist.id }}">
+                                    <span v-if="logo == null">{{this.album.artist.name}}</span>
+                                    <img :src="logo" v-if="logo != null">
+                                </router-link>
+                            </h3>
+                            <div class="actions">
+                                <playBtn :album=album></playBtn>
+                                <queueBtn :album=album></queueBtn>
+                            </div>
                         </div>
-                        <h3 class="artist-name">
-                            <router-link
-                                    :to="{ name: 'detail_artist', params: { artist: this.album.artist.name, id: this.album.artist.id }}">
-                                <span v-if="logo == null">{{this.album.artist.name}}</span>
-                                <img :src="logo" v-if="logo != null">
-                            </router-link>
-                        </h3>
                         <h1 class="detail-name">
                             {{ album.name }}
                         </h1>

@@ -1,4 +1,22 @@
-.navbar-nav .nav-user .dropdown-menu {
-  right: 0;
-  left: auto;
+.user-navbar {
+  .nav-link {
+    height: auto;
+    padding: 4px;
+    color: theme-color('secondary');
+    i {
+      font-size: 22px;
+      vertical-align: -6px;
+    }
+  }
+  .dropdown-menu {
+    background: theme-color('primary');
+    right: 10px;
+    top: 10px;
+    left: auto;
+    padding: 0;
+    .dropdown-item {
+      color: theme-color('light');
+      background: theme-color('secondary');
+    }
+  }
 }

@@ -7,7 +7,7 @@
   padding: 8px;
   background: theme-color-dark();
   border-bottom: 1px solid theme-color();
-  z-index: $zindex-sticky;
+  z-index: $zindex-fixed;
   .btn-sm {
     margin-right: 8px;
     padding: 0;

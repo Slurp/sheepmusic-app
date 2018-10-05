@@ -1,11 +1,14 @@
 <template>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto user-navbar">
         <li class="nav-item dropdown">
             <a class="nav-link nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">
+                <i class="material-icons">
+                    account_circle
+                </i>
                 {{ $auth.user().user }}
             </a>
-            <div class="dropdown-menu menu-cascading">
+            <div class="dropdown-menu">
                 <a class="dropdown-item" @click.prevent="logout">
                     Leave
                     <i class="material-icons">

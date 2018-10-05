@@ -7,19 +7,17 @@
                 chevron_left
             </i>
         </a>
-
-        <user-badge></user-badge>
+        <search-box></search-box>
     </nav>
 </template>
 
 <script>
-
-import userBadge from './user-badge'
+import searchBox from '@/components/search/search-box'
 
 export default {
   name: 'navbar-header',
   components: {
-    userBadge
+    searchBox
   },
   methods: {
     logout() {
