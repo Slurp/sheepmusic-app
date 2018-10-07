@@ -14,8 +14,8 @@
     top:95px;
   }
   .playlist {
-    top:97px;
-    height: calc(100vh - #{$footer-fixed-height} - 97px);
+    top:95px;
+    height: calc(100vh - #{$footer-fixed-height} - 95px);
     ul {
       height: calc(100vh - #{$footer-fixed-height} - 189px);
     }
