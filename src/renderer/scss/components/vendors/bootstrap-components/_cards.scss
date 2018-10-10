@@ -67,7 +67,7 @@
   }
   .card-subtitle {
     font-size: 0.8rem;
-    color: theme-color-light('primary');
+    color: theme-color-light('primary')!important;
     display: flex;
     align-items: center;
     margin-top: 0;

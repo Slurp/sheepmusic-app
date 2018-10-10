@@ -6,18 +6,14 @@
         </div>
         <section>
             <div class="detail-info-wrapper">
-                <div class="detail-art">
-                    <img
-                            v-lazyload
-                            :alt="playlist.name"
-                            :src=defaultCover
-                            :data-src=cover
-                            :data-err=defaultCover
-                            class="card-img-top"
-                    />
-                </div>
                 <div class="detail-info">
+                    <div class="detail-header">
                     <h1>{{ playlist.name }}</h1>
+                        <div class="actions">
+                            <playBtn :playlist=playlist></playBtn>
+                            <queueBtn :playlist=playlist></queueBtn>
+                        </div>
+                    </div>
                     <div class="meta">
                         <span v-if="playlistDuration">
                             <i class="material-icons">av_timer</i>
@@ -25,10 +21,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="actions">
-                    <play_btn :playlist=playlist></play_btn>
-                    <queue_btn :playlist=playlist></queue_btn>
-                </div>
+
             </div>
         </section>
         <song-list :songs="playlist.songs"></song-list>

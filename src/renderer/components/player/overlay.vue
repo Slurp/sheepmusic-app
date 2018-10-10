@@ -19,8 +19,8 @@
                 </div>
             </div>
             <div class="info">
-                <h3><img :src="logo" v-if="logo"><span v-else>{{ artist.name }}</span></h3>
-                <h2>{{ song.title }}</h2>
+                <h2 class="artist-name"><img :src="logo" v-if="logo"><span v-else>{{ artist.name }}</span></h2>
+                <h3>{{ song.title }}</h3>
                 <h4>{{ album.name }}</h4>
                 <p class="audio-info">
                    {{song.audio.dataformat }} {{ song.audio.bitrate_mode }} - {{ song.audio.sample_rate }}Hz - {{ song.audio.channelmode }}

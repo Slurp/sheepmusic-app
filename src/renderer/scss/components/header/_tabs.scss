@@ -1,5 +1,7 @@
 .nav-tabs.router-tabs {
-  position: relative;
+  position: sticky;
+  z-index: $zindex-sticky;
+  top:40px;
   .nav-link {
     transition: background-color 0.3s ease-in-out;
     &.active {

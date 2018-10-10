@@ -2,19 +2,17 @@
   width: $navdrawer-width;
   background-color: theme-color-dark('primary');
   box-shadow: map-get($shadows, 2);
-  padding: 0;
+  padding: 15px 0;
   position: fixed;
   top: 50px;
   left: 0;
   right: auto;
   bottom: $footer-fixed-height;
   transition: all 0.3s linear;
-  z-index: $zindex-fixed;
+  z-index: $zindex-fixed + 2;
   // Visibility.
   display: block;
-  z-index: (map-get($navdrawer-elevation-shadow, elevation) - 1);
-  // Items.
-  padding: 15px 0;
+
   .drawer-items {
     padding: 0;
     margin: 0;
@@ -62,7 +60,7 @@
       white-space: nowrap;
       &:active,
       &.active {
-        background: theme-color-dark('secondary');
+        background: theme-color('secondary');
         .drawer-link_text,
         .drawer-link_icon {
           color: theme-color('light');

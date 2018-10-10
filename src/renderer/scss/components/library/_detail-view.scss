@@ -192,11 +192,9 @@
     text-shadow: 1px 1px theme-color-dark('light');
     text-transform: capitalize;
     flex: 1 1 100%;
-    @include media-breakpoint-down(md) {
-      text-align: center;
-    }
     img {
       max-width: 100%;
+      margin: 0 auto;
     }
   }
 }

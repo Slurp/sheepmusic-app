@@ -17,7 +17,7 @@ const actions = {
     })
   },
   loadPlaylist({ commit, state }, playlistId) {
-    if (state.playlists[playlistId] === null || state.playlists[playlistId].songs === null) {
+    if (!state.playlists[playlistId] || !state.playlists[playlistId].songs) {
       Vue.axios.get(`/api/playlist/${state.playlists[playlistId].id}`).then(response => {
         commit('ADD_PLAYLIST', { playlist: response.data, index: playlistId })
       }, err => {

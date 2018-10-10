@@ -5,6 +5,18 @@
 /* General
    ========================================================================== */
 form.form-search {
+  @include make-col-ready();
+  @include make-col(5);
+  padding-right: 0;
+  @include media-breakpoint-up(sm) {
+    @include make-col(4.5);
+  }
+  @include media-breakpoint-up(md) {
+    @include make-col(3.5);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(2.5);
+  }
   .form-control {
     background: theme-color('light');
     border-bottom: 2px solid theme-color-dark('light');

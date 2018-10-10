@@ -45,7 +45,7 @@ const actions = {
     })
   },
   loadArtist({ commit, state }, artistId) {
-    if (!state.artists[artistId] || state.artists[artistId].fullyLoaded === false) {
+    if (state.artists[artistId] && state.artists[artistId].fullyLoaded === false) {
       Vue.axios.get(`/api/artist/${artistId}`).then(response => {
         commit('ADD_ARTIST', { artist: response.data, index: artistId })
       }, err => {
@@ -84,11 +84,14 @@ const getters = {
   pageNumber: state => state.page,
   totalArtists: state => state.artists.length,
   artists: state => {
-    if (state.artists.length >= state.itemsPerPage) {
-      const start = (state.itemsPerPage * (state.page - 1))
-      return state.sortedList.slice(start, start + state.itemsPerPage).map(artist => state.artists[artist.id])
+    if (state.artists.length > 0) {
+      if (state.artists.length >= state.itemsPerPage) {
+        const start = (state.itemsPerPage * (state.page - 1))
+        return state.sortedList.slice(start, start + state.itemsPerPage).map(artist => state.artists[artist.id])
+      }
+      return state.sortedList.map(object => state.artists[object.id])
     }
-    return state.sortedList.map(object => state.artist[object.id])
+    return null
   },
   getArtistById: state => artistId => {
     if (state.artists) {
