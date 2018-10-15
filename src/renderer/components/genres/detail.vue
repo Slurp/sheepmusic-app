@@ -115,7 +115,7 @@ export default {
     },
     albums() {
       if (this.genre && this.genre.albums) {
-        this.$store.dispatch('albums/loadAlbumCollection', this.genre.albums).then(() => {
+        this.$store.dispatch('albums/loadSlice', this.genre.albums).then(() => {
           this.loadedAlbums = true
         }).catch(() => {
           this.loadedAlbums = true

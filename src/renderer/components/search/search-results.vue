@@ -118,8 +118,7 @@ export default {
       this.loadedAlbums = false
       this.axios.get(`/api/search/${this.query}`).then(response => {
         this.results = response.data
-        this.$store.dispatch('albums/loadAlbumCollection', this.results.albums).then(() => {
-          console.log('albums/loadAlbumCollection')
+        this.$store.dispatch('albums/loadSlice', this.results.albums).then(() => {
           this.loadedAlbums = this.$store.getters['albums/search'](this.results.albums)
         }).catch(() => {
           this.loadedAlbums = false

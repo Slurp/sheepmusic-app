@@ -1,12 +1,12 @@
 <template>
     <section class="overview-list">
-        <loading v-if="loadedAlbums == false"></loading>
+        <loading v-if="loadedPage == false"></loading>
         <transition-group name="list" tag="ul" class="list">
-            <li class="col" v-for="album in albums" :key="album.id" :name="album.id">
-                <album :album-id=album.id :album=album :key="album.id"></album>
+            <li class="col" v-for="item in items" :key="item.id" :name="item.id">
+                <album :album-id=item.id :album=item :key="item.id"></album>
             </li>
         </transition-group>
-        <pagination for="albums" :records="totalAlbums" :vuex="true"></pagination>
+        <pagination for="albums" :records="records" :vuex="true"></pagination>
     </section>
 </template>
 
@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        loadedAlbums: false,
+        loadedPage: false,
         toast: new Toaster()
       }
     },
@@ -41,7 +41,7 @@
     beforeDestroy() {
       this.toast = null
       delete this.toast
-      delete this.loadedAlbums
+      delete this.loadedPage
     },
 
     watch: {
@@ -50,25 +50,25 @@
       }
     },
     computed: {
-      albums() {
-        if (this.albumPage) {
-          this.$store.dispatch('albums/loadAlbumCollection', this.albumPage).then(() => {
-            this.loadedAlbums = true
+      items() {
+        if (this.page) {
+          this.$store.dispatch('albums/loadSlice', this.page).then(() => {
+            this.loadedPage = true
           }).catch(() => {
-            this.loadedAlbums = true
+            this.loadedPage = true
           })
         }
-        if (this.loadedAlbums) {
-          return this.albumPage
+        if (this.loadedPage) {
+          return this.page
         }
         return null
       },
-      albumPage() {
-        this.loadedAlbums = false
-        return this.$store.getters['albums/albums']
+      page() {
+        this.loadedPage = false
+        return this.$store.getters['albums/slice']
       },
-      totalAlbums() {
-        return this.$store.getters['albums/totalAlbums']
+      records() {
+        return this.$store.getters['albums/totals']
       }
     }
   }

@@ -23,14 +23,15 @@
   .prev-page {
     color: theme-color('light');
     .page-link {
-      padding-left: $pagination-inner-spacer-x / 2;
-      padding-right: $pagination-inner-spacer-x / 2;
+      padding-top: 7.5px;
+      padding-bottom: 7.5px;
     }
   }
   .page-link {
     line-height: initial;
     display: block;
     color: theme-color-dark('light');
+    @include transition-standard-complex('background-color');
     @include active-focus-hover {
       color: theme-color-dark('light');
       text-decoration: none;

@@ -22,7 +22,7 @@ const actions = {
       })
     })
   },
-  async loadAlbumCollection({ commit }, albums) {
+  async loadSlice({ commit }, albums) {
     return new Promise((resolve, reject) => {
       const collection = albums.filter(album => (!state.albums[album.id] || state.albums[album.id].fullyLoaded === false))
       if (collection.length > 0) {
@@ -74,8 +74,8 @@ const mutations = {
 
 const getters = {
   pageNumber: state => state.page,
-  totalAlbums: state => state.albums.length,
-  albums: state => {
+  totals: state => state.albums.length,
+  slice: state => {
     if (state.albums.length >= state.itemsPerPage) {
       const start = (state.itemsPerPage * (state.page - 1))
       return state.sortedList.slice(start, start + state.itemsPerPage).map(album => state.albums[album.id])
