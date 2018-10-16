@@ -1,5 +1,5 @@
 <template>
-    <div class="playing-overlay" v-if="show">
+    <div class="playing-overlay" :class="showClass">
         <div class="background-image" v-bind:style="{ 'background-image': 'url(' + background + ')' }"></div>
         <div class="playing-overlay__content">
             <h1>Now playing</h1>
@@ -96,6 +96,9 @@ export default {
     },
     show() {
       return (this.$store.getters.isIdle && this.$store.getters['playlist/isPlaying'] && this.song)
+    },
+    showClass() {
+      return (this.show) ? 'show' : 'hide'
     }
   }
 }

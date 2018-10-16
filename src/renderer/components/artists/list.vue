@@ -1,12 +1,12 @@
 <template>
     <section class="overview-list">
-        <loading v-if="loadedArtists == false"></loading>
+        <loading v-if="loaded == false"></loading>
         <transition-group name="list" tag="ul" class="list">
-            <li class="col" v-for="artist in artists" :key="artist.id" :name="artist.id" >
-                <artist :artist-id=artist.id :artist=artist></artist>
+            <li class="col" v-for="item in items" :key="item.id" :name="item.id" >
+                <artist :artist-id=item.id :artist=item></artist>
             </li>
         </transition-group>
-        <pagination for="artists" :records="totalArtists" :vuex="true"></pagination>
+        <pagination for="artists" :records="records" :vuex="true"></pagination>
     </section>
 </template>
 
@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        loadedArtists: false
+        loaded: false
       }
     },
     watch: {
@@ -34,25 +34,25 @@
       }
     },
     computed: {
-      artists() {
-        if (this.artistPage) {
-          this.$store.dispatch('artists/loadArtistCollection', this.artistPage).then(() => {
-            this.loadedArtists = true
+      items() {
+        if (this.page) {
+          this.$store.dispatch('artists/loadSlice', this.page).then(() => {
+            this.loaded = true
           }).catch(() => {
-            this.loadedArtists = true
+            this.loaded = true
           })
         }
-        if (this.loadedArtists) {
-          return this.artistPage
+        if (this.loaded) {
+          return this.page
         }
         return null
       },
-      artistPage() {
-        this.loadedArtists = false
-        return this.$store.getters['artists/artists']
+      page() {
+        this.loaded = false
+        return this.$store.getters['artists/slice']
       },
-      totalArtists() {
-        return this.$store.getters['artists/totalArtists']
+      records() {
+        return this.$store.getters['artists/totals']
       }
     }
   }

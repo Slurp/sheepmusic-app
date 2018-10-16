@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import config from '@/config/index'
-import { sortedState, sortedMutations, sortedActions } from '@/store/helpers/sortedPage'
+import { sortedState, sortedMutations, sortedActions, sortedGetters } from '@/store/helpers/sortedPage'
 import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import { getBackground, getCover, getLogo } from './model'
 import { getImportedByMonth, getUpdatedByMonth } from '@/store/helpers/stats'
@@ -23,7 +23,7 @@ const actions = {
       })
     })
   },
-  async loadArtistCollection({ commit }, artists) {
+  async loadSlice({ commit }, artists) {
     return new Promise((resolve, reject) => {
       const collection = artists.filter(artist => (!state.artists[artist.id] || state.artists[artist.id].fullyLoaded === false))
       if (collection.length > 0) {
@@ -82,16 +82,9 @@ const mutations = {
 
 const getters = {
   pageNumber: state => state.page,
-  totalArtists: state => state.artists.length,
-  artists: state => {
-    if (state.artists.length > 0) {
-      if (state.artists.length >= state.itemsPerPage) {
-        const start = (state.itemsPerPage * (state.page - 1))
-        return state.sortedList.slice(start, start + state.itemsPerPage).map(artist => state.artists[artist.id])
-      }
-      return state.sortedList.map(object => state.artists[object.id])
-    }
-    return null
+  totals: state => state.artists.length,
+  slice: state => {
+    return sortedGetters.getSlice(state, 'artists')
   },
   getArtistById: state => artistId => {
     if (state.artists) {

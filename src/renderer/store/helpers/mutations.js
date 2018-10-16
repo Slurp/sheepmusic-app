@@ -112,6 +112,8 @@ export const addItemsAndSortedList = (state, key, data, subKey) => {
     state.sortedList.sort((a, b) => b.date - a.date)
   } else if (state.sortBy === 'most-played') {
     state.sortedList.sort((a, b) => b.playCount - a.playCount)
+  } else {
+    state.sortedList.sort((a, b) => a.name.localeCompare(b.name))
   }
 }
 

@@ -1,5 +1,4 @@
 .playing-overlay {
-
   position: fixed;
   top: 56px;
   left: 0; //$navdrawer-width;
@@ -8,7 +7,18 @@
   display: block;
   z-index: $zindex-popover;
   background-color: rgba(theme-color('dark'), 1);
-
+  &.show {
+    animation-name: slideInUp;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+  &.hide {
+    animation-name: slideOutDown;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
   .btn-close {
     position: absolute;
     top: $grid-gutter-width-base;
@@ -18,8 +28,6 @@
     width: 1.4rem;
   }
   .background-image {
-    animation-name: slideInUp;
-    animation-duration: 0.5s;
     transition: all 0.5s ease;
     position: absolute;
     top: 0;

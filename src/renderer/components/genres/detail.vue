@@ -102,7 +102,7 @@ export default {
     },
     artists() {
       if (this.genre && this.genre.artists) {
-        this.$store.dispatch('artists/loadArtistCollection', this.genre.artists).then(() => {
+        this.$store.dispatch('artists/loadSlice', this.genre.artists).then(() => {
           this.loadedArtists = true
         }).catch(() => {
           this.loadedArtists = true

@@ -226,3 +226,10 @@
     flex-direction: row;
   }
 }
+
+.artist-name {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

@@ -123,7 +123,7 @@ export default {
         }).catch(() => {
           this.loadedAlbums = false
         })
-        this.$store.dispatch('artists/loadArtistCollection', this.results.artists).then(() => {
+        this.$store.dispatch('artists/loadSlice', this.results.artists).then(() => {
           this.loadedArtists = this.$store.getters['artists/search'](this.results.artists)
         }).catch(() => {
           this.loadedArtists = false

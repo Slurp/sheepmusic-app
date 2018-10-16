@@ -34,3 +34,16 @@ export const sortedMutations = {
     }
   }
 }
+
+export const sortedGetters = {
+  getSlice: (state, key) => {
+    if (state[key].length > 0) {
+      if (state[key].length >= state.itemsPerPage) {
+        const start = (state.itemsPerPage * (state.page - 1))
+        return state.sortedList.slice(start, start + state.itemsPerPage).map(object => state[key][object.id])
+      }
+      return state.sortedList.map(object => state[key][object.id])
+    }
+    return null
+  }
+}
