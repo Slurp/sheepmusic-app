@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import config from '@/config/index'
-import { sortedState, sortedMutations, sortedActions, sortedGetters } from '@/store/helpers/sortedPage'
+import { sortedState, sortedMutations, sortedActions, sortedGetters, sortingType } from '@/store/helpers/sortedPage'
 import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import { getBackground, getCover, getLogo } from './model'
 import { getImportedByMonth, getUpdatedByMonth } from '@/store/helpers/stats'
@@ -83,9 +83,8 @@ const mutations = {
 const getters = {
   pageNumber: state => state.page,
   totals: state => state.artists.length,
-  slice: state => {
-    return sortedGetters.getSlice(state, 'artists')
-  },
+  slice: state => sortedGetters.getSlice(state, 'artists'),
+  getByLetter: state => letter => state.artists.filter(item => (item.name[0] && item.name[0].toLowerCase() === letter)).sort(sortingType.name),
   getArtistById: state => artistId => {
     if (state.artists) {
       return state.artists[artistId]

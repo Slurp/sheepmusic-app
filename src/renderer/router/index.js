@@ -67,6 +67,13 @@ const router = new VueRouter({
       meta: { auth: true }
     },
     {
+      path: '/albums/alphabet',
+      name: 'alphabet-albums',
+      component: AlbumOverview,
+      props: { type: 'alphabet' },
+      meta: { auth: true }
+    },
+    {
       path: '/artist/:artist/album/:album/:id',
       name: 'detail_album',
       component: AlbumDetail,
@@ -78,6 +85,13 @@ const router = new VueRouter({
       name: 'all-artists',
       component: ArtistOverview,
       props: { type: 'all' },
+      meta: { auth: true }
+    },
+    {
+      path: '/artists/alphabet',
+      name: 'alphabet-artists',
+      component: ArtistOverview,
+      props: { type: 'alphabet' },
       meta: { auth: true }
     },
     {

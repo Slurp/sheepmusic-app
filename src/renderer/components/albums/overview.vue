@@ -2,11 +2,6 @@
     <div>
         <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
-                <router-link class="nav-item nav-link" :to="{ name: 'all-albums'}">
-                    <span class="font-weight-normal">All</span>
-                </router-link>
-            </li>
-            <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{name:'recent-albums'}">
                     <span class="font-weight-normal">Recent</span>
                 </router-link>
@@ -16,12 +11,24 @@
                     <span class="font-weight-normal">Most Played</span>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-item nav-link" :to="{name:'alphabet-albums'}">
+                    <span class="font-weight-normal">Alphabet</span>
+                </router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-item nav-link" :to="{ name: 'all-albums'}">
+                    <span class="font-weight-normal">All</span>
+                </router-link>
+            </li>
         </ul>
-        <list :type=type></list>
+        <alphabet v-if="type == 'alphabet'"></alphabet>
+        <list :type=type v-else></list>
     </div>
 </template>
 
 <script>
+import alphabet from '@/components/albums/alphabet'
 import list from './list'
 
 export default {
@@ -33,6 +40,7 @@ export default {
     }
   },
   components: {
+    alphabet,
     list
   }
 }

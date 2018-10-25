@@ -1,6 +1,7 @@
 import { set } from '@/store/helpers/mutations'
-const sortingType = {
+export const sortingType = {
   all: (a, b) => a.id - b.id,
+  name: (a, b) => a.name.localeCompare(b.name),
   recent: (a, b) => b.date - a.date,
   'most-played': (a, b) => b.playCount - a.playCount
 }

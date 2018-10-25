@@ -4,7 +4,7 @@
         <div class="playing-overlay__content">
             <h1>Now playing</h1>
             <div class="album-cover">
-                <div class="case">
+                <div class="case" v-if="song">
                     <div class="overlay"></div>
                     <img class="cover"
                          v-lazyload
@@ -18,7 +18,7 @@
                     <div class="vinyl"><i></i></div>
                 </div>
             </div>
-            <div class="info">
+            <div class="info" v-if="song">
                 <h2 class="artist-name"><img :src="logo" v-if="logo"><span v-else>{{ artist.name }}</span></h2>
                 <h3>{{ song.title }}</h3>
                 <h4>{{ album.name }}</h4>

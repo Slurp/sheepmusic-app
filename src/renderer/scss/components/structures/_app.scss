@@ -9,6 +9,9 @@
   }
   .navbar.sticky {
     top: 39px;
+    ~ .container-fluid .router-view {
+      margin-top: 95px;
+    }
   }
   .playing-overlay {
     top:95px;
@@ -22,9 +25,6 @@
   }
   .nav-drawer-nav {
     top:95px;
-  }
-  .router-view {
-    margin-top: 95px;
   }
   .breadcrumb-fixed {
     left: 74px;

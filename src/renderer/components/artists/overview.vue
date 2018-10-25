@@ -2,26 +2,40 @@
     <div class="overview">
         <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
+                <router-link class="nav-item nav-link" :to="{ name: 'alphabet-artists'}">
+                    <span>Alphabet</span>
+                </router-link>
+            </li>
+            <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{ name: 'all-artists'}">
-                    <span class="font-weight-normal">All</span>
+                    <span>All</span>
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{name:'recent-artists'}">
-                    <span class="font-weight-normal">Recent</span>
+                    <span>Recent</span>
                 </router-link>
             </li>
         </ul>
-        <list :type="type"></list>
+        <alphabet v-if="type == 'alphabet'"></alphabet>
+        <list :type=type v-else></list>
     </div>
 </template>
 
 <script>
 import list from './list'
+import alphabet from './alphabet'
 
 export default {
-  props: ['type'],
+  props: {
+    type: {
+      type: String,
+      required: false,
+      default: 'alphabet'
+    }
+  },
   components: {
+    alphabet,
     list
   }
 }

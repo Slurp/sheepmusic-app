@@ -55,6 +55,10 @@
 .alphabet-pagination {
   flex-wrap: wrap;
   justify-content: space-evenly;
+  .page-link {
+    padding: 0.5rem 2px;
+    font-weight: bold;
+  }
 }
 
 

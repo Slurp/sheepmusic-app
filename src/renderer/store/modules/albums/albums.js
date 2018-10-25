@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { sortedState, sortedMutations, sortedActions } from '@/store/helpers/sortedPage'
+import { sortedState, sortedMutations, sortedActions, sortedGetters } from '@/store/helpers/sortedPage'
 import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import { getImportedByMonth } from '../../helpers/stats'
 
@@ -75,18 +75,11 @@ const mutations = {
 const getters = {
   pageNumber: state => state.page,
   totals: state => state.albums.length,
-  slice: state => {
-    if (state.albums.length >= state.itemsPerPage) {
-      const start = (state.itemsPerPage * (state.page - 1))
-      return state.sortedList.slice(start, start + state.itemsPerPage).map(album => state.albums[album.id])
-    }
-    return state.sortedList.map(album => state.albums[album.id])
-  },
+  slice: state => sortedGetters.getSlice(state, 'albums'),
+  getByLetter: state => letter => state.albums.filter(item => (item.name[0] && item.name[0].toLowerCase() === letter)),
   search: state => albums => albums.map(album => state.albums[album.id]),
-  getAlbumById: state => albumId => {
-    return state.albums[albumId]
-  },
-  detailLink: state => album => ({
+  getAlbumById: state => albumId => state.albums[albumId],
+  detailLink: () => album => ({
     name: 'detail_album',
     params: { artist: album.artist.name, album: album.name, id: album.id }
   }),

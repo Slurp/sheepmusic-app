@@ -12,8 +12,8 @@
                 </router-link>
             </li>
         </ul>
-        <transition-group name="list" tag="ul" class="nav nav-pills flex-column flex-sm-row" v-if="genrePage">
-            <li class="nav-item" v-for="(genre, index) in genrePage" :key="index" :name="genre.slug">
+        <transition-group name="list" tag="ul" class="nav nav-pills flex-column flex-sm-row" v-if="page">
+            <li class="nav-item" v-for="(genre, index) in page" :key="index" :name="genre.slug">
                 <router-link  class="nav-link" :to="{ name: 'detail_genres', params: { genre: genre.slug, id: genre.id }}">
                     {{ genre.name }}
                 </router-link>
@@ -59,8 +59,8 @@ export default {
     }
   },
   computed: {
-    genrePage() {
-      return this.$store.getters['genres/getGenresByLetter'](this.selectedLetter)
+    page() {
+      return this.$store.getters['genres/getByLetter'](this.selectedLetter)
     },
     selectedLetter() {
       return this.letter

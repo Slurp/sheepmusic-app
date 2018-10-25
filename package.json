@@ -82,6 +82,7 @@
     "vue-chartjs": "^3.1.0",
     "vue-elasticsearch": "^1.0.3-rc3",
     "vue-electron": "^1.0.6",
+    "vue-infinite-loading": "^2.3.5",
     "vue-router": "^3.0.1",
     "vue-style-loader": "^4.1.0",
     "vue-tiny-lazyload-img": "^0.0.3",

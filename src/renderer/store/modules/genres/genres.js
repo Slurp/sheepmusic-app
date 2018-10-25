@@ -1,3 +1,5 @@
+import { addItemsAndSortedList } from '@/store/helpers/mutations'
+import { sortedActions, sortedMutations } from '@/store/helpers/sortedPage'
 import Vue from 'vue'
 
 const state = {
@@ -31,34 +33,13 @@ const actions = {
   viewGenre({ commit }, genreId) {
     commit('SET_CURRENT_GENRE', { index: genreId })
   },
-  paginate({ commit }, page) {
-    commit('PAGINATE', { page })
-  },
-  sortBy({ commit }, sort) {
-    commit('SORT_BY', { sort })
-  }
+  ...sortedActions
 }
 
 const mutations = {
   ADD_GENRES: (state, { genres }) => {
-    for (const genre of genres) {
-      if (!state.genres[genre.id] || state.genres[genre.id].fullyLoaded === false) {
-        genre.fullyLoaded = false
-        Vue.set(state.genres, genre.id, genre)
-      }
-    }
     state.fetchedOverview = true
-    state.sortedList = state.genres.map(genre => ({
-      id: genre.id,
-      name: genre.slug,
-      date: new Date(genre.createdAt.date)
-    }))
-    // Remove first value is null
-    state.sortedList.splice(0, 1)
-    state.sortedList.sort((a, b) => a.name.localeCompare(b.name))
-    if (state.sortBy === 'recent') {
-      state.sortedList.sort((a, b) => b.date - a.date)
-    }
+    addItemsAndSortedList(state, 'genres', genres, 'fullyLoaded')
   },
   ADD_GENRE: (state, { genre, index }) => {
     genre.fullyLoaded = true
@@ -67,32 +48,13 @@ const mutations = {
   SET_CURRENT_GENRE: (state, { index }) => {
     state.current = state.genres[index]
   },
-  PAGINATE: (state, { page }) => {
-    state.page = page
-  },
-  SORT_BY: (state, { sort }) => {
-    if (sort !== state.sortBy) {
-      if (sort === 'recent') {
-        state.sortedList.sort((a, b) => b.date - a.date)
-      } else {
-        state.sortedList.sort((a, b) => a.name.localeCompare(b.name))
-      }
-      state.sortBy = sort
-    }
-  }
+  ...sortedMutations
 }
 
 const getters = {
   pageNumber: state => state.page,
   totalGenres: state => state.genres.length,
-  getGenresByLetter: state => letter => state.genres.filter(genre => (genre.name[0] && genre.name[0].toLowerCase() === letter)),
-  getGenres: state => {
-    if (state.genres.length >= 50) {
-      const start = (50 * (state.page - 1))
-      return state.sortedList.slice(start, start + 50).map(genre => state.genres[genre.id]).filter(Boolean)
-    }
-    return state.genres
-  },
+  getByLetter: state => letter => state.genres.filter(genre => (genre.name[0] && genre.name[0].toLowerCase() === letter)),
   getGenreById: state => genreId => state.genres[genreId]
 }
 
