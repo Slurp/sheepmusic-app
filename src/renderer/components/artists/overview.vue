@@ -3,11 +3,6 @@
         <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{ name: 'alphabet-artists'}">
-                    <span>Alphabet</span>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-item nav-link" :to="{ name: 'all-artists'}">
                     <span>All</span>
                 </router-link>
             </li>

@@ -13,11 +13,6 @@
             </li>
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{name:'alphabet-albums'}">
-                    <span class="font-weight-normal">Alphabet</span>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-item nav-link" :to="{ name: 'all-albums'}">
                     <span class="font-weight-normal">All</span>
                 </router-link>
             </li>

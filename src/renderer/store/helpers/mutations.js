@@ -3,7 +3,6 @@
 // https://itnext.io/reusable-vuex-mutation-functions-9b4920aa737b
 // *******************************************************************
 
-import { maybe } from '@/services/functional-tools'
 import { sortingType } from '@/store/helpers/sortedPage'
 // *******************************************************************
 // Helpers
@@ -105,7 +104,7 @@ export const addItemsAndSortedList = (state, key, data, subKey) => {
   state.sortedList = state[key].filter(Boolean).map(item => ({
     id: item.id,
     name: item.name,
-    playCount: maybe(item.playCount, playCount => playCount, item.id),
+    playCount: item.playCount,
     date: new Date(item.createdAt)
   }))
   // remove first value is null

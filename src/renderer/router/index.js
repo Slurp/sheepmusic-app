@@ -49,7 +49,7 @@ const router = new VueRouter({
       path: '/albums',
       name: 'all-albums',
       component: AlbumOverview,
-      props: { type: 'all' },
+      props: { type: 'recent' },
       meta: { auth: true }
     },
     {
@@ -84,7 +84,7 @@ const router = new VueRouter({
       path: '/artists/',
       name: 'all-artists',
       component: ArtistOverview,
-      props: { type: 'all' },
+      props: { type: 'alphabet' },
       meta: { auth: true }
     },
     {
