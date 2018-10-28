@@ -39,9 +39,7 @@
                         <artist :artist-id=artist.id :artist=storedArtist(artist.id)></artist>
                     </div>
                 </transition-group>
-                <div v-else>
-                    Loading
-                </div>
+                <loading-bars v-else></loading-bars>
             </div>
             <div class="tab-pane fade" id="albums" role="tabpanel" v-if="genre.albums" aria-labelledby="albums-tab">
                 <transition-group name="list" tag="div" class="list" v-if="albums">
@@ -49,9 +47,7 @@
                         <album :album-id=album.id :album=storedAlbum(album.id) :key="album.id"></album>
                     </div>
                 </transition-group>
-                <div v-else>
-                    Loading
-                </div>
+                <loading-bars v-else></loading-bars>
             </div>
         </div>
 
@@ -60,6 +56,7 @@
 </template>
 
 <script>
+import LoadingBars from '@/components/misc/loading-bars'
 import config from '@/config/index'
 import album from '@/components/albums/album'
 import artist from '@/components/artists/artist'
@@ -75,6 +72,7 @@ export default {
     }
   },
   components: {
+    LoadingBars,
     album,
     artist,
     playBtn,

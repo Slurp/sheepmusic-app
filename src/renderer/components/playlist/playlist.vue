@@ -2,9 +2,8 @@
     <div class="playlist">
         <div class="playlist-dropup">
             <h5 class="playlist-header">
-                Current Playlist
-                <span v-if="playlistName">: {{ playlistName }}</span>
-
+                <span v-if="playlistName">{{ playlistName }}</span>
+                <span v-else>Current Playlist</span>
             </h5>
             <div class="playlist-wrapper">
                 <ul v-if="isEmpty">
@@ -33,7 +32,6 @@
             </div>
 
             <div v-if="isEmpty == false" class="playlist-actions" role="group">
-
                 <div class="btn-group-fluid">
                     <a href="#" class='btn' v-on:click.stop.prevent="shuffle">
                         <i class="material-icons">shuffle</i>
@@ -52,13 +50,11 @@
                             delete
                         </i>
                     </a>
-
                 </div>
                 <div class="duration" v-if="playlistDuration">
                     <i class="material-icons">av_timer</i>
                     {{ playlistDuration }}
                 </div>
-
             </div>
         </div>
     </div>

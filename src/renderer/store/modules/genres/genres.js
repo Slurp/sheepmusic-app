@@ -22,7 +22,7 @@ const actions = {
     }
   },
   loadGenre({ commit, state }, genreId) {
-    if (state.genres[genreId] === null || state.genres[genreId].songs === null) {
+    if (!state.genres[genreId] || state.genres[genreId].fullyLoaded === false) {
       Vue.axios.get(`/api/genre/${genreId}`).then(response => {
         commit('ADD_GENRE', { genre: response.data, index: genreId })
       }, err => {

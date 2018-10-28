@@ -8,16 +8,20 @@
             <div class="detail-info-wrapper">
                 <div class="detail-info">
                     <div class="detail-header">
-                    <h1>{{ playlist.name }}</h1>
+                    <h1 class="text-secondary">{{ playlist.name }}</h1>
                         <div class="actions">
                             <playBtn :playlist=playlist></playBtn>
                             <queueBtn :playlist=playlist></queueBtn>
                         </div>
                     </div>
-                    <div class="meta">
-                        <span v-if="playlistDuration">
+                    <div class="meta" v-if="playlistDuration">
+                        <span>
                             <i class="material-icons">av_timer</i>
                             {{ playlistDuration }}
+                        </span>
+                        <span>
+                            <i class="material-icons">bar_chart</i>
+                            {{ this.playlist.songs.length }}
                         </span>
                     </div>
                 </div>
