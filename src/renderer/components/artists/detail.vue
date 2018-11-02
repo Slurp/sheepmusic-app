@@ -29,6 +29,7 @@
                                 <playBtn :artist=artist></playBtn>
                                 <queueBtn :artist=artist></queueBtn>
                                 <editBtn :artist=artist></editBtn>
+                                <playlist-artist-btn :artist=artist></playlist-artist-btn>
                             </div>
                         </div>
                         <div class="meta">
@@ -72,6 +73,7 @@
 </template>
 
 <script>
+  import PlaylistArtistBtn from '@/components/artists/playlist-btn'
   import songList from '@/components/songs/list'
   import breadcrumbs from '@/components/misc/breadcrumbs'
   import album from '@/components/albums/album'
@@ -88,6 +90,7 @@
   export default {
     name: 'artist_detail',
     components: {
+      PlaylistArtistBtn,
       songList,
       breadcrumbs,
       album,

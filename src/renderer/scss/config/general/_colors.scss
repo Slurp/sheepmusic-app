@@ -70,112 +70,105 @@ $tomato: #F44336;
 
 /* Colors
    ========================================================================== */
-$primary-color-dark:   #455A64;
-$primary-color:        #607D8B;
-$primary-color-light:  #CFD8DC;
-$primary-color-text:   #FFFFFF;
-$accent-color:         #FF4081;
-$primary-text-color:   #212121;
+$primary-color-dark: #455A64;
+$primary-color: #607D8B;
+$primary-color-light: #CFD8DC;
+$primary-color-text: #FFFFFF;
+$accent-color: #FF4081;
+$primary-text-color: #212121;
 $secondary-text-color: #757575;
-$divider-color:        #BDBDBD;
+$divider-color: #BDBDBD;
 
-$primary: #343a40;
-$primary: #131e2b;
-$primary-light: #5e646b;
-$primary-dark: #0e141a;
+$primary: #607D8B; //#131e2b;
+$primary-light: #CFD8DC; //#5e646b;
+$primary-dark: #455A64; //#0e141a;
+
+//dark theme
+$primary: #283243; //#131e2b;
+$primary-light: #323E4F; //#5e646b;
+$primary-dark: #1C2532; //#0e141a;
+
 $secondary-light: #ff4081;
-$secondary: #f50057;
-$secondary-dark: #bb002f;
-
-//$theme-colors: (
-//        primary: $primary,
-//        secondary: #F50057,
-//        success: $green,
-//        info: $teal,
-//        warning: $yellow,
-//        danger: $secondary-dark,
-//        light: $gray-100,
-//        dark: $primary-dark
-//);
+$secondary: #f92672; //#f50057;
+$secondary-dark: #f50057; //#bb002f;
 
 // Theme palette
 // Change these values to customise colour palettes
 
 $theme-colors: (
         primary: (
-                color: $material-color-grey-900,
-                dark:  $black,
-                light: $material-color-grey-600
+                color: $primary, //$material-color-grey-900,
+                dark: $primary-dark,
+                light: $primary-light
         ),
         secondary: (
-                color:   $secondary,
-                dark:  $secondary-dark,
+                color: $secondary,
+                dark: $secondary-dark,
                 light: $secondary-light
         ),
         danger: (
-                color:   $material-color-red-600,
-                dark:  $material-color-red-900,
+                color: $material-color-red-600,
+                dark: $material-color-red-900,
                 light: $material-color-red-300
         ),
         info: (
-                color:   $material-color-blue-500,
-                dark:  $material-color-blue-700,
+                color: $material-color-blue-500,
+                dark: $material-color-blue-700,
                 light: $material-color-blue-100
         ),
         success: (
-                color:   $material-color-green-500,
-                dark:  $material-color-green-700,
+                color: $material-color-green-500,
+                dark: $material-color-green-700,
                 light: $material-color-green-100
         ),
         warning: (
-                color:   $material-color-orange-500,
-                dark:  $material-color-orange-700,
+                color: $material-color-orange-500,
+                dark: $material-color-orange-700,
                 light: $material-color-orange-100
         ),
         dark: (
                 color: $material-color-grey-800,
-                dark:  $material-color-grey-900,
+                dark: $material-color-grey-900,
                 light: $material-color-grey-600
         ),
         light: (
                 color: $material-color-grey-100,
-                dark:  $material-color-grey-300,
+                dark: $material-color-grey-300,
                 light: $material-color-grey-050
         )
 );
-
 
 //material
 // Black and white
 // Based on https://material.google.com/style/color.html#color-text-background-colors
 
-$black:                   #000000 !default;
+$black: #000000 !default;
 
-$black-primary-opacity:   .87 !default;
+$black-primary-opacity: .87 !default;
 $black-secondary-opacity: .54 !default;
-$black-hint-opacity:      .38 !default;
-$black-divider-opacity:   .12 !default;
+$black-hint-opacity: .38 !default;
+$black-divider-opacity: .12 !default;
 
-$black-primary-solid:     #212121 !default;
-$black-secondary-solid:   #757575 !default;
-$black-hint-solid:        #9e9e9e !default;
-$black-divider-solid:     #e1e1e1 !default;
+$black-primary-solid: #212121 !default;
+$black-secondary-solid: #757575 !default;
+$black-hint-solid: #9e9e9e !default;
+$black-divider-solid: #e1e1e1 !default;
 
-$black-primary:           rgba(red($black), green($black), blue($black), $black-primary-opacity) !default;
-$black-secondary:         rgba(red($black), green($black), blue($black), $black-secondary-opacity) !default;
-$black-hint:              rgba(red($black), green($black), blue($black), $black-hint-opacity) !default;
-$black-divider:           rgba(red($black), green($black), blue($black), $black-divider-opacity) !default;
+$black-primary: rgba(red($black), green($black), blue($black), $black-primary-opacity) !default;
+$black-secondary: rgba(red($black), green($black), blue($black), $black-secondary-opacity) !default;
+$black-hint: rgba(red($black), green($black), blue($black), $black-hint-opacity) !default;
+$black-divider: rgba(red($black), green($black), blue($black), $black-divider-opacity) !default;
 
-$white:                   #ffffff !default;
+$white: #ffffff !default;
 
-$white-primary-opacity:   1 !default;
+$white-primary-opacity: 1 !default;
 $white-secondary-opacity: .7 !default;
-$white-hint-opacity:      .5 !default;
-$white-divider-opacity:   .12 !default;
+$white-hint-opacity: .5 !default;
+$white-divider-opacity: .12 !default;
 
-$white-primary:           rgba(red($white), green($white), blue($white), $white-primary-opacity) !default;
-$white-secondary:         rgba(red($white), green($white), blue($white), $white-secondary-opacity) !default;
-$white-hint:              rgba(red($white), green($white), blue($white), $white-hint-opacity) !default;
-$white-divider:           rgba(red($white), green($white), blue($white), $white-divider-opacity) !default;
+$white-primary: rgba(red($white), green($white), blue($white), $white-primary-opacity) !default;
+$white-secondary: rgba(red($white), green($white), blue($white), $white-secondary-opacity) !default;
+$white-hint: rgba(red($white), green($white), blue($white), $white-hint-opacity) !default;
+$white-divider: rgba(red($white), green($white), blue($white), $white-divider-opacity) !default;
 
 $loading-colors-list: $blue $indigo $purple $amethyst $pink $fuschia $red $orange $gold $yellow $breaking-bad $green $teal $cyan

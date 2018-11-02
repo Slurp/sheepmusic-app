@@ -1,3 +1,4 @@
+import { maybe } from '@/services/functional-tools'
 import Vue from 'vue'
 
 const state = {
@@ -168,7 +169,7 @@ const getters = {
       return state.songs[state.currentIndex + 1]
     }
   },
-  getCurrentSong: state => state.currentSong,
+  getCurrentSong: state => maybe(state.currentSong, song => song),
   getCurrentSelectedItem: state => state.currentIndex,
   list: state => state.songs,
   isPlaying: state => state.isPlaying,
