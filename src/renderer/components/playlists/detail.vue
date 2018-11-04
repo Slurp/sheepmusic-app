@@ -1,8 +1,9 @@
 <template>
     <div class="library-detail" :id="playlist.id" v-if="playlist">
         <breadcrumbs></breadcrumbs>
-        <div class="backdrop">
-            <div class="image-backdrop" v-bind:style="{ 'background-image': 'url(' + cover + ')' }"></div>
+        <div class="backdrop" v-if="background">
+            <div class="image-backdrop" v-bind:style="{ 'background-image': 'url(' + background + ')' }">>
+            </div>
         </div>
         <section>
             <div class="detail-info-wrapper">
@@ -12,6 +13,7 @@
                         <div class="actions">
                             <playBtn :playlist=playlist></playBtn>
                             <queueBtn :playlist=playlist></queueBtn>
+                            <shuffle-playlist-btn :playlist=playlist></shuffle-playlist-btn>
                         </div>
                     </div>
                     <div class="meta" v-if="playlistDuration">
@@ -27,12 +29,13 @@
                 </div>
 
             </div>
+            <song-list :songs="playlist.songs"></song-list>
         </section>
-        <song-list :songs="playlist.songs"></song-list>
     </div>
 </template>
 
 <script>
+import ShufflePlaylistBtn from '@/components/playlists/shuffle-btn'
 import config from '@/config/index'
 import songList from '@/components/songs/list'
 import breadcrumbs from '@/components/misc/breadcrumbs'
@@ -43,6 +46,7 @@ import { secondsToHis } from '@/services/time'
 export default {
   name: 'playlist-detail',
   components: {
+    ShufflePlaylistBtn,
     songList,
     breadcrumbs,
     playBtn,
@@ -59,9 +63,9 @@ export default {
     }
   },
   computed: {
-    cover() {
-      if (this.playlist.cover) {
-        return `${config.baseUrl}/${this.playlist.cover}`
+    background() {
+      if (this.playlist && this.playlist.cover) {
+        return `'${config.baseUrl}/${this.playlist.cover}'`
       }
       return null
     },
