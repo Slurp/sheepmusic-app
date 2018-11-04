@@ -136,7 +136,7 @@ const mutations = {
       const itemAtIndex = state.songs[randomIndex]
       Vue.set(state.songs, randomIndex, state.songs[i])
       Vue.set(state.songs, i, itemAtIndex)
-      if (state.currentSong !== null && itemAtIndex.id === state.currentSong.id) {
+      if (state.currentSong && itemAtIndex.id === state.currentSong.id) {
         state.currentIndex = i
       }
     }
