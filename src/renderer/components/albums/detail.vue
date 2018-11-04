@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                    <song-list :songs="album.songs"></song-list>
+                <song-list :songs="album.songs"></song-list>
             </section>
         </div>
         <loading-cirlce v-else></loading-cirlce>
