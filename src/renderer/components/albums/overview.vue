@@ -31,7 +31,7 @@ export default {
     type: {
       type: String,
       required: false,
-      default: 'all'
+      default: 'recent'
     }
   },
   components: {
