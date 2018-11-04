@@ -1,6 +1,6 @@
 .song-list {
   background-color: $songlist-bg-color;
-  box-shadow: map-get($shadows, 2);
+  box-shadow: unquote('0 1px 4px 0 #{theme-color-light()}, 0 0px 5px 0 #{theme-color()}, 0 0px 10px 0 #{theme-color-dark()}');
   margin: $grid-gutter-width-base * 2 0;
   .song-list-header,
   .song-list-item {

@@ -50,13 +50,14 @@
 
     &.list,
     .song-list {
-      background: rgba(theme-color(), 0.025);
+      background: rgba(theme-color(), 0.5);
       margin-left: 0;
       margin-right: 0;
       padding: 2rem 1.6rem 0;
     }
     .song-list {
       margin-top: 0;
+      box-shadow: none;
       @include media-breakpoint-up(md) {
         padding: 0;
       }
