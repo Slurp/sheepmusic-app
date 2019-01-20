@@ -60,6 +60,13 @@ const router = new VueRouter({
       meta: { auth: true }
     },
     {
+      path: '/albums/random',
+      name: 'random-albums',
+      component: AlbumOverview,
+      props: { type: 'random' },
+      meta: { auth: true }
+    },
+    {
       path: '/albums/most-played',
       name: 'most-played-albums',
       component: AlbumOverview,
@@ -99,6 +106,13 @@ const router = new VueRouter({
       name: 'recent-artists',
       component: ArtistOverview,
       props: { type: 'recent' },
+      meta: { auth: true }
+    },
+    {
+      path: '/artists/random',
+      name: 'random-artists',
+      component: ArtistOverview,
+      props: { type: 'rando,' },
       meta: { auth: true }
     },
     {

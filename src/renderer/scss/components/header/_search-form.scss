@@ -27,13 +27,13 @@ form.form-search {
     border-top-right-radius: 0;
     color: theme-color('light');
     &::placeholder {
-      color: theme-color-dark('light');
+      color: theme-color-light('light');
       opacity: 1; /* Firefox */
     }
     &:focus {
       text-decoration: none;
       border-color:theme-color('secondary');
-      .input-group-append {
+      ~ .input-group-append {
         .btn {
           border-color:theme-color('secondary');
         }

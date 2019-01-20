@@ -11,6 +11,16 @@
                     <span>Recent</span>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-item nav-link" :to="{name:'random-artists'}">
+                    <span>Random</span>
+                </router-link>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-item nav-link" :to="{name:'most-played-artists'}">
+                    <span>Most-played</span>
+                </router-link>
+            </li>
         </ul>
         <alphabet v-if="type == 'alphabet'"></alphabet>
         <list :type=type v-else></list>

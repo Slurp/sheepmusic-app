@@ -1,9 +1,11 @@
 import { set } from '@/store/helpers/mutations'
+
 export const sortingType = {
   all: (a, b) => a.id - b.id,
   name: (a, b) => a.name.localeCompare(b.name),
   recent: (a, b) => b.date - a.date,
-  'most-played': (a, b) => b.playCount - a.playCount
+  'most-played': (a, b) => b.playCount - a.playCount,
+  random: () => Math.random() - Math.random()
 }
 export const sortedState = {
   sortedList: [],
@@ -35,6 +37,18 @@ export const sortedMutations = {
     }
   }
 }
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+// function shuffle(a) {
+//   for (let i = a.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [a[i], a[j]] = [a[j], a[i]]
+//   }
+//   return a
+// }
 
 export const sortedGetters = {
   getSlice: (state, key) => {
