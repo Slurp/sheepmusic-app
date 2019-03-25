@@ -62,7 +62,7 @@
     background-color: theme-color-dark();
     width: 100% !important;
     // Sticky target is now sticky
-    position: fixed;
+    position: sticky;
     z-index: $zindex-sticky;
     left: 0;
     right: 0;

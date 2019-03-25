@@ -17,6 +17,10 @@ form.form-search {
   @include media-breakpoint-up(lg) {
     @include make-col(2.5);
   }
+  .input-group {
+    margin-left: auto;
+    width: 100%;
+  }
   .form-control {
     background: theme-color('light');
     border-bottom: 2px solid theme-color-dark('light');

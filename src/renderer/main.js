@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import AsyncComputed from 'vue-async-computed'
 import 'bootstrap'
 import 'daemonite-material'
 import { sync } from 'vuex-router-sync'
@@ -13,6 +14,7 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 
 Vue.use(VueTinyLazyloadImg)
+Vue.use(AsyncComputed)
 // Setup auth
 Vue.use(Auth, {
   auth: Bearer,

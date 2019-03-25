@@ -1,12 +1,14 @@
 <template>
     <section class="overview-list">
-        <loading v-if="loaded == false"></loading>
-        <transition-group name="list" tag="ul" class="list">
-            <li class="col" v-for="item in items" :key="item.id" :name="item.id" >
-                <artist :artist-id=item.id :artist=item></artist>
-            </li>
-        </transition-group>
-        <pagination for="artists" :records="records" :vuex="true"></pagination>
+        <loading v-if="$asyncComputed.page.updating"></loading>
+        <div v-else>
+          <transition-group name="list" tag="ul" class="list">
+              <li class="col" v-for="item in page" :key="item.id" :name="item.id" >
+                  <artist :artist-id=item.id :artist=item></artist>
+              </li>
+          </transition-group>
+          <pagination for="artists" :records="records" :vuex="true"></pagination>
+        </div>
     </section>
 </template>
 
@@ -23,34 +25,17 @@
     created() {
       this.$store.dispatch('artists/sortBy', this.type)
     },
-    data() {
-      return {
-        loaded: false
-      }
-    },
     watch: {
       type() {
         this.$store.dispatch('artists/sortBy', this.type)
       }
     },
+    asyncComputed: {
+      async page() {
+        return this.$store.dispatch('artists/loadSlice', this.$store.getters['artists/slice'])
+      }
+    },
     computed: {
-      items() {
-        if (this.page) {
-          this.$store.dispatch('artists/loadSlice', this.page).then(() => {
-            this.loaded = true
-          }).catch(() => {
-            this.loaded = true
-          })
-        }
-        if (this.loaded) {
-          return this.page
-        }
-        return null
-      },
-      page() {
-        this.loaded = false
-        return this.$store.getters['artists/slice']
-      },
       records() {
         return this.$store.getters['artists/totals']
       }

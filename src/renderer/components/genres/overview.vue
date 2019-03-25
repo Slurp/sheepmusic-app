@@ -13,7 +13,7 @@
             </li>
         </ul>
         <transition-group name="list" tag="ul" class="nav nav-pills flex-column flex-sm-row" v-if="page">
-            <li class="nav-item" v-for="(genre, index) in page" :key="index" :name="genre.slug">
+            <li class="nav-item" v-for="(genre) in page" :key="genre.id" :name="genre.slug">
                 <router-link  class="nav-link" :to="{ name: 'detail_genres', params: { genre: genre.slug, id: genre.id }}">
                     {{ genre.name }}
                 </router-link>

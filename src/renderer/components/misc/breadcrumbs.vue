@@ -8,9 +8,9 @@
                 {{ album.artist.name }}
             </router-link>
         </li>
-        <li class="breadcrumb-item active" v-if="album">
-            {{ album.name }}
-        </li>
+        <!--<li class="breadcrumb-item active" v-if="album">-->
+            <!--{{ album.name }}-->
+        <!--</li>-->
     </ol>
 </template>
 <script>

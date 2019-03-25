@@ -35,12 +35,13 @@ const actions = {
             album: responseAlbum,
             index: responseAlbum.id
           }))
-          resolve()
+          console.log('resolve')
+          resolve(albums)
         }, err => {
           reject(err)
         })
       }
-      resolve()
+      resolve(albums)
     })
   },
   async loadAlbum({ commit, state }, albumId) {
@@ -63,8 +64,10 @@ const mutations = {
     addItemsAndSortedList(state, 'albums', albums, 'songs')
   },
   ADD_ALBUM: (state, { album, index }) => {
-    album.fullyLoaded = true
-    Vue.set(state.albums, index, album)
+    if (state.albums[index] && state.albums[index].fullyLoaded === false) {
+      album.fullyLoaded = true
+      Vue.set(state.albums, index, album)
+    }
   },
   SET_CURRENT_ALBUM: (state, { index }) => {
     state.currentAlbum = state.albums[index]

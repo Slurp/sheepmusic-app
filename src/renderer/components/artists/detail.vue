@@ -46,21 +46,21 @@
                     </div>
                 </div>
                 <section class="list">
-                    <h2 class="section-header">Albums</h2>
+                    <h3 class="section-header">Albums</h3>
                     <div class="row">
                         <div class="col" v-for="album in albums" :key="album.id">
-                            <album :album-id=album.id :album=storedAlbum(album.id) :key="album.id"></album>
+                            <album :album-id=album.id :album=album :key="album.id"></album>
                         </div>
                     </div>
                 </section>
 
                 <section class="list" v-if="artist.similar.length > 0">
-                    <h2 class="section-header">Similar Artists</h2>
+                    <h3 class="section-header">Similar Artists</h3>
                     <div class="row">
-                        <div class="col" v-for="similarArtist in artist.similar" :key="similarArtist">
-                            <artist-card :artist-id=similarArtist
-                                         :artist=storedArtist(similarArtist)
-                                         :key="similarArtist"></artist-card>
+                        <div class="col" v-for="similarArtist in similar">
+                            <artist-card :artist-id=similarArtist.id
+                                         :artist=similarArtist
+                                         :key="similarArtist.id"></artist-card>
                         </div>
                     </div>
                 </section>
@@ -116,12 +116,18 @@
           this.$store.dispatch('artists/loadArtist', this.id)
         }
         this.$store.dispatch('artists/viewArtist', this.id)
+      }
+    },
+    asyncComputed: {
+      async albums() {
+        if (this.artist.albums !== 'undefined') {
+          return this.$store.dispatch('albums/loadSlice', this.artist.albums.sort((a, b) => b.year - a.year).map(album => this.$store.getters['albums/getAlbumById'](album.id)))
+        }
       },
-      storedAlbum(albumId) {
-        return this.$store.getters['albums/getAlbumById'](albumId)
-      },
-      storedArtist(artistId) {
-        return this.$store.getters['artists/getArtistById'](artistId)
+      async similar() {
+        if (this.artist.albums !== 'undefined') {
+          return this.$store.dispatch('artists/loadSlice', this.artist.similar.map(artist => this.$store.getters['artists/getArtistById'](artist)))
+        }
       }
     },
     computed: {
@@ -139,11 +145,6 @@
       },
       artist() {
         return this.$store.getters['artists/getArtistById'](this.id)
-      },
-      albums() {
-        if (this.artist.albums !== 'undefined') {
-          return this.artist.albums.sort((a, b) => b.year - a.year)
-        }
       }
     }
   }

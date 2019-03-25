@@ -36,12 +36,12 @@ const actions = {
             artist: artistData,
             index: artistData.id
           }))
-          resolve()
+          resolve(artists)
         }, err => {
           reject(err)
         })
       }
-      resolve()
+      resolve(artists)
     })
   },
   loadArtist({ commit, state }, artistId) {
@@ -71,8 +71,10 @@ const mutations = {
     addItemsAndSortedList(state, 'artists', artists, 'albums')
   },
   ADD_ARTIST: (state, { artist, index }) => {
-    artist.fullyLoaded = true
-    Vue.set(state.artists, index, artist)
+    if (state.artists[index] && state.artists[index].fullyLoaded === false) {
+      artist.fullyLoaded = true
+      Vue.set(state.artists, index, artist)
+    }
   },
   SET_CURRENT_ARTIST: (state, { index }) => {
     state.currentArtist = state.artists[index]

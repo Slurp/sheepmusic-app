@@ -5,7 +5,9 @@
             <h1>Now playing</h1>
             <div class="album-cover">
                 <div class="case" v-if="show">
-                    <div class="overlay"></div>
+                    <div class="overlay">
+
+                    </div>
                     <img class="cover"
                          v-lazyload
                          :alt="album.name"

@@ -82,6 +82,7 @@
     flex: 0;
     width: auto;
     height: $footer-fixed-height;
+    width: $footer-fixed-height;
     margin-left: -15px;
   }
   button {
@@ -157,29 +158,22 @@
   //  left: percentage(3 / $grid-columns);
   //}
   .plyr--audio .plyr__progress--buffer {
-    border-radius: 0 0 1rem 1rem;
     background: $player-bg-color;
+    border-radius: 0;
+
   }
   &.plyr--playing {
     .plyr__progress {
       width: 100%;
       opacity: 1;
+      border-radius: 0;
       @include media-breakpoint-up(sm) {
 
         .plyr__progress--buffer,
         .plyr__progress--played {
-          border-radius: 0 0 1rem 1rem;
+
           &::-webkit-progress-bar {
             background: transparent;
-          }
-          &::-webkit-progress-value {
-            border-radius: 0 0 0rem 1rem;
-          }
-          &::-moz-progress-bar {
-            border-radius: 0 0 0rem 1rem;
-          }
-          &::-ms-fill {
-            border-radius: 0 0 0rem 1rem;
           }
         }
       }
