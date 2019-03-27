@@ -1,8 +1,18 @@
 .nav-tabs.router-tabs {
   position: sticky;
   z-index: $zindex-sticky;
-  top:40px;
+  top:38px;
   margin-top: -55px;
+  @include make-col(7);
+  @include media-breakpoint-up(sm) {
+    @include make-col(7.5);
+  }
+  @include media-breakpoint-up(md) {
+    @include make-col(8.5);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(9.5);
+  }
   .nav-link {
     transition: background-color 0.3s ease-in-out;
     &.active {

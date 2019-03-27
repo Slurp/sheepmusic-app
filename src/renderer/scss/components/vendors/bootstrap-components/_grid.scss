@@ -78,7 +78,7 @@
       @include make-col(12/4);
     }
     @include media-breakpoint-up(xl) {
-      @include make-col(12/5);
+      @include make-col(12/6);
     }
 
     .card {
@@ -105,6 +105,19 @@
   @include transition-standard-complex(width);
 }
 .playlist-show {
+  .nav-tabs.router-tabs  {
+    @include make-col(12);
+    @include media-breakpoint-up(sm) {
+      @include make-col(12);
+    }
+    @include media-breakpoint-up(md) {
+      @include make-col(12);
+    }
+    @include media-breakpoint-up(lg) {
+      @include make-col(12);
+    }
+
+  }
   .left-column {
     @include make-col(7);
     @include media-breakpoint-up(sm) {

@@ -10,7 +10,7 @@
   .navbar.sticky {
     top: 39px;
     ~ .container-fluid .router-view {
-      margin-top: 95px;
+      margin-top: 35px;
     }
   }
   .playing-overlay {
@@ -28,8 +28,12 @@
   }
   .breadcrumb-fixed {
     left: 122px;
-    height: 36px;
-    padding: 0px 8px;
+    height: 56px;
+    padding: 0;
     min-height: auto;
+    img {
+      max-height: 50px;
+      margin-top: -8px;
+    }
   }
 }

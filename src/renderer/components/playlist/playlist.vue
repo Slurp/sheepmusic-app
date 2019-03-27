@@ -32,6 +32,10 @@
             </div>
 
             <div v-if="isEmpty == false" class="playlist-actions" role="group">
+                <div class="duration" v-if="playlistDuration">
+                    <i class="material-icons">av_timer</i>
+                    {{ playlistDuration }}
+                </div>
                 <div class="btn-group-fluid">
                     <a href="#" class='btn' v-on:click.stop.prevent="shuffle">
                         <i class="material-icons">shuffle</i>
@@ -51,10 +55,7 @@
                         </i>
                     </a>
                 </div>
-                <div class="duration" v-if="playlistDuration">
-                    <i class="material-icons">av_timer</i>
-                    {{ playlistDuration }}
-                </div>
+
             </div>
         </div>
     </div>

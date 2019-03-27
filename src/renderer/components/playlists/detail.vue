@@ -1,5 +1,5 @@
 <template>
-    <div class="library-detail" :id="playlist.id" v-if="playlist">
+    <div class="library-detail artist-detail" :id="playlist.id" v-if="playlist">
         <breadcrumbs></breadcrumbs>
         <div class="backdrop" v-if="background">
             <div class="image-backdrop" v-bind:style="{ 'background-image': 'url(' + background + ')' }">>
@@ -9,7 +9,7 @@
             <div class="detail-info-wrapper">
                 <div class="detail-info">
                     <div class="detail-header">
-                    <h1 class="text-secondary">{{ playlist.name }}</h1>
+                        <h1>{{ playlist.name }}</h1>
                         <div class="actions">
                             <playBtn :playlist=playlist></playBtn>
                             <queueBtn :playlist=playlist></queueBtn>
@@ -17,17 +17,20 @@
                         </div>
                     </div>
                     <div class="meta" v-if="playlistDuration">
-                        <span>
-                            <i class="material-icons">av_timer</i>
+                        <span class="chip">
+                            <span class="chip-icon">
+                                <i class="material-icons">av_timer</i>
+                            </span>
                             {{ playlistDuration }}
                         </span>
-                        <span>
-                            <i class="material-icons">bar_chart</i>
+                        <span class="chip">
+                            <span class="chip-icon">
+                                <i class="material-icons">filter_list</i>
+                            </span>
                             {{ this.playlist.songs.length }}
                         </span>
                     </div>
                 </div>
-
             </div>
             <song-list :songs="playlist.songs"></song-list>
         </section>

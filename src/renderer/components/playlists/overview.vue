@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <ul class="nav nav-tabs">
+    <div class="overview">
+        <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{ name: 'all-playlists'}">
                     <span class="font-weight-normal">All</span>
@@ -12,13 +12,15 @@
                 </router-link>
             </li>
         </ul>
-
+        <section class="overview-list">
         <transition-group name="list" tag="div" class="list" v-if="playlistPage">
             <div class="col" v-for="(playlist, index) in playlistPage" :key="playlist.id" :name="playlist.id">
                 <playlist :playlist-id=index :playlist=playlist :key="playlist.id"></playlist>
             </div>
         </transition-group>
+
         <pagination for="playlists" :records="totalPlaylists" :vuex="true"></pagination>
+        </section>
     </div>
 </template>
 

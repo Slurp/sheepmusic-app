@@ -1,7 +1,7 @@
 <template>
     <article class="library-detail artist-detail" :id="id">
         <div v-if="artist && artist.fullyLoaded">
-            <breadcrumbs :artist="artist"></breadcrumbs>
+            <breadcrumbs :artist="artist" :logo="logo"></breadcrumbs>
             <div class="backdrop">
                 <div class="image-backdrop artist-backdrop"
                      v-bind:style="{ 'background-image': 'url(' + background + ')' }"></div>

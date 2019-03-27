@@ -73,6 +73,9 @@
     z-index: $zindex-sticky;
     top: 50px;
     text-align: right;
+    margin-left: auto;
+    display: block;
+    max-width: 50%;
   }
   .actions {
     float: none;

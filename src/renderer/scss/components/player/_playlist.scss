@@ -39,11 +39,7 @@
   @include transition-standard-complex(transform, width);
   color: $playlist-txt-color;
   height: calc(100vh - #{$footer-fixed-height} - 57px);
-  &:hover {
-    .playlist-actions a {
-      opacity: 1;
-    }
-  }
+
   .playlist-wrapper {
     position: absolute;
     left: 5px;
@@ -199,20 +195,31 @@
   }
 }
 
+.playlist {
+  &:hover {
+    .playlist-actions{
+      transform: translate3d(0,-10px,0);
+      a {
+        opacity: 1;
+      }
+    }
+  }
+}
 .playlist-actions {
-
   border-top:1px solid rgba(0, 0, 0, 0.1);
   padding: 5px 0 5px;
   //padding-right: 3.75rem;
   margin: 0 10px;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left:0;
   right:0;
   background: $playlist-bg-color;
   z-index: 999;
   display: flex;
   flex-wrap: wrap;
+  transform: translate3d(0,40px,0);
+  @include transition-deceleration(transform);
   .btn-group-fluid {
     width: 100%;
     display: flex;
