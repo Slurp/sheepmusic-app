@@ -121,10 +121,6 @@ export default class BlackSheepPlayer {
     })
 
     this.player.on('play', () => {
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.log('song play')
-      }
       if (preloadedSong) {
         this.duration = this.player.duration()
         this.dispatchEvent('loaded', this.duration)
@@ -134,15 +130,10 @@ export default class BlackSheepPlayer {
       requestAnimationFrame(self.seekUpdate.bind(self))
     })
     this.player.on('end', () => {
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.log('song ended')
-      }
       this.stop()
       this.dispatchEvent('end', null)
     })
     this.player.on('loaderror', () => this.handleAudioResourceError())
-
     this.restart()
   }
 

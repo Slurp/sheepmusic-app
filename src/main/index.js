@@ -2,6 +2,7 @@ import { app, protocol, BrowserWindow } from 'electron' // eslint-disable-line
 import windowStateKeeper from 'electron-window-state'
 import path from 'path'
 
+
 const MIN_WINDOW_WIDTH = 320
 const MIN_WINDOW_HEIGHT = 640
 
