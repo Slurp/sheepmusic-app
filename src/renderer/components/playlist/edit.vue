@@ -45,8 +45,6 @@ export default {
       this.$store.dispatch('playlist/savePlaylist', this.formName).then(response => {
         this.$store.dispatch('playlist/setTitle', response.data.name).then(() => {
           this.$store.dispatch('playlists/loadPlaylists', response.data.name)
-          // eslint-disable-next-line no-undef
-          $('#playlistModal').modal('toggle')
           toast.toast(`Saved playlist: ${response.data.name}`)
           toast = null
         })

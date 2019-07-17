@@ -57,13 +57,12 @@ const actions = {
   setRepeatMode({ commit }, mode) {
     commit('SET_REPEAT_MODE', { mode })
   },
-  async savePlaylist({ commit }, title) {
-    const data = new FormData()
+  savePlaylist({ commit, state }, title) {
+    const data = state.songs.reduce((formData, object) => {
+      formData.append('songs[]', object.id)
+      return formData
+    }, new FormData())
     data.append('name', title)
-    for (const song of state.songs) {
-      data.append('songs[]', song.id)
-    }
-
     return Vue.axios.post('/api/save/playlist', data).then(response => {
       commit('SAVE', { title: response.name })
       return response
