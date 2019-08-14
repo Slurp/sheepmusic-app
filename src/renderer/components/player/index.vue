@@ -90,26 +90,12 @@ export default {
     this.blackSheepPlayer = new BlackSheepPlayer(this)
 
     this.blackSheepPlayer.on('loaded', duration => {
-      if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-        console.log('loaded')
-      }
       this.duration = duration
       // grab next song.
-      if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-        console.log(!this.nextSong || this.nextSong.preloaded)
-      }
       if (!this.nextSong || this.nextSong.preloaded) {
         this.nextSong = this.$store.getters['playlist/getPreloadSong']
         if (!this.nextSong) {
-        // Don't preload if
-        // - there's no next song
           return
-        }
-        if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-          console.log('preload song')
         }
         this.blackSheepPlayer.preloadSong(this.nextSong)
         this.nextSong.preloaded = true
