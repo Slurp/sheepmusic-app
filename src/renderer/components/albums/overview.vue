@@ -22,14 +22,23 @@
                 </router-link>
             </li>
         </ul>
-        <alphabet v-if="type == 'alphabet'"></alphabet>
-        <list :type=type v-else></list>
+        <alphabet v-if="type == 'alphabet'" for-store="albums">
+            <template slot-scope="listItem">
+                <album :album-id="listItem.listitem.id" :album="listItem.listitem" :key="listItem.listitem.id"></album>
+            </template>
+        </alphabet>
+        <list :type=type for-store="albums" v-else>
+            <template slot-scope="listItem">
+                <album :album-id="listItem.listitem.id" :album="listItem.listitem" :key="listItem.listitem.id"></album>
+            </template>
+        </list>
     </div>
 </template>
 
 <script>
-import alphabet from '@/components/albums/alphabet'
-import list from './list'
+import alphabet from '@/components/list/alphabet'
+import list from '@/components/list/list'
+import album from './album'
 
 export default {
   props: {
@@ -41,7 +50,8 @@ export default {
   },
   components: {
     alphabet,
-    list
+    list,
+    album
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="overview">
+    <div>
         <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{ name: 'all-playlists'}">
@@ -12,56 +12,28 @@
                 </router-link>
             </li>
         </ul>
-        <section class="overview-list">
-        <transition-group name="list" tag="div" class="list" v-if="playlistPage">
-            <div class="col" v-for="(playlist, index) in playlistPage" :key="playlist.id" :name="playlist.id">
-                <playlist :playlist-id=index :playlist=playlist :key="playlist.id"></playlist>
-            </div>
-        </transition-group>
-
-        <pagination for="playlists" :records="totalPlaylists" :vuex="true"></pagination>
-        </section>
+        <list :type=type for-store="playlists">
+            <template slot-scope="listItem">
+                <playlist :playlist-id=listItem.listitem.id :playlist="listItem.listitem" :key="listItem.listitem.name"></playlist>
+            </template>
+        </list>
     </div>
 </template>
 
 <script>
 import playlist from './playlists'
-import Toaster from '@/services/toast'
+import list from '@/components/list/list'
 
 export default {
   name: 'playlist-overview',
   props: ['type'],
   components: {
-    playlist
-  },
-  data() {
-    return {
-      toast: new Toaster()
-    }
-  },
-  beforeDestroy() {
-    this.toast = null
-    delete this.toast
-  },
-  watch: {
-    type() {
-      this.$store.dispatch('playlists/sortBy', this.type)
-    }
-  },
-  computed: {
-    playlistPage() {
-      return this.$store.getters['playlists/getPlaylists']
-    },
-    totalPlaylists() {
-      return this.$store.getters['playlists/totalPlaylists']
-    }
-
+    playlist,
+    list
   },
   created() {
-    this.$store.dispatch('playlists/loadPlaylists').then(() => {
-      this.toast.toast('loaded playlists')
-    }).catch(() => {
-      this.toast.toast('@#@#*(&@#*&@#(*!@^!@&@!')
+    this.$store.dispatch('playlists/loadLists').then(() => {
+      this.$store.dispatch(`playlists/sortBy`, this.type)
     })
   }
 }

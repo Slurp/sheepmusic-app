@@ -1,10 +1,7 @@
 .player {
   z-index: 4;
   display: flex;
-
   background-color: $player-bg-color;
-
-
   height: $footer-fixed-height;
   border-top: 1px solid $player-border-color;
   border-bottom: 1px solid $player-border-color;
@@ -80,7 +77,6 @@
   display: flex;
   .song-image {
     flex: 0;
-    width: auto;
     height: $footer-fixed-height;
     width: $footer-fixed-height;
     margin-left: -15px;
@@ -94,28 +90,31 @@
     }
   }
   .now-playing {
-
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
+    display: block;
+    padding-top: 12px;
     padding-left: 0.5rem;
+    max-width: 100%;
     &__content {
-      flex:1;
+      flex:0 0 100%;
+      align-items: center;
     }
     .title {
       @include text-truncate();
       text-transform: capitalize;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      line-height: 1.9rem;
       color: theme-color-light('light');
       margin-bottom: 0;
-      line-height: 1.9rem;
+
     }
     .meta {
       margin: 0;
       text-transform: capitalize;
       display: flex;
+      flex-direction: column;
       padding-bottom: 3px;
       a,span {
+        @include text-truncate();
         color: theme-color-light('light');
         font-size: 13px;
         margin: 0;

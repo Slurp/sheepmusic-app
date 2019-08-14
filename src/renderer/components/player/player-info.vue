@@ -7,7 +7,6 @@
             <h3 class="title" >{{ currentSong.title }}</h3>
             <p class="meta">
                 <router-link class="artist" :to=detailArtist>{{ currentSong.artist.name }}</router-link>
-                <span> – </span>
                 <router-link class="album" :to=detailAlbum>{{ currentSong.album.name }}</router-link>
             </p>
             </div>

@@ -82,10 +82,6 @@ export default class BlackSheepPlayer {
   preloadSong(song) {
     if (this.nextSong === null) {
       this.nextSong = { id: song.id, player: this.createHowl(song.src) }
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.log('preloaded song')
-      }
     }
   }
 
@@ -101,10 +97,6 @@ export default class BlackSheepPlayer {
       this.currentSong = this.nextSong.id
       this.player = this.nextSong.player
       preloadedSong = true
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.log('use preloaded song')
-      }
     } else {
       this.currentSong = song.id
       this.player = this.createHowl(song.src)
@@ -112,10 +104,6 @@ export default class BlackSheepPlayer {
     this.nextSong = null
     // Attach events for the player
     this.player.on('load', () => {
-      if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
-        console.log('song loaded')
-      }
       this.duration = this.player.duration()
       this.dispatchEvent('loaded', this.duration)
     })

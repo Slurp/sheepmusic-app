@@ -1,19 +1,26 @@
+import { addItemsAndSortedList } from '@/store/helpers/mutations'
 import Vue from 'vue'
+import { sortedState, sortedMutations, sortedActions, sortedGetters } from '@/store/helpers/sortedPage'
 
 const state = {
   playlists: [],
-  sortedList: [],
-  currentArtist: null,
-  page: 1,
-  sortBy: 'all'
+  loadedList: false,
+  ...sortedState
 }
 
 const actions = {
-  loadPlaylists({ commit }) {
+  loadLists({ commit }) {
     Vue.axios.get('/api/playlist_list').then(response => {
       commit('ADD_PLAYLISTS', { playlists: response.data })
     }, err => {
       console.log(err)
+    })
+  },
+  loadSlice({ commit, state }, playlists) {
+    return new Promise(resolve => {
+      if (state.loadedList === true) {
+        resolve(playlists)
+      }
     })
   },
   loadPlaylist({ commit, state }, playlistId) {
@@ -28,21 +35,13 @@ const actions = {
   viewPlaylist({ commit }, playlistId) {
     commit('SET_CURRENT_PLAYLIST', { index: playlistId })
   },
-  paginate({ commit }, page) {
-    commit('PAGINATE', { page })
-  },
-  sortBy({ commit }, sort) {
-    commit('SORT_BY', { sort })
-  }
+  ...sortedActions
 }
 
 const mutations = {
   ADD_PLAYLISTS: (state, { playlists }) => {
-    state.playlists = playlists
-    state.sortedList = state.playlists.map(playlist => ({ id: playlist.id, date: new Date(playlist.createdAt.date) }))
-    if (state.sortBy === 'recent') {
-      state.sortedList.sort((a, b) => b.date - a.date)
-    }
+    addItemsAndSortedList(state, 'playlists', playlists, 'songs')
+    state.loadedList = true
   },
   ADD_PLAYLIST: (state, { playlist, index }) => {
     Vue.set(state.playlists, index, playlist)
@@ -50,31 +49,13 @@ const mutations = {
   SET_CURRENT_PLAYLIST: (state, { index }) => {
     state.currentArtist = state.playlists[index]
   },
-  PAGINATE: (state, { page }) => {
-    state.page = page
-  },
-  SORT_BY: (state, { sort }) => {
-    if (sort !== state.sortBy) {
-      if (sort === 'recent') {
-        state.sortedList.sort((a, b) => b.date - a.date)
-      } else {
-        state.sortedList.sort((a, b) => a.id - b.id)
-      }
-      state.sortBy = sort
-    }
-  }
+  ...sortedMutations
 }
 
 const getters = {
   pageNumber: state => state.page,
-  totalPlaylists: state => state.playlists.length,
-  getPlaylists: state => {
-    if (state.playlists.length >= 12) {
-      const start = (12 * (state.page - 1)) + 1
-      return state.sortedList.slice(start, start + 12).map(playlist => state.playlists[playlist.id])
-    }
-    return state.playlists
-  },
+  totals: state => state.playlists.length,
+  slice: state => sortedGetters.getSlice(state, 'playlists'),
   getPlaylistById: state => playlistId => state.playlists[playlistId]
 }
 
