@@ -1,44 +1,25 @@
 <template>
-    <router-link :to="detailLink"
-                 class="card card__overview">
-        <div class="card-img">
-            <img class="card-img-top"
-                 v-lazyload
-                 :alt="album.name"
-                 :src=defaultCover
-                 :data-src=cover
-                 :data-err=defaultCover
-            />
-            <ul class="action-sheet" v-if="loadedAlbum">
-                <li>
-                    <playBtn :album=album></playBtn>
-                </li>
-                <li>
-                    <queueBtn :album=album></queueBtn>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="progress" v-if="!loadedAlbum">
-                <div class="progress-bar progress-bar-indeterminate bg-dark" role="progressbar"></div>
-            </div>
-            <div class="card-block" v-else>
-                <h4 class="card-title">{{album.artist.name}}</h4>
-                <h6 class="card-subtitle">{{album.name}}</h6>
-            </div>
-        </div>
-    </router-link>
+    <card v-bind:loaded="loadedAlbum"
+          v-bind:cover="cover"
+          v-bind:detail-link="detailLink"
+          v-bind:title="album.name"
+          v-bind:subtitle="album.artist.name"
+          v-bind:buttons="buttons"
+          v-bind:data-object="{album}"/>
+
 </template>
 
 <script>
 import Toaster from '@/services/toast'
 import config from '@/config/index'
+import Card from 'components/list/card'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 
 export default {
   props: ['album', 'albumId'],
   components: {
+    Card,
     playBtn,
     queueBtn
   },
@@ -47,7 +28,11 @@ export default {
       openSheet: false,
       toast: new Toaster(),
       loaded: false,
-      defaultCover: config.defaultCover
+      defaultCover: config.defaultCover,
+      buttons: [
+        { name: 'play', component: playBtn },
+        { name: 'queue', component: queueBtn }
+      ]
     }
   },
   created() {

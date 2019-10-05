@@ -1,6 +1,6 @@
 import path from 'path'
 
-export default (app) => {
+export default app => {
   if (!process.argv.includes('--disable-smooth-scrolling')) {
     app.commandLine.appendSwitch('enable-smooth-scrolling', '1')
   }

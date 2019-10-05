@@ -61,26 +61,35 @@ export default {
     }
   },
   created() {
-    this.readyState()
+    this.$auth.ready(() => {
+      console.log('ready')
+      this.$auth.refresh({
+        success() {
+          console.log('refreshed')
+          this.readyState()
+        },
+        error() {
+          console.log('error')
+          this.readyState()
+        }
+      })
+    })
   },
   methods: {
     readyState() {
-      this.$auth.ready(() => {
-        this.$store.dispatch('toggleLoading')
-        if (this.$auth.check()) {
-          this.$store.dispatch('loggedIn').then(() => {
-            this.loaded = true
-            this.$store.dispatch('toggleLoading')
-          }).catch(() => {
-            this.toast.toast('@#@#*(&@#*&@#(*!@^!@&@!')
-          })
-        } else {
-          this.$store.dispatch('toggleLoading')
+      this.$store.dispatch('toggleLoading')
+      if (this.$auth.check()) {
+        this.$store.dispatch('loggedIn').then(() => {
           this.loaded = true
-        }
-      })
+          this.$store.dispatch('toggleLoading')
+        }).catch(() => {
+          this.toast.toast('@#@#*(&@#*&@#(*!@^!@&@!')
+        })
+      } else {
+        this.$store.dispatch('toggleLoading')
+        this.loaded = true
+      }
     }
-
   }
 }
 </script>

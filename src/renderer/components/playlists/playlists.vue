@@ -1,44 +1,16 @@
 <template>
-    <router-link :to="detailLink"
-                 class="card card__overview">
-        <div class="card-img">
-            <img class="card-img-top"
-                 v-lazyload
-                 :alt="playlist.name"
-                 :src=defaultCover
-                 :data-src=cover
-                 :data-err=defaultCover
-            />
-            <ul class="action-sheet">
-                <li>
-                    <playBtn :playlist=playlist></playBtn>
-                </li>
-                <li>
-                    <queueBtn :playlist=playlist></queueBtn>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-
-            <div class="progress" v-if="!loaded">
-                <div class="progress-bar progress-bar-indeterminate bg-dark" role="progressbar"></div>
-            </div>
-            <div class="card-block" v-else>
-                <h4 class="card-title">{{playlist.name}}</h4>
-                <h6 class="card-subtitle text-muted" v-if="playlist.songs">
-                    {{playlist.songs.length}} songs
-                    <span v-if="playlistDuration">
-                    <i class="material-icons">av_timer</i>
-                    {{ playlistDuration }}
-                </span>
-                </h6>
-            </div>
-        </div>
-    </router-link>
+    <card v-bind:loaded="loadedPlaylist"
+          v-bind:cover="cover"
+          v-bind:detail-link="detailLink"
+          v-bind:title="playlist.name"
+          v-bind:subtitle="{ text:playlistDuration, icon:'av_timer' }"
+          v-bind:buttons="buttons"
+          v-bind:data-object="{playlist}" />
 </template>
 
 <script>
 import config from '@/config/index'
+import Card from 'components/list/card'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
 import { secondsToHis } from '@/services/time'
@@ -48,21 +20,30 @@ export default {
   props: ['playlist', 'playlistId'],
   components: {
     playBtn,
-    queueBtn
+    queueBtn,
+    Card
   },
   data() {
     return {
       openSheet: false,
       loaded: false,
-      defaultCover: config.defaultCover
+      defaultCover: config.defaultCover,
+      buttons: [
+        { name: 'play', component: playBtn },
+        { name: 'queue', component: queueBtn }
+      ]
     }
   },
   created() {
-    this.$store.dispatch('playlists/loadPlaylist', this.playlistId).then(() => {
-      this.loaded = true
-    }).catch(() => {
-      this.loaded = false
-    })
+    if (this.loaded === false || !this.playlist || (this.playlist && !this.playlist.songs)) {
+      console.log('load playlist')
+      this.$store.dispatch('playlists/loadPlaylist', this.playlistId).then(() => {
+        this.loaded = true
+        console.log('loaded playlist')
+      }).catch(() => {
+        this.loaded = false
+      })
+    }
   },
   methods: {
     toggleSheet() {
@@ -79,6 +60,9 @@ export default {
       }
       return config.defaultCover
     },
+    loadedPlaylist() {
+      return (this.loaded && this.playlist && this.playlist.songs)
+    },
     detailLink() {
       return {
         name: 'detail_playlists',
@@ -89,7 +73,7 @@ export default {
       if (this.loaded && this.playlist && this.playlist.songs) {
         return secondsToHis(this.playlist.songs.map(song => (song ? song.length : 0)).reduce((acc, val) => parseInt(acc, 10) + parseInt(val, 10), 0))
       }
-      return null
+      return ''
     }
   }
 }

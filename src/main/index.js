@@ -43,7 +43,10 @@ function createWindow() {
     autoHideMenuBar: true,
     darkTheme: true,
     show: false,
-    backgroundColor: '#2e2c29'
+    backgroundColor: '#2e2c29',
+    webPreferences: {
+      nodeIntegration: true // add this
+    }
   })
 
   mainWindow.once('ready-to-show', () => mainWindow.show())

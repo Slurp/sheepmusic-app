@@ -2,7 +2,7 @@ export default {
 
   request(req, token) {
     token = token.split(';')
-    if (req.url.indexOf('refresh') > -1 && token[1] !== 'undefined') {
+    if (req.url === this.options.refreshData.url && token[1] !== 'undefined') {
       req.url += `?refresh_token=${token[1]}`
     }
     this.options.http._setHeaders.call(this, req, { Authorization: `Bearer ${token[0]}` })

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <ul class="nav nav-tabs">
+    <div class="overview">
+        <ul class="nav nav-tabs router-tabs">
             <li class="nav-item">
                 <router-link class="nav-item nav-link" :to="{ name: 'all-genres'}">
                     <span class="font-weight-normal">All</span>
@@ -12,18 +12,20 @@
                 </router-link>
             </li>
         </ul>
-        <transition-group name="list" tag="ul" class="nav nav-pills flex-column flex-sm-row" v-if="page">
-            <li class="nav-item" v-for="(genre) in page" :key="genre.id" :name="genre.slug">
-                <router-link  class="nav-link" :to="{ name: 'detail_genres', params: { genre: genre.slug, id: genre.id }}">
-                    {{ genre.name }}
-                </router-link>
-            </li>
-        </transition-group>
-        <ul class="pagination alphabet-pagination">
-            <li class="page-item" v-for="letter in this.alphabet"  v-bind:class="{ active: isActive(letter) }">
-               <a class="page-link" v-on:click.stop.prevent="selectLetter(letter)"> {{ letter }}</a>
-            </li>
-        </ul>
+        <section class="overview-list">
+            <transition-group name="list" tag="ul" class="nav nav-pills flex-column flex-sm-row" v-if="page">
+                <li class="nav-item" v-for="(genre) in page" :key="genre.id" :name="genre.slug">
+                    <router-link  class="nav-link" :to="{ name: 'detail_genres', params: { genre: genre.slug, id: genre.id }}">
+                        {{ genre.name }}
+                    </router-link>
+                </li>
+            </transition-group>
+            <ul class="pagination alphabet-pagination">
+                <li class="page-item" v-for="letter in this.alphabet"  v-bind:class="{ active: isActive(letter) }">
+                   <a class="page-link" v-on:click.stop.prevent="selectLetter(letter)"> {{ letter }}</a>
+                </li>
+            </ul>
+        </section>
     </div>
 </template>
 

@@ -31,9 +31,9 @@
             // eslint-disable-next-line no-console
             console.log(`success ${this.context}`)
           },
-          error() {
+          error(error) {
             // eslint-disable-next-line no-console
-            console.log(`error ${this.context}`)
+            console.log(`error ` + error)
           }
         })
       }
