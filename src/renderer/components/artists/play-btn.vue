@@ -11,10 +11,12 @@
       play(event) {
         if (event) event.preventDefault()
         this.$store.dispatch('playlist/clearPlaylist')
-        for (const album of this.artist.albums) {
-          this.$store.dispatch('playlist/queueAlbum', this.$store.getters['albums/getAlbumById'](album.id))
-        }
-        this.$store.dispatch('playlist/nextSong')
+        this.$store.dispatch('albums/loadSlice', this.artist.albums).then(() => {
+          for (const album of this.artist.albums) {
+            this.$store.dispatch('playlist/queueAlbum', this.$store.getters['albums/getAlbumById'](album.id))
+          }
+          this.$store.dispatch('playlist/nextSong')
+        })
       }
     }
   }
