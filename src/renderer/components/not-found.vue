@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
         NOTHING HERE. PLEASE MOVE ALONG
-    </div>
+  </div>
 </template>

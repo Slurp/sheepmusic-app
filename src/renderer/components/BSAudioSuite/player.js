@@ -1,4 +1,5 @@
-import { Howl } from 'howler'
+import BlaatAudio from 'components/BSAudioSuite/BlaatAudio'
+import Emitter from 'components/BSAudioSuite/emitter'
 
 export default class BlackSheepPlayer {
   constructor(vue) {
@@ -10,69 +11,21 @@ export default class BlackSheepPlayer {
     this.seek = 0
     this.duration = 0
     this.token = vue.$auth.token()
+    this.media = new BlaatAudio()
+    this.emitter = new Emitter()
   }
 
   on(eventName, handler) {
-    if (!(eventName in this.events)) {
-      this.events[eventName] = []
-    }
-    this.events[eventName].push(handler)
+    this.emitter.on(eventName, handler)
   }
 
-  dispatchEvent(eventName, args) {
-    const currentEvents = this.events[eventName]
-    if (!currentEvents) return
-
-    for (let i = 0; i < currentEvents.length; i++) {
-      if (typeof currentEvents[i] === 'function') {
-        currentEvents[i](args)
-      }
-    }
-  }
-
-  createHowl(src) {
-    return new Howl({
-      type: 'audio',
-      title: '-',
-      src: [src],
-      format: ['mp3'],
-      html5: true,
-      preload: true,
-      headers: [
-        {
-          name: 'Authorization',
-          value: 'Bearer ' + this.token
-        }
-      ]
-    })
+  createAudio(src, preload = true) {
+    return this.media.loadFromUrl(src, preload)
   }
 
   handleAudioResourceError() {
-    if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-      console.warn('[Player] Error while loading audio resource.')
-    }
-    // Stop the music
     this.stop()
-    this.dispatchEvent('playerror')
-  }
-
-  seekUpdate() {
-    const self = this
-    if (self.player === null) {
-      self.seek = 0
-      self.duration = 0
-    } else {
-      // Fix for howl.seek() returning the howl instance
-      self.seek = self.player.seek()
-      if (typeof self.seek !== 'number') {
-        self.seek = 0
-      }
-      self.dispatchEvent('seekUpdate', self.seek)
-      if (self.player.playing()) {
-        requestAnimationFrame(self.seekUpdate.bind(self))
-      }
-    }
+    this.emitter.dispatchEvent('playerror')
   }
 
   /**
@@ -81,7 +34,7 @@ export default class BlackSheepPlayer {
    */
   preloadSong(song) {
     if (this.nextSong === null) {
-      this.nextSong = { id: song.id, player: this.createHowl(song.src) }
+      this.nextSong = { id: song.id, player: this.createAudio(song.src, true) }
     }
   }
 
@@ -94,34 +47,35 @@ export default class BlackSheepPlayer {
     let preloadedSong = false
     // Check for preloaded song
     if (this.nextSong && this.nextSong.id === song.id) {
-      this.currentSong = this.nextSong.id
+      this.currentSong = this.nextSong
       this.player = this.nextSong.player
       preloadedSong = true
     } else {
-      this.currentSong = song.id
-      this.player = this.createHowl(song.src)
+      this.currentSong = song
+      this.player = this.createAudio(song.src, false)
     }
     this.nextSong = null
     // Attach events for the player
-    this.player.on('load', () => {
-      this.duration = this.player.duration()
-      this.dispatchEvent('loaded', this.duration)
+    this.media.on('loaded', () => {
+      this.duration = this.media.duration()
+      this.emitter.dispatchEvent('loaded', this.duration)
     })
 
-    this.player.on('play', () => {
+    this.media.on('play', () => {
       if (preloadedSong) {
-        this.duration = this.player.duration()
-        this.dispatchEvent('loaded', this.duration)
+        this.duration = this.media.duration()
+        this.emitter.dispatchEvent('loaded', this.duration)
       }
-      const self = this
-      this.dispatchEvent('play')
-      requestAnimationFrame(self.seekUpdate.bind(self))
+      this.emitter.dispatchEvent('play')
     })
-    this.player.on('end', () => {
+    this.media.on('timeupdate', () => {
+      this.emitter.dispatchEvent('seekUpdate', this.media.timeElapsed())
+    })
+    this.media.on('end', () => {
       this.stop()
-      this.dispatchEvent('end', null)
+      this.emitter.dispatchEvent('end', null)
     })
-    this.player.on('loaderror', () => this.handleAudioResourceError())
+    this.media.on('loaderror', () => this.handleAudioResourceError())
     this.restart()
   }
 
@@ -129,9 +83,9 @@ export default class BlackSheepPlayer {
    * Groundhog day!
    */
   restart() {
-    if (this.player) {
-      this.player.seek(0)
-      this.player.play()
+    if (this.media) {
+      this.media.seek(0)
+      this.media.play(this.currentSong.src)
     }
   }
 
@@ -139,8 +93,8 @@ export default class BlackSheepPlayer {
    * Slow down
    */
   pause() {
-    if (this.player.playing()) {
-      this.player.pause()
+    if (this.media.playing()) {
+      this.media.pause()
     }
   }
 
@@ -148,7 +102,7 @@ export default class BlackSheepPlayer {
    * And we go on.
    */
   resume() {
-    this.player.play()
+    this.media.play(this.currentSong.url)
   }
 
   /**
@@ -156,7 +110,7 @@ export default class BlackSheepPlayer {
    * @returns {boolean}
    */
   isPaused() {
-    return (this.player !== null && !this.player.playing())
+    return (this.player !== null && !this.media.playing())
   }
 
   /**
@@ -164,7 +118,7 @@ export default class BlackSheepPlayer {
    */
   stop() {
     if (this.player) {
-      this.player.stop().off().unload()
+      this.media.stop()
       this.player = null
       this.currentSong = null
     }
@@ -174,13 +128,13 @@ export default class BlackSheepPlayer {
    *
    */
   forward() {
-    if (this.player && this.player.playing()) {
+    if (this.player && this.media.playing()) {
       this.player.seek(Math.min(this.player._duration, this.player.seek() + 5))
     }
   }
 
   rewind() {
-    if (this.player && this.player.playing()) {
+    if (this.player && this.media.playing()) {
       this.player.seek(Math.max(0, this.player.seek() - 5))
     }
   }
@@ -190,7 +144,7 @@ export default class BlackSheepPlayer {
    */
   setSeekPosition(value) {
     if (this.player) {
-      this.player.seek(value)
+      this.media.seek(value)
     }
   }
 
@@ -200,6 +154,10 @@ export default class BlackSheepPlayer {
    * @param {Number}     volume   0-10
    */
   setVolume(volume) {
-    this.player.volume(volume / 10)
+    this.media.setVolume(volume / 10)
+  }
+
+  getVolume() {
+    return (this.media.getVolume() * 10)
   }
 }

@@ -1,6 +1,12 @@
 <template>
     <li>
-        <img :src="cover">
+        <img
+            v-lazyload
+            :alt="song.title"
+            :src=defaultCover
+            :data-src=cover
+            :data-err=defaultCover
+        />
         <div class="playlist-item-info">
             <h5>{{ song.title }}</h5>
             <h6>{{ song.artist.name }} - {{ song.album.name }}</h6>
@@ -19,9 +25,17 @@
 import config from '@/config/index'
 export default {
   props: ['song', 'index'],
+  data() {
+    return {
+        defaultCover: config.defaultCover
+    }
+  },
   methods: {
     select(event) {
-      this.$store.dispatch('playlist/selectSong', this.index)
+      this.$store.dispatch('playlist/selectSong', this.index).then(() => {
+        this.$store.dispatch('player/stop')
+        this.$store.dispatch('player/play', { song: this.$store.getters['playlist/getCurrentSong'], restart: true })
+      })
     },
     remove(event) {
       this.$store.dispatch('playlist/removeSong', this.index)

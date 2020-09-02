@@ -15,7 +15,10 @@
         for (const song of this.playlist.songs) {
           this.$store.dispatch('playlist/queueSong', song)
         }
-        this.$store.dispatch('playlist/nextSong')
+        this.$store.dispatch('playlist/nextSong').then(() => {
+          this.$store.dispatch('player/stop')
+          this.$store.dispatch('player/play', { song: this.$store.getters['playlist/getCurrentSong'], restart: true })
+        })
       }
     }
   }

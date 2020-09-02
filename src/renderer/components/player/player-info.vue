@@ -1,32 +1,47 @@
 <template>
     <div class="player-info">
 
-        <img :src="cover" class='song-image'>
+        <img
+            v-lazyload
+            :alt="currentSong.title"
+            :src=defaultCover
+            :data-src=cover
+            :data-err=defaultCover
+            class="song-image"
+        />
         <div class="now-playing" v-if="currentSong">
+            <Visualizer class="visualizer"/>
             <div class="now-playing__content" >
-            <h3 class="title" >{{ currentSong.title }}</h3>
-            <p class="meta">
-                <router-link class="artist" :to=detailArtist>{{ currentSong.artist.name }}</router-link>
-                <router-link class="album" :to=detailAlbum>{{ currentSong.album.name }}</router-link>
-            </p>
+                <h3 class="title" >{{ currentSong.title }}</h3>
+                <p class="meta">
+                    <router-link class="artist" :to=detailArtist>{{ currentSong.artist.name }}</router-link>
+                    <router-link class="album" :to=detailAlbum>{{ currentSong.album.name }}</router-link>
+                </p>
             </div>
+
         </div>
     </div>
 </template>
 <script>
   import config from '@/config/index'
+  import Visualizer from '@/components/player/visualizer'
 
 export default {
     name: 'player-info',
+    components: {
+      Visualizer
+    },
+    data() {
+        return {
+            defaultCover: config.defaultCover
+        }
+    },
     computed: {
       playing() {
         return this.$store.getters['playlist/isPlaying']
       },
       currentSong() {
-        if (this.playing) {
-          return this.$store.getters['playlist/getCurrentSong']
-        }
-        return null
+        return this.$store.getters['playlist/getCurrentSong']
       },
       cover() {
         if (this.currentSong && this.currentSong.album.cover) {
@@ -52,3 +67,28 @@ export default {
     }
   }
 </script>
+<style lang="scss" scoped>
+    .player-info {
+        .now-playing {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            position: relative;
+        }
+        .now-playing__content {
+            z-index: 1;
+            background: rgba(#373a44,0.4);
+            position: relative;
+        }
+    }
+    .visualizer {
+        position: absolute;
+        right: 0;
+        top: auto;
+        bottom: -16px;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        opacity: 0.5;
+    }
+</style>

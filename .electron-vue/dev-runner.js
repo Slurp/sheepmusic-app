@@ -48,12 +48,11 @@ function startRenderer () {
       heartbeat: 2500
     })
 
-    compiler.hooks.compilation.tap('compilation', compilation => {
-      compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync('html-webpack-plugin-after-emit', (data, cb) => {
-        hotMiddleware.publish({ action: 'reload' })
-        cb()
-      })
-    })
+    compiler.hooks.compilation.tap('html-webpack-plugin-after-emit', () => {
+      hotMiddleware.publish({
+        action: 'reload'
+      });
+    });
 
     compiler.hooks.done.tap('done', stats => {
       logStats('Renderer', stats)
@@ -64,8 +63,9 @@ function startRenderer () {
       {
         contentBase: path.join(__dirname, '../'),
         quiet: true,
+        hot: true,
         before (app, ctx) {
-          app.use(hotMiddleware)
+          // app.use(hotMiddleware)
           ctx.middleware.waitUntilValid(() => {
             resolve()
           })

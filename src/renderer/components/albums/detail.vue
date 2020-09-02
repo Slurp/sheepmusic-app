@@ -2,11 +2,10 @@
     <div class="library-detail album-detail" :id="id">
         <div v-if="album && album.fullyLoaded">
             <breadcrumbs :album="album"></breadcrumbs>
-            <div class="backdrop">
+            <div class="backdrop" v-if="album.cover">
                 <div class="image-backdrop album-backdrop" v-bind:style="{ 'background-image': 'url(' + album.cover + ')' }"></div>
             </div>
             <section>
-
                 <div class="detail-info-wrapper">
                     <div class="detail-art">
                         <div class="detail-art-img">
@@ -25,7 +24,7 @@
                                 <router-link
                                         :to="{ name: 'detail_artist', params: { artist: this.album.artist.name, id: this.album.artist.id }}">
                                     <span v-if="logo == null">{{this.album.artist.name}}</span>
-                                    <img :src="logo" v-if="logo != null">
+                                    <img :src="logo" v-else>
                                 </router-link>
                             </h3>
                             <div class="actions">
@@ -60,8 +59,8 @@ import { secondsToHis } from '@/services/time'
 import config from '@/config/index'
 import playBtn from './play-btn'
 import queueBtn from './queue-btn'
-import { getLogo } from '../../store/modules/artists/model'
-import { maybe } from '../../services/functional-tools'
+import { getLogo } from '@/store/modules/artists/model'
+import { maybe } from '@/services/functional-tools'
 
 export default {
   name: 'album_details',

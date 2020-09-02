@@ -43,7 +43,7 @@ Vue.use(Auth, {
 sync(store, router)
 
 // Import global modules
-Vue.component('pagination', pagination)
+Vue.component('Pagination', pagination)
 
 // Stop! App Time
 /* eslint-disable no-new */

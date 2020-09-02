@@ -37,8 +37,8 @@ export default {
   created() {
     if (this.loaded === false || !this.playlist || (this.playlist && !this.playlist.songs)) {
       console.log('load playlist')
+      this.loaded = true
       this.$store.dispatch('playlists/loadPlaylist', this.playlistId).then(() => {
-        this.loaded = true
         console.log('loaded playlist')
       }).catch(() => {
         this.loaded = false

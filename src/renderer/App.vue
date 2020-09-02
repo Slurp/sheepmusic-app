@@ -14,6 +14,7 @@
         </div>
         <player v-show="$auth.check() && !loading"></player>
         <overlay v-if="(!$auth.ready() && !loaded ) || loading"></overlay>
+        <equalizer v-if="showEqualizer" />
         <modal-screens></modal-screens>
     </div>
 </template>
@@ -28,12 +29,13 @@ import sidebar from '@/components/sidebar/index'
 import modalScreens from '@/components/modals/screens'
 import Toaster from '@/services/toast'
 import TitleBar from './components/misc/title-bar'
+import equalizer from 'components/player/EqualizerWindow/index'
 
 export default {
   name: 'sheepmusic-app',
   components: {
     TitleBar,
-    navbar, player, playlist, overlay, sidebar, modalScreens, playerOverlay
+    navbar, player, playlist, overlay, sidebar, modalScreens, playerOverlay, equalizer
   },
   data() {
     return {
@@ -58,6 +60,9 @@ export default {
     },
     showPlaylist() {
       return this.$store.getters.showPlaylist
+    },
+    showEqualizer() {
+      return this.$store.getters.showEqualizer
     }
   },
   created() {

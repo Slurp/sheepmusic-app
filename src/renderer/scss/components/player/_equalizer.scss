@@ -1,0 +1,113 @@
+#equalizer{
+  position: fixed;
+  top: 39px;
+  left: $navdrawer-width;
+  bottom: $footer-fixed-height;
+  width: 100%;
+  display: block;
+  z-index: $zindex-popover;
+  background-color: rgba(theme-color('dark'), 1);
+  &.show {
+    animation-name: slideInUp;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+  &.hide {
+    animation-name: slideOutDown;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+  .btn-close {
+    position: absolute;
+    top: $grid-gutter-width-base;
+    right: $grid-gutter-width-base;
+    height: 1.4rem;
+    line-height: 1.2rem;
+    width: 1.4rem;
+  }
+  &__content {
+    animation-name: slideInUp;
+    animation-duration: 0.5s;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(theme-color('dark'), 0.5);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: theme-color('light');
+    padding: $grid-gutter-width-base;
+    .track {
+      color: theme-color('secondary');
+    }
+    h1 {
+      font-size: 4rem;
+      text-transform: capitalize;
+      font-weight: 700;
+      flex: 1 1 100%;
+    }
+    h2 {
+      color: theme-color('secondary');
+      font-weight: 700;
+    }
+    h3 {
+      font-weight: 500;
+    }
+
+    .info {
+      flex: 0 75%;
+      text-align: left;
+      padding: 0 $grid-gutter-width-base * 2;
+      padding-left: 12%;
+      .artist-name {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        img {
+          margin-right: 10px;
+          width: 50%;
+        }
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+    .album-cover {
+      flex: 1 25%;
+      max-width: 50%;
+      img {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+    }
+
+  }
+}
+
+@mixin equalizer-make-col($size) {
+  flex: 0 0 percentage($size / $grid-columns);
+  max-width: calc(#{percentage($size / $grid-columns)} - #{$navdrawer-width});
+}
+.playlist-show {
+  #equalizer {
+    @include equalizer-make-col(7);
+    @include media-breakpoint-up(sm) {
+      @include equalizer-make-col(7.5);
+    }
+    @include media-breakpoint-up(md) {
+      @include equalizer-make-col(8.5);
+    }
+    @include media-breakpoint-up(lg) {
+      @include equalizer-make-col(9.5);
+    }
+  }
+}

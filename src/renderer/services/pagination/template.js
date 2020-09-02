@@ -20,8 +20,8 @@ module.exports = function () {
               click: this.setPage.bind(this, page)
             }
           },
-          [page],
-        )],
+          [page]
+        )]
       ))
     })
 
@@ -52,8 +52,8 @@ module.exports = function () {
                 click: this.setChunk.bind(this, -1)
               }
             },
-            [h('i', { class: 'material-icons' }, 'first_page')],
-          )],
+            [h('i', { class: 'material-icons' }, 'first_page')]
+          )]
         ), h(
           'li',
           { class: ` page-item prev-page ${this.allowedPageClass(this.page - 1)}` },
@@ -68,8 +68,8 @@ module.exports = function () {
                 click: this.prev.bind(this)
               }
             },
-            [h('i', { class: 'material-icons' }, 'chevron_left')],
-          )],
+            [h('i', { class: 'material-icons' }, 'chevron_left')]
+          )]
         ), items, h(
           'li',
           { class: ` page-item next-page ${this.allowedPageClass(this.page + 1)}` },
@@ -84,8 +84,8 @@ module.exports = function () {
                 click: this.next.bind(this)
               }
             },
-            [h('i', { class: 'material-icons' }, 'chevron_right')],
-          )],
+            [h('i', { class: 'material-icons' }, 'chevron_right')]
+          )]
         ), h(
           'li',
           { class: ` page-item next-chunk ${this.allowedChunkClass(1)}` },
@@ -100,9 +100,9 @@ module.exports = function () {
                 click: this.setChunk.bind(this, 1)
               }
             },
-            [[h('i', { class: 'material-icons' }, 'last_page')]],
-          )],
-        )],
+            [[h('i', { class: 'material-icons' }, 'last_page')]]
+          )]
+        )]
       ), h(
         'p',
         {
@@ -113,8 +113,8 @@ module.exports = function () {
 
           class: 'count'
         },
-        [this.count],
-      )],
+        [this.count]
+      )]
     )
   }
 }

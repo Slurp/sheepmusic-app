@@ -92,9 +92,9 @@
   .now-playing {
     display: block;
     padding-top: 12px;
-    padding-left: 0.5rem;
     max-width: 100%;
     &__content {
+      padding-left: 0.5rem;
       flex:0 0 100%;
       align-items: center;
     }

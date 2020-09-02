@@ -3,9 +3,7 @@
   font-style: normal;
   font-weight: 400;
   src: url('#{$webfont-path}/MaterialIcons-Regular.eot'); /* For IE6-8 */
-  src: local('#{$webfont-path}/Material Icons'),
-       local('#{$webfont-path}/MaterialIcons-Regular'),
-       url('#{$webfont-path}/MaterialIcons-Regular.woff2') format('woff2'),
+  src: url('#{$webfont-path}/MaterialIcons-Regular.woff2') format('woff2'),
        url('#{$webfont-path}/MaterialIcons-Regular.woff') format('woff'),
        url('#{$webfont-path}/MaterialIcons-Regular.ttf') format('truetype');
 }

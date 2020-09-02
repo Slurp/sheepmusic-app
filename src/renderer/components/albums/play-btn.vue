@@ -10,7 +10,11 @@
     methods: {
       play(event) {
         if (event) event.preventDefault()
-        this.$store.dispatch('playlist/playAlbum', this.album)
+
+        this.$store.dispatch('playlist/playAlbum', this.album).then(() => {
+          this.$store.dispatch('player/stop')
+          this.$store.dispatch('player/play', { song: this.$store.getters['playlist/getCurrentSong'], restart: true })
+        })
       }
     }
   }

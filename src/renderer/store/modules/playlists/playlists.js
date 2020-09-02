@@ -9,14 +9,20 @@ const state = {
 }
 
 const actions = {
-  loadLists({ commit }) {
-    Vue.axios.get('/api/playlist_list').then(response => {
-      commit('ADD_PLAYLISTS', { playlists: response.data })
-    }, err => {
-      console.log(err)
+  async loadLists({ commit, state }) {
+    commit('SET_LOADED');
+    return new Promise((resolve, reject) => {
+      Vue.axios.get('/api/playlist_list').then(response => {
+        if (response.data.length !== state.playlists.length) {
+          commit('ADD_PLAYLISTS', { playlists: response.data })
+          resolve()
+        }
+      }, err => {
+        reject(err)
+      })
     })
   },
-  loadSlice({ commit, state }, playlists) {
+  async loadSlice({ commit, state }, playlists) {
     return new Promise(resolve => {
       if (state.loadedList === true) {
         resolve(playlists)
@@ -39,9 +45,11 @@ const actions = {
 }
 
 const mutations = {
+  SET_LOADED: (state  ) => {
+    state.loadedList = true
+  },
   ADD_PLAYLISTS: (state, { playlists }) => {
     addItemsAndSortedList(state, 'playlists', playlists, 'songs')
-    state.loadedList = true
   },
   ADD_PLAYLIST: (state, { playlist, index }) => {
     Vue.set(state.playlists, index, playlist)
@@ -56,7 +64,8 @@ const getters = {
   pageNumber: state => state.page,
   totals: state => state.playlists.length,
   slice: state => sortedGetters.getSlice(state, 'playlists'),
-  getPlaylistById: state => playlistId => state.playlists[playlistId]
+  getPlaylistById: state => playlistId => state.playlists[playlistId],
+  isLoaded: state => state.loadedList
 }
 
 const playlists = {
