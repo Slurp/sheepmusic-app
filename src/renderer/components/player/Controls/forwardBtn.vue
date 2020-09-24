@@ -3,7 +3,7 @@
           class="player__button"
           v-on:click.stop.prevent="forward">
     <i class='material-icons'>fast_forward</i>
-    <span class='plyr__sr-only'>forward</span>
+    <span class='sr-only'>forward</span>
   </button>
 </template>
 <script>

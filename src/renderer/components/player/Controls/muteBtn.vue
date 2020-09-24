@@ -2,7 +2,7 @@
   <button class="player__button" type='button' data-plyr='mute'>
     <i class='material-icons icon--muted' v-if="muted">volume_off</i>
     <i class='material-icons' v-else>volume_mute</i>
-    <span class='plyr__sr-only'>Toggle Mute</span>
+    <span class='sr-only'>Toggle Mute</span>
   </button>
 </template>
 <script>

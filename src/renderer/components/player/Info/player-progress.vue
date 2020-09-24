@@ -1,21 +1,15 @@
 <template>
-  <div class="plyr plyr--audio plyr--ready" v-bind:class="{ 'plyr--playing': playing }">
-    <div class="plyr__controls">
-      <div class="plyr__progress" v-on:mouseover="hoverProgress = true"
+  <div class="progress" v-bind:class="{ 'progress--playing': playing }">
+    <div class="progress__controls">
+      <div class="progress__progress" v-on:mouseover="hoverProgress = true"
            v-on:mouseout="hoverProgress = false">
-        <label for="seek" class="plyr__sr-only">Seek</label>
-        <input id="seek" ref="seekerElement" class="plyr__progress--seek" type="range" min="0" max="100"
+        <label for="seek" class="sr-only">Seek</label>
+        <input id="seek" ref="seekerElement" class="progress__progress--seek" type="range" min="0" max="100"
                step="0.1"
-               :value="progress" @mousedown="() => onSeekerMousedown ">
-        <progress class="plyr__progress--played" max="100" :value="progress"
-                  role="presentation"/>
-        <progress class="plyr__progress--buffer" max="100" value="100">
-          <span>100</span>
-          % buffered
-        </progress>
-        <span class="plyr__tooltip" v-bind:class="{ 'plyr__tooltip--visible': hoverProgress }"
-              v-bind:style="{ left: progress + '%' }">{{ position }}</span>
+               :value="progress" @mousedown="(event) => this.onSeekerMousedown(event) ">
+        <progress class="progress__progress--played" max="100" :value="progress" role="presentation"/>
       </div>
+      <span class="progress__tooltip" v-bind:class="{ 'progress__tooltip--visible': hoverProgress }"  v-bind:style="{ left: progress + '%' }">{{ position }}</span>
     </div>
   </div>
 </template>
@@ -36,35 +30,40 @@
       window.addEventListener('mouseup', this.onMouseUp)
     },
     computed: {
-      playing() {
+      playing()
+      {
         return this.$store.getters['playlist/isPlaying']
       },
-      seek() {
+      seek()
+      {
         return this.$store.getters['player/getTimeElapsed']
       },
-      progress() {
+      progress()
+      {
         if (this.mouseDownProgress) {
           return this.variableSeek * 100
         }
         return this.$store.getters['player/getProgress']
       },
-      position() {
+      position()
+      {
         return secondsToHis(this.seek)
       },
+      duration()
+      {
+        return this.$store.getters['player/duration']
+      },
+    },
+    methods: {
       changeSeek(e) {
         this.$store.dispatch('player/setSeekPosition', (this.duration / 100 * e.target.value))
       },
-      duration() {
-        return this.$store.getters['player/duration']
-      },
       onSeekerMousedown() {
-        if (this.duration > 0) {
-          this.mouseDownProgress = true
-        }
+        this.mouseDownProgress = true
       },
       onMouseMove(event) {
         if (this.mouseDownProgress === true) {
-          this.variableSeek = this.calculatePercentage(event.clientX, this.$refs.seekerElement)
+          this.variableSeek = Math.min(1, Math.max(0, (event.clientX - this.$refs.seekerElement.getBoundingClientRect().left) / this.$refs.seekerElement.scrollWidth))
         }
       },
       onMouseUp() {
@@ -74,7 +73,7 @@
         }
       },
       calculatePercentage(xPos, element) {
-        return Math.min(1, Math.max(0, (xPos - element.getBoundingClientRect().left) / element.scrollWidth))
+
       }
     }
   }

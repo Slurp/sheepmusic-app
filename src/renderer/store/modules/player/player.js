@@ -193,6 +193,7 @@ const mutations = {
   UPDATE_SEEK: state => {
     if (state.media) {
       state.seek = state.media.timeElapsed()
+      state.progress = state.media.percentComplete()
     }
   },
   UPDATE_PROGRESS: state => {

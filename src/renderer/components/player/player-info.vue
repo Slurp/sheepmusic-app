@@ -1,6 +1,5 @@
 <template>
     <div class="player-info">
-
         <img
             v-lazyload
             :alt="currentSong.title"
@@ -18,7 +17,6 @@
                     <router-link class="album" :to=detailAlbum>{{ currentSong.album.name }}</router-link>
                 </p>
             </div>
-
         </div>
     </div>
 </template>
@@ -72,13 +70,14 @@ export default {
         .now-playing {
             width: 100%;
             height: 100%;
-            display: flex;
             position: relative;
-        }
-        .now-playing__content {
-            z-index: 1;
-            background: rgba(#373a44,0.4);
-            position: relative;
+            padding-top: 20px;
+            z-index: 0;
+            &__content {
+                z-index: 1;
+                background: rgba(#373a44,0.4);
+                position: relative;
+            }
         }
     }
     .visualizer {
@@ -90,5 +89,6 @@ export default {
         width: 100%;
         z-index: 0;
         opacity: 0.5;
+        padding-top: 5px;
     }
 </style>

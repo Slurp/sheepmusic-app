@@ -1,7 +1,11 @@
-@import "plyr/plyr";
 @import "main";
 @import "desktop-controls";
 @import "playlist";
 @import "overlay";
 @import "volume-knob";
 @import "equalizer";
+@import "progress";
+.sr_only {
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+}

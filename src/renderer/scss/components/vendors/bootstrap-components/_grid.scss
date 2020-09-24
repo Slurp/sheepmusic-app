@@ -63,6 +63,11 @@
 .list {
   @include make-row();
   padding: $grid-gutter-width 0;
+  width: 100%;
+  > .row {
+    width: 100%;
+    margin: 0;
+  }
   .col {
     transition: opacity 0.3s ease;
     display: flex;

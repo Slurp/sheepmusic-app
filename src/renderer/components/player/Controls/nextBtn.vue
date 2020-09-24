@@ -3,7 +3,7 @@
           class="player__button"
           v-on:click.stop.prevent="next">
     <i class='material-icons'>skip_next</i>
-    <span class='plyr__sr-only'>next</span>
+    <span class='sr-only'>next</span>
   </button>
 </template>
 <script>

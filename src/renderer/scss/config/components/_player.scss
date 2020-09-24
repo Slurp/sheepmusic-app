@@ -1,6 +1,6 @@
 /* ==========  Player  ========== */
 $player-bg-color : theme-color-dark();
-$player-border-color:  #263238;
+$player-border-color: rgba(theme-color-light(), 0.5);
 $player-txt-color : theme-color('light');
 $player-button-color:theme-color('secondary');
 
