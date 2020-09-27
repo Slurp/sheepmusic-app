@@ -14,7 +14,7 @@
         </ul>
         <list :type=type for-store="playlists">
             <template slot-scope="listItem">
-                <playlist :playlist-id=listItem.listitem.id :playlist="listItem.listitem" :key="listItem.listitem.name"></playlist>
+                <playlist :playlist-id=listItem.listitem.id :playlist="listItem.listitem" v-bind:key="listItem.listitem.id"></playlist>
             </template>
         </list>
     </div>
@@ -25,17 +25,12 @@ import playlist from './playlists'
 import list from '@/components/list/list'
 
 export default {
-  name: 'playlist-overview',
-  props: ['type'],
-  components: {
-    playlist,
-    list
-  },
-  created() {
-    this.$store.dispatch('playlists/loadLists').then(() => {
-      this.$store.dispatch(`playlists/sortBy`, this.type)
-    })
-  }
+    name:       'playlist-overview',
+    props:      ['type'],
+    components: {
+        playlist,
+        list
+    }
 }
 </script>
 <style>

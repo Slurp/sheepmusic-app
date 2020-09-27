@@ -7,18 +7,14 @@
                 chevron_left
             </i>
         </a>
-        <search-box></search-box>
     </nav>
 </template>
 
 <script>
-import searchBox from '@/components/search/search-box'
+
 
 export default {
   name: 'navbar-header',
-  components: {
-    searchBox
-  },
   methods: {
     logout() {
       this.$auth.logout({

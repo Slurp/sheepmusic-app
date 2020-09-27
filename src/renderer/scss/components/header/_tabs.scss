@@ -1,8 +1,7 @@
 .nav-tabs.router-tabs {
   position: sticky;
   z-index: $zindex-sticky;
-  top:38px;
-  margin-top: -55px;
+  top:52px;
   @include make-col(7);
   @include media-breakpoint-up(sm) {
     @include make-col(7.5);

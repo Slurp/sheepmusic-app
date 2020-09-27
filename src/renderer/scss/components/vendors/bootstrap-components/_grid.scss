@@ -59,14 +59,17 @@
     padding-left: 0;
   }
 }
-
+.overview-list {
+  .list {
+    width: auto;
+  }
+}
 .list {
   @include make-row();
   padding: $grid-gutter-width 0;
   width: 100%;
   > .row {
-    width: 100%;
-    margin: 0;
+    width: calc(100% + 30px); // add negative margin back
   }
   .col {
     transition: opacity 0.3s ease;

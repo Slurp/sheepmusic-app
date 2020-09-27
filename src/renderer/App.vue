@@ -67,14 +67,11 @@ export default {
   },
   created() {
     this.$auth.ready(() => {
-      console.log('ready')
       this.$auth.refresh({
         success() {
-          console.log('refreshed')
           this.readyState()
         },
         error() {
-          console.log('error')
           this.readyState()
         }
       })

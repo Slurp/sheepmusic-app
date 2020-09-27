@@ -75,7 +75,6 @@ export default {
             z-index: 0;
             &__content {
                 z-index: 1;
-                background: rgba(#373a44,0.4);
                 position: relative;
             }
         }

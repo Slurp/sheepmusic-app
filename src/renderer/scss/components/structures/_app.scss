@@ -5,29 +5,31 @@
     justify-content: left;
     padding-left: 75px;
     -webkit-user-select: none;
-    -webkit-app-region: drag
+    -webkit-app-region: drag;
+    z-index:1200;
   }
   .navbar.sticky {
-    top: 39px;
+    top: 45px;
+    position: fixed;
     ~ .container-fluid .router-view {
-      margin-top: 35px;
+      margin-top: 40px;
     }
   }
   .playing-overlay {
-    top:38px;
+    top:49px;
   }
   .playlist {
-    top:95px;
-    height: calc(100vh - #{$footer-fixed-height} - 95px);
+    top:50px;
+    height: calc(100vh - #{$footer-fixed-height} - 50px);
     ul {
-      height: calc(100vh - #{$footer-fixed-height} - 189px);
+      height: calc(100vh - #{$footer-fixed-height} - 139px);
     }
   }
   .nav-drawer-nav {
-    top:95px;
+    top:100px;
   }
   .breadcrumb-fixed {
-    left: 122px;
+    left: 90px;
     height: 56px;
     padding: 0;
     min-height: auto;

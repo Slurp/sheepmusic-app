@@ -1,4 +1,9 @@
 .user-navbar {
+  .dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .nav-link {
     height: auto;
     padding: 4px;

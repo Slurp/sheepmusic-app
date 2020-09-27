@@ -33,7 +33,7 @@
   background-color: $playlist-bg-color;
   border-left:1px solid rgba(theme-color-dark('primary'), 0.5);
   transform: translate3d(100%,0,0);
-  z-index: 998;
+  z-index: 1000;
   margin-right: 0;
   margin-bottom: 0;
   @include transition-standard-complex(transform, width);
@@ -76,7 +76,7 @@
   max-height: 40px;
   min-height: 40px;
   font-size: 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(theme-color-light('primary'), 0.26);
   position: relative;
   transition: all 1s;
   img {

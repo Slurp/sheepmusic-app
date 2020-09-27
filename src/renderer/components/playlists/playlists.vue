@@ -35,15 +35,16 @@ export default {
     }
   },
   created() {
-    if (this.loaded === false || !this.playlist || (this.playlist && !this.playlist.songs)) {
-      console.log('load playlist')
-      this.loaded = true
-      this.$store.dispatch('playlists/loadPlaylist', this.playlistId).then(() => {
-        console.log('loaded playlist')
-      }).catch(() => {
-        this.loaded = false
-      })
-    }
+      if (!this.playlist || this.playlist.fullyLoaded === false) {
+          this.$store.dispatch('playlists/loadPlaylist', this.playlistId).then(() => {
+              this.loaded = true
+          }).catch(() => {
+              this.toast.toast('Nope, API SAYS NO.')
+              this.loaded = false
+          })
+      } else {
+          this.loaded = true
+      }
   },
   methods: {
     toggleSheet() {
@@ -52,7 +53,7 @@ export default {
   },
   computed: {
     hasCover() {
-      return (this.loaded && (this.playlist.cover))
+      return (this.loaded && (this.playlist && this.playlist.cover))
     },
     cover() {
       if (this.hasCover) {
@@ -61,7 +62,7 @@ export default {
       return config.defaultCover
     },
     loadedPlaylist() {
-      return (this.loaded && this.playlist && this.playlist.songs)
+      return (this.loaded && this.playlist && this.playlist.fullyLoaded)
     },
     detailLink() {
       return {

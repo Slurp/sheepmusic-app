@@ -22,7 +22,6 @@ export default class BlaatAudio {
     this.analyser.fftSize = 2048
     // don't smooth audio analysis
     this.analyser.smoothingTimeConstant = 0.0
-    console.log(this.analyser)
   }
   contextFix() {
     // Fix for iOS and Chrome (Canary) which require that the context be created
@@ -128,7 +127,6 @@ export default class BlaatAudio {
   }
 
   getAnalyser() {
-    console.log(this.analyser)
     return this.analyser
   }
 
@@ -202,8 +200,6 @@ export default class BlaatAudio {
   }
 
   setEqBand(band, value) {
-    console.log(this.bands)
-    console.log(this.bands[Number.parseInt(band, 10)])
     this.bands[Number.parseInt(band, 10)].gain.value = value // ((value / 100) * 24) - 12
   }
 

@@ -19,7 +19,6 @@ const actions = {
         resolve()
       }, err => {
         reject(err)
-        console.log(err)
       })
     })
   },

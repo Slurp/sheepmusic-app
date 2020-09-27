@@ -16,9 +16,6 @@ export default class Emitter {
 
     for (let i = 0; i < currentEvents.length; i++) {
       if (typeof currentEvents[i] === 'function') {
-        if (typeof args === 'string') {
-          console.log({ eventName, args })
-        }
         currentEvents[i](args)
       }
     }

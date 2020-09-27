@@ -6,7 +6,7 @@
   width: 100%;
   display: block;
   z-index: $zindex-popover;
-  background-color: rgba(theme-color('dark'), 1);
+  background-image: url("#{$backgrounds}/1920x1080.jpg");
   &.show {
     animation-name: slideInUp;
     animation-duration: 0.5s;
@@ -106,6 +106,8 @@
     .album-cover {
       flex: 1 25%;
       max-width: 50%;
+      width: 25vw;
+      height: 25vw;
       img {
         width: 100%;
         height: auto;

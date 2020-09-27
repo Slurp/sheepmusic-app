@@ -40,7 +40,6 @@ export default class ElementSource {
     })
     this.audio.addEventListener('loadeddata', () => {
       if (this.audio.readyState >= 2) {
-        console.log(this.audio.readyState)
         this.emitter.dispatchEvent('loaded')
       }
     })

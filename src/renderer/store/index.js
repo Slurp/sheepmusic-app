@@ -53,7 +53,11 @@ const store = new Vuex.Store({
     loggedIn: ({ dispatch }) => new Promise((resolve, reject) => {
       dispatch('albums/loadAlbums').then(() => {
         dispatch('artists/loadArtists').then(() => {
-          resolve()
+          dispatch('playlists/loadLists').then(() => {
+            resolve()
+          }).catch(() => {
+            reject()
+          })
         }).catch(() => {
           reject()
         })

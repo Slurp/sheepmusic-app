@@ -52,10 +52,8 @@ const actions = {
     }
   },
   play(context, { song, restart = false}) {
-    console.log(song.title + 'restart:' + restart)
     const { commit, state } = context
     if (restart === false && state.media.getStatus() === MEDIA_STATUS.PAUSED) {
-      console.log('resume')
       commit('RESUME')
     } else {
       // Check for preloaded song
@@ -121,7 +119,6 @@ const actions = {
    * @param {Number}     volume   0-100
    */
   setVolume({ commit }, volume) {
-    console.log(volume)
     commit('SET_VOLUME', volume)
   },
   setBandValue({ commit }, band, value) {
@@ -139,7 +136,6 @@ const mutations = {
   },
   PRELOAD_SONG: (state, song) => {
     // grab next song.
-    console.log('preload:' + song.title)
     if (!state.nextSong || (state.nextSong.id !== song.id && !state.preloadedSong)) {
       state.nextSong = song
       state.preloadedSong = false

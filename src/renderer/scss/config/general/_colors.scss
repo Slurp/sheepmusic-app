@@ -84,12 +84,12 @@ $primary-light: #CFD8DC; //#5e646b;
 $primary-dark: #283243; //#0e141a;
 
 //dark theme
-$primary: #2c2e38; //#131e2b;
+$primary: #333; //#131e2b;
 $primary-light: #5e646b; //#5e646b;
-$primary-dark: #373a44; //#0e141a;
+$primary-dark: #222; //#0e141a;
 
-$secondary-light: #ff4081;
-$secondary: #f92672; //#f50057;
+$secondary-light: #bb002f;
+$secondary: #d90166; // #f92672; //#f50057;
 $secondary-dark: #f50057; //#bb002f;
 
 // Theme palette
@@ -97,7 +97,7 @@ $secondary-dark: #f50057; //#bb002f;
 
 $theme-colors: (
         primary: (
-                color: $primary, //$material-color-grey-900,
+                color: $primary,
                 dark: $primary-dark,
                 light: $primary-light
         ),

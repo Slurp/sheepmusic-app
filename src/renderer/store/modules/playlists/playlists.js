@@ -10,11 +10,11 @@ const state = {
 
 const actions = {
   async loadLists({ commit, state }) {
-    commit('SET_LOADED');
     return new Promise((resolve, reject) => {
       Vue.axios.get('/api/playlist_list').then(response => {
         if (response.data.length !== state.playlists.length) {
           commit('ADD_PLAYLISTS', { playlists: response.data })
+          commit('SET_LOADED');
           resolve()
         }
       }, err => {
@@ -22,16 +22,20 @@ const actions = {
       })
     })
   },
-  async loadSlice({ commit, state }, playlists) {
+  async loadSlice({ commit, state, dispatch }, playlists) {
     return new Promise(resolve => {
-      if (state.loadedList === true) {
+      if (state.loadedList === true ) {
+        console.log(playlists)
+        playlists.forEach(playlist => dispatch('loadPlaylist', playlist.id ))
         resolve(playlists)
+      } else {
+        dispatch('loadLists')
       }
     })
   },
-  loadPlaylist({ commit, state }, playlistId) {
-    if (!state.playlists[playlistId] || !state.playlists[playlistId].songs) {
-      Vue.axios.get(`/api/playlist/${state.playlists[playlistId].id}`).then(response => {
+  async loadPlaylist({ commit, state }, playlistId) {
+    if (state.playlists[playlistId] && state.playlists[playlistId].fullyLoaded === false) {
+      await Vue.axios.get(`/api/playlist/${playlistId}`).then(response => {
         commit('ADD_PLAYLIST', { playlist: response.data, index: playlistId })
       }, err => {
         console.log(err)
@@ -52,7 +56,11 @@ const mutations = {
     addItemsAndSortedList(state, 'playlists', playlists, 'songs')
   },
   ADD_PLAYLIST: (state, { playlist, index }) => {
-    Vue.set(state.playlists, index, playlist)
+    if (state.playlists[index] && state.playlists[index].fullyLoaded === false) {
+      console.log('ADD_PLAYLIST')
+      playlist.fullyLoaded = true
+      Vue.set(state.playlists, index, playlist)
+    }
   },
   SET_CURRENT_PLAYLIST: (state, { index }) => {
     state.currentArtist = state.playlists[index]

@@ -35,7 +35,6 @@ const actions = {
             album: responseAlbum,
             index: responseAlbum.id
           }))
-          console.log('resolve')
           resolve(albums)
         }, err => {
           reject(err)

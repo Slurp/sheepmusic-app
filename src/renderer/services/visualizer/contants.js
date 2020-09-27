@@ -37,7 +37,7 @@ const visualizerConstants = {
     'rgb(150,150,150)'
   ],
   colors: [
-    'rgb(55,58,68)',
+    'rgb(34,34,34)',
     'rgb(24,33,41)',
     'rgb(249, 38, 114)',
     'rgb(235, 40, 112)',

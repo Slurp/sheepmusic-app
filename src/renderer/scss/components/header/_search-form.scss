@@ -21,17 +21,22 @@ form.form-search {
     margin-left: auto;
     width: 100%;
   }
+  .input-group-append {
+    margin-left: 0;
+    border-color:theme-color('secondary');
+  }
   .form-control {
-    background: theme-color('light');
-    border-bottom: 2px solid theme-color-dark('light');
+    background: lighten(theme-color-dark(),10%);
+    border-bottom: 2px solid theme-color-light();
     opacity: 1;
     min-height: auto;
     margin-right: 0;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     color: theme-color('light');
+    padding-left: 3px;
     &::placeholder {
-      color: theme-color-light('light');
+      color: theme-color-light();
       opacity: 1; /* Firefox */
     }
     &:focus {
@@ -49,7 +54,7 @@ form.form-search {
     border-left:0;
     padding: 6px;
     border-radius: 0;
-    border-bottom: 2px solid theme-color-dark('light');
+    border-bottom: 2px solid theme-color-light();
   }
 }
 
