@@ -1,59 +1,67 @@
 export default {
-  _init() {
-    if (!this.options.Vue.axios) {
+
+  init: function () {
+    if ( ! this.Vue.axios) {
       return 'axios.js : Vue.axios must be set.'
     }
   },
 
-  _interceptor(req, res) {
-    const _this = this
+  interceptor: function (req, res) {
+    var _this = this;
 
     if (req) {
-      this.options.Vue.axios.interceptors.request.use(request => {
-        req.call(_this, request)
-        return request
-      }, error => {
-        req.call(_this, error.request)
-        return Promise.reject(error)
-      })
+      this.Vue.axios.interceptors.request.use(function (request) {
+        req.call(_this, request);
+
+        return request;
+      }, function (error) {
+        req.call(_this, error.request);
+
+        return Promise.reject(error);
+      });
     }
 
     if (res) {
-      this.options.Vue.axios.interceptors.response.use(response => {
-        res.call(_this, response)
-        return response
-      }, error => {
+      this.Vue.axios.interceptors.response.use(function (response) {
+        res.call(_this, response);
+
+        return response;
+      }, function (error) {
+        console.log(error)
         if (error && error.response) {
-          res.call(_this, error.response)
+          res.call(_this, error.response);
         }
 
-        return Promise.reject(error)
-      })
+        return Promise.reject(error);
+      });
     }
   },
 
   /**
    * Override to logout with wrong token
    */
-  _invalidToken(res) {
-    if (res.status === 401 && res.data.message === 'Bad credentials') {
-      this.options.logoutProcess.call(this, res, { redirect: this.options.authRedirect })
+  invalidToken(res) {
+    if (res.status === 401 || res.status === 485) {
+      this.logout({
+            makeRequest: false,
+            redirect: '/login',
+          }).then(() => { console.log('logout')});
     }
   },
 
-  _httpData(res) {
-    return res.data || {}
+  httpData: function (res) {
+    return res.data || {};
   },
 
-  _http(data) {
-    this.options.Vue.axios(data).then(data.success, data.error)
+  http: function (data) {
+    return this.Vue.axios(data);
   },
 
-  _getHeaders(res) {
-    return res.headers
+  getHeaders: function (res) {
+    return res.headers;
   },
 
-  _setHeaders(req, headers) {
-    req.headers.common = Object.assign(req.headers.common, headers)
+  setHeaders: function (req, headers) {
+    req.headers.common = Object.assign({}, req.headers.common, headers);
   }
 }

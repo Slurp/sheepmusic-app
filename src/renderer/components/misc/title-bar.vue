@@ -1,6 +1,7 @@
 <template>
     <nav class="title-bar">
-         <user-badge></user-badge><search-box></search-box>
+         <user-badge v-if="$auth.check()" />
+         <search-box></search-box>
     </nav>
 </template>
 

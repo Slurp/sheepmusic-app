@@ -54,14 +54,19 @@ const store = new Vuex.Store({
       dispatch('albums/loadAlbums').then(() => {
         dispatch('artists/loadArtists').then(() => {
           dispatch('playlists/loadLists').then(() => {
+            console.log('loaded list')
             resolve()
           }).catch(() => {
+            console.log('failed plays list')
             reject()
           })
+          resolve()
         }).catch(() => {
+          console.log('failed artist list')
           reject()
         })
       }).catch(() => {
+        console.log('failed albums list')
         reject()
       })
     })

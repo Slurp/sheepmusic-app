@@ -1,32 +1,35 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { routerHistory, writeHistory } from 'vue-router-back-button'
-import AlbumOverview from '@/components/albums/overview'
-import ArtistOverview from '@/components/artists/overview'
-import PlaylistOverview from '@/components/playlists/overview'
-import GenreOverview from '@/components/genres/overview'
-import AlbumDetail from '@/components/albums/detail'
-import ArtistDetail from '@/components/artists/detail'
-import PlaylistDetail from '@/components/playlists/detail'
-import GenreDetail from '@/components/genres/detail'
-import SearchResults from '@/components/search/search-results'
-import UserProfile from '@/components/user/profile'
-import Charts from '@/components/charts/charts'
+// import AlbumOverview from '@/components/albums/overview'
+// import ArtistOverview from '@/components/artists/overview'
+// import PlaylistOverview from '@/components/playlists/overview'
+// import GenreOverview from '@/components/genres/overview'
+// import AlbumDetail from '@/components/albums/detail'
+// import ArtistDetail from '@/components/artists/detail'
+// import PlaylistDetail from '@/components/playlists/detail'
+// import GenreDetail from '@/components/genres/detail'
+// import SearchResults from '@/components/search/search-results'
+// import UserProfile from '@/components/user/profile'
+// import Charts from '@/components/charts/charts'
 
 import Login from '@/components/pages/login'
 // import NotFound from '@/components/not-found.vue'
 
 // Promised based routing
 // Is really buggy at the moment..
-// const AlbumOverview = () => import('components/albums/overview')
-// const ArtistOverview = () => import('components/artists/overview')
-// const PlaylistOverview = () => import('components/playlists/overview')
-// const AlbumDetail = () => import('components/albums/detail')
-// const ArtistDetail = () => import('components/artists/detail')
-// const PlaylistDetail = () => import('components/playlists/detail')
-// const SearchResults = () => import('components/search/search-results')
-// const UserProfile = () => import('components/user/profile')
-// const Charts = () => import('components/charts/charts')
+const AlbumOverview = () => import('components/albums/overview')
+const ArtistOverview = () => import('components/artists/overview')
+const PlaylistOverview = () => import('components/playlists/overview')
+const GenreOverview = () => import('components/genres/overview')
+const AlbumDetail = () => import('components/albums/detail')
+const AlbumArtwork = () => import('components/albums/artwork')
+const ArtistDetail = () => import('components/artists/detail')
+const PlaylistDetail = () => import('components/playlists/detail')
+const GenreDetail = () => import('components/genres/detail')
+const SearchResults = () => import('components/search/search-results')
+const UserProfile = () => import('components/user/profile')
+const Charts = () => import('components/charts/charts')
 
 Vue.use(VueRouter)
 Vue.use(routerHistory)
@@ -84,6 +87,13 @@ const router = new VueRouter({
       path: '/artist/:artist/album/:album/:id',
       name: 'detail_album',
       component: AlbumDetail,
+      props: true,
+      meta: { auth: true }
+    },
+    {
+      path: '/artist/:artist/album/:album/:id/artwork',
+      name: 'detail_album_artwork',
+      component: AlbumArtwork,
       props: true,
       meta: { auth: true }
     },

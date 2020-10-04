@@ -2,7 +2,6 @@
     <div class="player-info">
         <img
             v-lazyload
-            :alt="currentSong.title"
             :src=defaultCover
             :data-src=cover
             :data-err=defaultCover

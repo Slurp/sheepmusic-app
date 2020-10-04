@@ -60,21 +60,21 @@ export default {
     login() {
       this.$store.dispatch('toggleLoading')
       this.$auth.login({
-        data: this.data.body, // Axios
-        rememberMe: this.data.rememberMe,
-        redirect: { name: 'recent-albums' },
-        fetchUser: this.data.fetchUser,
-        success() {
+          data:       this.data.body, // Axios
+          rememberMe: this.data.rememberMe,
+          redirect:   { name: 'recent-albums' },
+          fetchUser:  this.data.fetchUser,
+      })
+        .then(() => {
           this.$store.dispatch('loggedIn').then(() => {
             this.$store.dispatch('toggleLoading')
-          }).catch(() => {
-            this.toast.toast('@#@#*(&@#*&@#(*!@^!@&@!')
+          }).catch((e) => {
+            console.log(e)
           })
-        },
-        error() {
+        }, () => {
           this.$store.dispatch('toggleLoading')
-        }
-      })
+        })
+
     }
   }
 }

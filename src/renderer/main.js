@@ -15,29 +15,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueTinyLazyloadImg)
 Vue.use(AsyncComputed)
-// Setup auth
-Vue.use(Auth, {
-  auth: Bearer,
-  http: HttpDriver,
-  router: RouterDriver,
-  fetchData: { url: 'api/user', method: 'GET', enabled: true },
-  registerData: { url: 'api/register', method: 'POST', redirect: '/login' },
-  loginData: {
-    url: 'api/login_check', method: 'POST', redirect: { name: 'home', redirect: true }, fetchUser: true
-  },
-  logoutData: {
-    url: 'api/logout', method: 'POST', redirect: '/', makeRequest: false
-  },
-  refreshData: {
-    url: 'api/token/refresh',
-    method: 'GET',
-    enabled: true,
-    interval: 30
-  },
-  parseUserData(data) {
-    return data
-  }
-})
+
 
 // Sync up!
 sync(store, router)

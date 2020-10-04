@@ -52,6 +52,13 @@ const actions = {
       })
     }
   },
+  async getArtwork({ commit, state }, albumId) {
+    Vue.axios.get(`/api/album/${albumId}/artwork`).then(response => {
+      commit('ADD_ARTWORK', { artwork: response.data, index: albumId })
+    }, err => {
+      console.log(err)
+    })
+  },
   async viewAlbum({ commit }, albumId) {
     commit('SET_CURRENT_ALBUM', { index: albumId })
   },
@@ -65,6 +72,13 @@ const mutations = {
   ADD_ALBUM: (state, { album, index }) => {
     if (state.albums[index] && state.albums[index].fullyLoaded === false) {
       album.fullyLoaded = true
+      Vue.set(state.albums, index, album)
+    }
+  },
+  ADD_ARTWORK: (state, { artwork, index }) => {
+    if (state.albums[index]) {
+      const album = { ...state.albums[index] }
+      album.artwork = artwork
       Vue.set(state.albums, index, album)
     }
   },

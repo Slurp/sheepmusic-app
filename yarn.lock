@@ -1304,10 +1304,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@websanova/vue-auth@^2.22.1-beta":
-  version "2.22.1-beta"
-  resolved "https://registry.yarnpkg.com/@websanova/vue-auth/-/vue-auth-2.22.1-beta.tgz#c9e9784742f532b73fbf579fd2f8f1cfee3771e4"
-  integrity sha512-DWtlzl1EJuogIZs4LspDVwE6gKn3U0suHwNesVn1AgR58Xx9acR7HiMFp5PvsXyrbDHOqb5VK/xkmso2BnQ8xA==
+"@websanova/vue-auth@^3.3.8":
+  version "3.3.8"
+  resolved "https://registry.yarnpkg.com/@websanova/vue-auth/-/vue-auth-3.3.8.tgz#ada2714cd3d2c7c15462e7d761d75b13a9cddbbc"
+  integrity sha512-Gnvm8VsS5D0RvCSdaNqOq0dNp4pTScTD4HzX6zaXWjCBz/DG+JYZJwosIEn0o7FZcHMXg8dvGFGRMWpyAtGN+A==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
