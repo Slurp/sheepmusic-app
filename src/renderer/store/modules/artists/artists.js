@@ -22,7 +22,7 @@ const actions = {
       })
     })
   },
-  async loadSlice({ commit }, artists) {
+  async loadSlice({ commit, state }, artists) {
     return new Promise((resolve, reject) => {
       const collection = artists.filter(artist => (!state.artists[artist.id] || state.artists[artist.id].fullyLoaded === false))
       if (collection.length > 0) {

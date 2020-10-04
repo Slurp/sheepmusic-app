@@ -45,7 +45,7 @@
                         <truncate clamp="..." :length="90" less="Show Less" :text="artist.biography"></truncate>
                     </div>
                 </div>
-                <section class="list">
+                <section class="list" v-if="albums && albums.length > 0">
                     <h3 class="section-header">Albums</h3>
                     <div class="row">
                         <div class="col" v-for="album in albums" :key="album.id">
@@ -54,7 +54,7 @@
                     </div>
                 </section>
 
-                <section class="list" v-if="artist.similar.length > 0">
+                <section class="list" v-if="similar && similar.length > 0">
                     <h3 class="section-header">Similar Artists</h3>
                     <div class="row">
                         <div class="col" v-for="similarArtist in similar">
@@ -84,8 +84,8 @@
   import playBtn from './play-btn'
   import queueBtn from './queue-btn'
   import editBtn from './edit-btn'
-  import { getBackground, getCover, getLogo } from '../../store/modules/artists/model'
-  import { maybe } from '../../services/functional-tools'
+  import { getBackground, getCover, getLogo } from '@/store/modules/artists/model'
+  import { maybe } from '@/services/functional-tools'
 
   export default {
     name: 'artist_detail',
@@ -113,6 +113,7 @@
     methods: {
       loadArtistDetail() {
         if (!this.artist || !this.artist.fullyLoaded) {
+            console.log(this.artist.fullyLoaded)
           this.$store.dispatch('artists/loadArtist', this.id)
         }
         this.$store.dispatch('artists/viewArtist', this.id)
@@ -120,13 +121,13 @@
     },
     asyncComputed: {
       async albums() {
-        if (this.artist.albums !== 'undefined') {
-          return this.$store.dispatch('albums/loadSlice', this.artist.albums.sort((a, b) => b.year - a.year).map(album => this.$store.getters['albums/getAlbumById'](album.id)))
+        if (this.artist.fullyLoaded) {
+            return  await  this.$store.dispatch('albums/loadSlice', this.artist.albums.sort((a, b) => b.year - a.year).map(album => this.$store.getters['albums/getAlbumById'](album.id)))
         }
       },
       async similar() {
-        if (this.artist.albums !== 'undefined') {
-          return this.$store.dispatch('artists/loadSlice', this.artist.similar.map(artist => this.$store.getters['artists/getArtistById'](artist)))
+        if (this.artist.fullyLoaded) {
+          return await this.$store.dispatch('artists/loadSlice', this.artist.similar.map(artist => this.$store.getters['artists/getArtistById'](artist)))
         }
       }
     },

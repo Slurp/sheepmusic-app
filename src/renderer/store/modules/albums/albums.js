@@ -22,9 +22,11 @@ const actions = {
       })
     })
   },
-  async loadSlice({ commit }, albums) {
+  async loadSlice({ commit, state }, albums) {
     return new Promise((resolve, reject) => {
-      const collection = albums.filter(album => (!state.albums[album.id] || state.albums[album.id].fullyLoaded === false))
+      const collection = albums.filter(album => {
+        return !(state.albums[album.id] && state.albums[album.id].fullyLoaded === true)
+      })
       if (collection.length > 0) {
         const data = collection.reduce((formData, object) => {
           formData.append('objects[]', object.id)
