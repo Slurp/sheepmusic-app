@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@websanova/vue-auth": "^2.21.14-beta",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.8.0",
     "daemonite-material": "4.1.1",
