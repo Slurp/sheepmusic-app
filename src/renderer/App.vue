@@ -73,7 +73,6 @@
     created()
     {
       this.$auth.load().then(() => {
-
         this.$auth.refresh().then(() => {
           this.readyState()
         }, () => {

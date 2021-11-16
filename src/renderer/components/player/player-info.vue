@@ -6,6 +6,7 @@
             :data-src=cover
             :data-err=defaultCover
             class="song-image"
+            v-if="playing"
         />
         <div class="now-playing" v-if="currentSong">
             <Visualizer class="visualizer"/>
@@ -38,7 +39,7 @@ export default {
         return this.$store.getters['playlist/isPlaying']
       },
       currentSong() {
-        return this.$store.getters['playlist/getCurrentSong']
+          return this.$store.getters['playlist/getCurrentSong']
       },
       cover() {
         if (this.currentSong && this.currentSong.album.cover) {
@@ -80,6 +81,7 @@ export default {
     }
     .visualizer {
         position: absolute;
+        left: 2px;
         right: 0;
         top: auto;
         bottom: -16px;

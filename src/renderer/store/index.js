@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import modules from './modules'
-import { CHANGE_IDLE, CLEAR, TOGGLE_LOADING, TOGGLE_PLAYLIST, TOGGLE_EQUALIZER } from './mutations'
+import { CHANGE_IDLE, CLEAR, TOGGLE_LOADING, TOGGLE_PLAYLIST, TOGGLE_EQUALIZER, TOGGLE_LOGGING_IN } from './mutations'
 
 Vue.use(Vuex)
 
@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     showPlaylist: true,
     showEqualizer: false,
     loadingScreen: false,
+    loggingIn: false,
     isIdle: false
   },
 
@@ -49,6 +50,7 @@ const store = new Vuex.Store({
     togglePlaylist: ({ commit }) => commit(TOGGLE_PLAYLIST),
     toggleEqualizer: ({ commit }) => commit(TOGGLE_EQUALIZER),
     toggleLoading: ({ commit }) => commit(TOGGLE_LOADING),
+    toggleLogin: ({ commit }) => commit(TOGGLE_LOGGING_IN),
     changeIdle: ({ commit }, isIdle) => commit(CHANGE_IDLE, isIdle),
     loggedIn: ({ dispatch }) => new Promise((resolve, reject) => {
       dispatch('albums/loadAlbums').then(() => {
@@ -82,6 +84,9 @@ const store = new Vuex.Store({
     [TOGGLE_LOADING]: state => {
       state.loadingScreen = !state.loadingScreen
     },
+    [TOGGLE_LOGGING_IN]: state => {
+      state.loggingIn = !state.loggingIn
+    },
     [CHANGE_IDLE]: (state, isIdle) => {
       state.isIdle = isIdle
     }
@@ -89,6 +94,7 @@ const store = new Vuex.Store({
   },
   getters: {
     loading: state => state.loadingScreen,
+    loggingIn: state => state.loggingIn,
     showPlaylist: state => state.showPlaylist,
     showEqualizer: state => state.showEqualizer,
     isIdle: state => state.isIdle

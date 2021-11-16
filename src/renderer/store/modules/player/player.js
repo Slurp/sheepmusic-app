@@ -136,7 +136,7 @@ const mutations = {
   },
   PRELOAD_SONG: (state, song) => {
     // grab next song.
-    if (!state.nextSong || (state.nextSong.id !== song.id && !state.preloadedSong)) {
+    if (song !== undefined && !state.nextSong || (state.nextSong.id !== song.id && !state.preloadedSong)) {
       state.nextSong = song
       state.preloadedSong = false
       state.media.loadFromUrl(song.src, true).then(() => {

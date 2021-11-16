@@ -21,7 +21,7 @@
   }
   .song-list-item {
     border-bottom: 1px solid $divider-color;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     &.playing {
       background-color: rgba(theme-color-light('light'), 1);
       color: theme-color('dark');
@@ -47,7 +47,7 @@
       border-bottom: none;
     }
     &:hover {
-      background-color: rgba(theme-color('light'), 0.5);
+      background-color: rgba(theme-color-dark('dark'), 0.8);
       a {
         color: theme-color('secondary');
       }

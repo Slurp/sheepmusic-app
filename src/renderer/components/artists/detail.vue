@@ -8,41 +8,32 @@
             </div>
             <section>
                 <div class="detail-info-wrapper">
-                    <div class="detail-art">
-                        <div class="detail-art-img">
-                            <img
-                                    v-lazyload
-                                    :alt="artist.name"
-                                    :src=defaultCover
-                                    :data-src=cover
-                                    :data-err=defaultCover
-                            />
-                        </div>
-                    </div>
                     <div class="detail-info">
                         <div class="detail-header">
                             <h1 class="artist-name" v-if="logo == null">{{ artist.name }}</h1>
                             <h1 class="artist-name" v-if="logo != null">
                                 <img :src="logo">
                             </h1>
+                            <truncate clamp="..." :length="90" less="Show Less" :text="artist.biography"></truncate>
+                        </div>
+                        <div class="detail-header__right">
                             <div class="actions">
                                 <playBtn :artist=artist></playBtn>
                                 <queueBtn :artist=artist></queueBtn>
                                 <editBtn :artist=artist></editBtn>
                                 <playlist-artist-btn :artist=artist></playlist-artist-btn>
                             </div>
+                            <div class="meta">
+                                <span class="chip"><span class="chip-icon"><i class="material-icons">album</i></span>{{ artist.albums.length }}</span>
+                                <span class="chip" v-if="genres" v-for="genre in genres">
+                                    <span class="chip-icon"><i class="material-icons">receipt</i></span>
+                                        <router-link
+                                            :to="{ name: 'detail_genres', params: { genre: genre.name, id: genre.id }}">
+                                            {{ genre.name }}
+                                        </router-link>
+                                    </span>
+                            </div>
                         </div>
-                        <div class="meta">
-                            <span class="chip"><span class="chip-icon"><i class="material-icons">album</i></span>{{ artist.albums.length }}</span>
-                            <span class="chip" v-if="genres" v-for="genre in genres">
-                                <span class="chip-icon"><i class="material-icons">receipt</i></span>
-                                <router-link
-                                        :to="{ name: 'detail_genres', params: { genre: genre.name, id: genre.id }}">
-                                    {{ genre.name }}
-                                </router-link>
-                            </span>
-                        </div>
-                        <truncate clamp="..." :length="90" less="Show Less" :text="artist.biography"></truncate>
                     </div>
                 </div>
                 <section class="list" v-if="albums && albums.length > 0">
@@ -113,7 +104,6 @@
     methods: {
       loadArtistDetail() {
         if (!this.artist || !this.artist.fullyLoaded) {
-            console.log(this.artist.fullyLoaded)
           this.$store.dispatch('artists/loadArtist', this.id)
         }
         this.$store.dispatch('artists/viewArtist', this.id)

@@ -13,6 +13,7 @@
     position: fixed;
     ~ .container-fluid .router-view {
       margin-top: 40px;
+      padding-bottom:calc(#{$footer-fixed-height} + 45px);
     }
   }
   .playing-overlay {
@@ -29,7 +30,7 @@
     top:100px;
   }
   .breadcrumb-fixed {
-    left: 90px;
+    left: 80px;
     height: 56px;
     padding: 0;
     min-height: auto;

@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-sm sticky" role="navigation">
-    <a class="navbar-brand" href="#" @click.stop.prevent="$router.back()">
+    <a class="navbar-brand" href="#" @click.stop.prevent="navigateBack">
             <span class="brand-logo">
             </span>
       <i class="material-icons brand-back">
@@ -16,6 +16,11 @@
   export default {
     name:    'navbar-header',
     methods: {
+      navigateBack () {
+        if(this.$routerHistory.hasPrevious()) {
+          this.$router.push(this.$routerHistory.previous().path)
+        }
+      },
       logout()
       {
         this.$auth.logout({
@@ -23,7 +28,6 @@
         }).then(() => {
 
         })
-
       }
     }
   }

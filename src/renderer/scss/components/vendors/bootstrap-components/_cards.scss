@@ -1,60 +1,39 @@
 .card__overview {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   text-decoration: none;
   color: theme-color-light('light');
   background: transparent;
-  box-shadow: 0 0 2px 0 rgba(theme-color(), 0.14), 0 1px 2px 0 rgba(theme-color(), 0.12), 0 1px 1px 0 rgba(theme-color(), 0.2);
+  box-shadow: none;
   &[href],
   &[tabindex] {
     @include active-focus-hover {
-      box-shadow:  0 2px 4px 0 rgba(theme-color(), 0.14), 0 4px 5px 0  rgba(theme-color(), 0.12), 0 1px 10px 0 rgba(theme-color(), 0.2);
-      text-decoration: none;
+      box-shadow: none;
+      .card-img {
+        box-shadow: 0 2px 4px 0 rgba(theme-color(), 0.14), 0 4px 5px 0 rgba(theme-color(), 0.12), 0 1px 10px 0 rgba(theme-color(), 0.2);
+        text-decoration: none;
+      }
     }
 
     &:focus {
       outline: 0;
     }
   }
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    top:5px;
-    bottom:0;
-    opacity: 0;
-    border-radius: 5px;
-    @extend .z-depth-1-half;
-    transition: all 0.5s ease;
-  }
-  &:hover {
-    &::after {
-      opacity: 0.9;
-    }
-  }
   .card-img-top {
     height: auto;
     width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
   }
   .card-body {
-    padding: 1rem;
+    padding: 0.5rem 0rem;
     display: flex;
-    background-color: rgba(theme-color-dark('primary'), 0.95);
   }
   .card-block {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    justify-content: center;
     align-items: flex-start;
     width: 100%;
   }
   .card-subtitle,
   .card-title {
-    flex: 1;
     text-decoration: none;
     &:hover {
       text-decoration: none;
@@ -63,11 +42,12 @@
   .card-title {
     font-size: 1rem;
     color: theme-color-light('light');
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.2rem;
+    font-weight: bold;
   }
   .card-subtitle {
     font-size: 0.8rem;
-    color: theme-color-light('dark')!important;
+    color: theme-color('light')!important;
     display: flex;
     align-items: center;
     margin-top: 0;

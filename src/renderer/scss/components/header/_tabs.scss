@@ -13,12 +13,11 @@
     @include make-col(9.5);
   }
   .nav-link {
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.4s ease-in-out;
     &.active {
       color: $nav-tab-color;
-      opacity: $nav-tab-link-opacity;
       &:before {
-        background-color: $nav-tab-indicator-bg;
+        background-color: $nav-tab-border-color;
         opacity: 0;
       }
     }

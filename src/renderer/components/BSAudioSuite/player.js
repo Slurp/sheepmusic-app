@@ -33,7 +33,7 @@ export default class BlackSheepPlayer {
    * @param song
    */
   preloadSong(song) {
-    if (this.nextSong === null) {
+    if (this.nextSong === null && !!song.id) {
       this.nextSong = { id: song.id, player: this.createAudio(song.src, true) }
     }
   }

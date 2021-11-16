@@ -1,0 +1,29 @@
+&.album-detail {
+  .backdrop {
+    + section {
+      margin-top: 80px;
+    }
+  }
+  .detail-art {
+    margin: 0;
+  }
+  .detail-header {
+    flex-direction: column;
+    flex: 1;
+    &__right {
+      min-width: auto;
+      padding: 15px;
+    }
+  }
+  .detail-info {
+    background: linear-gradient(to bottom right, rgba(theme-color(), 0.5), rgba(theme-color(), 0));
+    display: flex;
+    @include media-breakpoint-up(md) {
+      padding-left: 20px;
+    }
+    h1 {
+      flex: 0;
+      font-weight: bold;
+    }
+  }
+}

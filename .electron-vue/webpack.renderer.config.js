@@ -151,27 +151,29 @@ let rendererConfig = {
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({
       title:       'ZelfSpotify',
-      filename:    'index.html',
-      template:    path.resolve(__dirname, '../src/index.ejs'),
-      templateParameters(compilation, assets, options)
-      {
+      filename: 'index.html',
+      template: path.resolve(__dirname, '../src/index.ejs'),
+      templateParameters(compilation, assets, options) {
         return {
-          compilation:       compilation,
-          webpack:           compilation.getStats().toJson(),
-          webpackConfig:     compilation.options,
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
           htmlWebpackPlugin: {
-            files:   assets,
+            files: assets,
             options: options
           },
           process,
-        }
+        };
       },
-      minify:      {
-        collapseWhitespace:    true,
+      minify: {
+        collapseWhitespace: true,
         removeAttributeQuotes: true,
-        removeComments:        true
+        removeComments: true
       },
-      nodeModules: false
+      isDevelopment: process.env.NODE_ENV !== 'production',
+      nodeModules: process.env.NODE_ENV !== 'production'
+                         ? path.resolve(__dirname, '../node_modules')
+                         : false
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

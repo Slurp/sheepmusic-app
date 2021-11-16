@@ -63,6 +63,7 @@ export default {
   },
   computed: {
     hasCover() {
+
       return (this.loadedAlbum && this.album.cover)
     },
     cover() {

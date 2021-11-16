@@ -1,5 +1,5 @@
 <template>
-    <div class="library-detail artist-detail" :id="playlist.id" v-if="playlist">
+    <div class="library-detail playlists-detail" :id="playlist.id" v-if="playlist">
         <breadcrumbs></breadcrumbs>
         <div class="backdrop" v-if="background">
             <div class="image-backdrop" v-bind:style="{ 'background-image': 'url(' + background + ')' }">>

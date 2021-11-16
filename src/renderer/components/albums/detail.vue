@@ -7,7 +7,7 @@
             </div>
             <section>
                 <div class="detail-info-wrapper">
-                    <div class="detail-art">
+                    <router-link class="detail-art" :to="artworkLink">
                         <div class="detail-art-img">
                             <img
                                  v-lazyload
@@ -17,30 +17,33 @@
                                  :data-err=defaultCover
                             />
                         </div>
-                    </div>
+                    </router-link>
                     <div class="detail-info">
+
                         <div class="detail-header">
+                            <h1 class="detail-name">
+                                {{ album.name }}
+                            </h1>
                             <h3 class="artist-name">
                                 <router-link
                                         :to="{ name: 'detail_artist', params: { artist: this.album.artist.name, id: this.album.artist.id }}">
-                                    <span v-if="logo == null">{{this.album.artist.name}}</span>
-                                    <img :src="logo" v-else>
+                                    <span>By: {{this.album.artist.name}}</span>
+
                                 </router-link>
                             </h3>
+                            <div class="meta">
+                                <span class="chip"><span class="chip-icon"><i class="material-icons">hearing</i></span>{{ album.playCount}} times</span>
+                                <span class="chip"><span class="chip-icon"><i class="material-icons">date_range</i></span>{{ album.year}}</span>
+                                <span class="chip"><span class="chip-icon"><i class="material-icons">queue_music</i></span>{{ album.songs.length }} songs</span>
+                                <span class="chip"><span class="chip-icon"><i class="material-icons">av_timer</i></span>{{ lengthAlbum }}</span>
+                                <span class="chip" v-if="album.genre.name"><span class="chip-icon"><i class="material-icons">receipt</i></span>{{ album.genre.name}}</span>
+                            </div>
+                        </div>
+                        <div class="detail-header__right" >
                             <div class="actions">
                                 <playBtn :album=album></playBtn>
                                 <queueBtn :album=album></queueBtn>
                             </div>
-                        </div>
-                        <h1 class="detail-name">
-                            {{ album.name }}
-                        </h1>
-                        <div class="meta">
-                            <span class="chip"><span class="chip-icon"><i class="material-icons">hearing</i></span>{{ album.playCount}} times</span>
-                            <span class="chip"><span class="chip-icon"><i class="material-icons">date_range</i></span>{{ album.year}}</span>
-                            <span class="chip"><span class="chip-icon"><i class="material-icons">queue_music</i></span>{{ album.songs.length }} songs</span>
-                            <span class="chip"><span class="chip-icon"><i class="material-icons">av_timer</i></span>{{ lengthAlbum }}</span>
-                            <span class="chip" v-if="album.genre.name"><span class="chip-icon"><i class="material-icons">receipt</i></span>{{ album.genre.name}}</span>
                         </div>
                     </div>
                 </div>
@@ -107,6 +110,12 @@ export default {
         return null
       }
       return null
+    },
+    artworkLink() {
+      return {
+          name: 'detail_album_artwork',
+          params: { artist: this.album.artist.name, album: this.album.slug, id: this.album.id }
+      }
     }
   }
 }

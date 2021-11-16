@@ -1,10 +1,13 @@
 <template>
     <div class="login">
+        <div class="alert alert-danger" v-if="failed">
+            Login failed
+        </div>
         <div class="card">
             <div class="card-header">
+                <h1 class="h4">Login</h1>
                 <span class="brand-logo">
                 </span>
-                <h1>Login</h1>
             </div>
             <div class="card-body">
                 <form v-on:submit.prevent="login()">
@@ -23,7 +26,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary float-md-right">Login</button>
+                        <button type="submit" class="btn btn-secondary float-md-right" v-if="logginIn === false">Login</button>
+                        <loading v-else></loading>
                     </div>
                     <div v-show="error" style="color:red; word-wrap:break-word;">{{ error }}</div>
                 </form>
@@ -33,11 +37,13 @@
 </template>
 
 <script>
+import loading from '@/components/misc/loading-bars'
+
 export default {
   data() {
     return {
       context: 'login context',
-
+      failed: false,
       data: {
         body: {
           username: '',
@@ -50,15 +56,19 @@ export default {
       error: null
     }
   },
-
-  mounted() {
-  // Can set query parameter here for auth redirect or just do it silently in login redirect.
-
+  components: {
+    loading
   },
-
+  computed: {
+    logginIn()
+    {
+        return this.$store.getters.loading
+    },
+  },
   methods: {
     login() {
-      this.$store.dispatch('toggleLoading')
+      this.failed = true;
+      this.$store.dispatch('toggleLogin')
       this.$auth.login({
           data:       this.data.body, // Axios
           rememberMe: this.data.rememberMe,
@@ -66,14 +76,15 @@ export default {
           fetchUser:  this.data.fetchUser,
       })
         .then(() => {
+          this.$store.dispatch('toggleLoading')
           this.$store.dispatch('loggedIn').then(() => {
             this.$store.dispatch('toggleLoading')
           }).catch((e) => {
             console.log(e)
           })
         }, () => {
-          this.$store.dispatch('toggleLoading')
-        })
+          this.failed = true;
+        }).finally(() => this.$store.dispatch('toggleLogin'))
 
     }
   }

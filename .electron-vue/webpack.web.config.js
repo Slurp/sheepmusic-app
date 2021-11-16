@@ -120,7 +120,10 @@ let webConfig = {
         removeAttributeQuotes: true,
         removeComments: true
       },
-      nodeModules: false
+      isDevelopment: process.env.NODE_ENV !== 'production',
+      nodeModules: process.env.NODE_ENV !== 'production'
+                         ? path.resolve(__dirname, '../node_modules')
+                         : false
     }),
     new webpack.DefinePlugin({
       'process.env.IS_WEB': 'true'

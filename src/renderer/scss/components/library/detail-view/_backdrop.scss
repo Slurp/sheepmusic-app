@@ -1,0 +1,37 @@
+.backdrop {
+  background: theme-color();
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  margin-right: ($grid-gutter-width / 2);
+  margin-left: ($grid-gutter-width / 2);
+  filter: blur(3px);
+  background-size: cover;
+  + section {
+    margin: 12vmin -15px 0;
+    background: transparent;
+    z-index: 1;
+    @include media-breakpoint-up(md) {
+      margin-top: 20vmin;
+    }
+  }
+  .image-backdrop {
+    width: 100%;
+    height: 56.25vw;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    left: 0;
+    background-position: top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow: inset 0px -27vw 20vw -10vw theme-color();
+    @include media-breakpoint-up(md) {
+      box-shadow: inset 0px -27vw 20vw -2vh theme-color();
+    }
+  }
+}
