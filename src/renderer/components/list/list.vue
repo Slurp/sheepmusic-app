@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import LoadingBars from '@/components/misc/loading-bars'
   import loading from '@/components/misc/loading-bars'
 
   export default {

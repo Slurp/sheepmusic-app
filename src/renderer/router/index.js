@@ -20,11 +20,12 @@ import Login from '@/components/pages/login'
 // Is really buggy at the moment..
 const AlbumOverview = () => import('components/albums/overview')
 const ArtistOverview = () => import('components/artists/overview')
-const PlaylistOverview = () => import('components/playlists/overview')
+
 const GenreOverview = () => import('components/genres/overview')
 const AlbumDetail = () => import('components/albums/detail')
 const AlbumArtwork = () => import('components/albums/artwork')
 const ArtistDetail = () => import('components/artists/detail')
+const PlaylistOverview = () => import('components/playlists/overview')
 const PlaylistDetail = () => import('components/playlists/detail')
 const GenreDetail = () => import('components/genres/detail')
 const SearchResults = () => import('components/search/search-results')
